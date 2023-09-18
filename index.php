@@ -13,24 +13,10 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-light bg-light">
-        <div class="container">
-            <a class="navbar-brand d-flex w-25 me-auto" href="/">Reclaiming Tomorrow</a>
-            <ul class="nav justify-content-end">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Login</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    <?php include "header.php";?>
 
     <p>This is the main page</p>
-    <ul>
-        <li> <a href="/rewards/redemption">My Rewards</a> </li>
-        <li> <a href="#">Admin Console</a> </li>
-        <li> <a href="#">Recycling Location Search Link</a> </li>
-        <li> <a href="#">Local County Information Link</a> </li>
-    </ul>
+    <a href="/rewards/redemption">Rewards page link</a>
 </body>
 
 </html>
