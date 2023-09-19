@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <?php include "header.php";?>
+    <?php include "include/header.php";?>
 
     <p>This is the main page</p>
     <a href="/rewards/redemption">Rewards page link</a>

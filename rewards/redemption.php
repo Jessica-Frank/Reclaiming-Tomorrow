@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <?php $on_rewards_page = true; include '../header.php'; ?>
+    <?php $on_rewards_page = true; include '../include/header.php'; ?>
 
     <div class="container">
         <?php
