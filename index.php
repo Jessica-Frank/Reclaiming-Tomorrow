@@ -17,6 +17,8 @@
 
     <p>This is the main page</p>
     <a href="/rewards/redemption">Rewards page link</a>
+    <br>
+    <a href="/admin/dashboard">Preview of Admin Dashboard</a>
 </body>
 
 </html>

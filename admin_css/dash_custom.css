@@ -1,0 +1,109 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+.home-container {
+    width: 100%;
+    display: flex;
+    overflow: auto;
+    min-height: 100vh;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    background-image: linear-gradient(to right, #f1f2b5 0%, #135058 100%);
+  }
+  .home-container1 {
+    flex: 0 0 auto;
+    width: 722px;
+    height: 100px;
+    display: flex;
+    opacity: 1;
+    align-items: center;
+    justify-content: center;
+    background-color: #000000;
+  }
+  .home-text {
+    color: rgb(255, 255, 255);
+    font-size: 40px;
+    font-family: Verdana;
+  }
+  .home-container2 {
+    width: 722px;
+    height: 489px;
+    display: flex;
+    position: relative;
+    align-items: flex-end;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #ffffff;
+  }
+  .home-button {
+    top: 31px;
+    left: 0px;
+    color: rgb(255, 255, 255);
+    right: 0px;
+    width: 600px;
+    height: 70px;
+    margin: auto;
+    position: absolute;
+    font-size: 38px;
+    font-family: Verdana;
+    border-color: #272727;
+    background-color: rgb(39, 39, 39);
+  }
+  .home-button1 {
+    top: 146px;
+    left: 0px;
+    color: rgb(255, 255, 255);
+    right: 0px;
+    width: 600px;
+    height: 70px;
+    margin: auto;
+    position: absolute;
+    font-size: 40px;
+    font-family: Verdana;
+    border-color: #272727;
+    background-color: rgb(39, 39, 39);
+  }
+  .home-text01 {
+    font-size: 38px;
+    font-family: Verdana;
+  }
+  .home-button2 {
+    top: 383px;
+    left: 0px;
+    color: rgb(255, 255, 255);
+    right: 0px;
+    width: 600px;
+    height: 70px;
+    margin: auto;
+    position: absolute;
+    font-size: 40px;
+    font-family: Verdana;
+    border-color: #272727;
+    background-color: rgb(39, 39, 39);
+  }
+  .home-text04 {
+    font-size: 38px;
+    font-family: Verdana;
+  }
+  .home-button3 {
+    top: 264px;
+    left: 0px;
+    color: rgb(255, 255, 255);
+    right: 0px;
+    width: 600px;
+    height: 70px;
+    margin: auto;
+    position: absolute;
+    font-size: 40px;
+    font-family: Verdana;
+    border-color: #272727;
+    background-color: rgb(39, 39, 39);
+  }
+  .home-text08 {
+    font-size: 38px;
+    font-family: Verdana;
+  }
+  
