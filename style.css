@@ -1,6 +1,9 @@
 :root {
     --tan-light:#FAF1E4;
-    --tan-dark:#cec5b7;
+    --tan-dark:#CEC5B7;
+    --green-dark: #40513B;
+    --green-medium: #609966;
+    --green-light: #9DC08B;
 }
 
 body {
@@ -8,7 +11,7 @@ body {
 }
 
 .navbar {
-    background-color: #40513B !important;
+    background-color: var(--green-dark) !important;
 }
 .nav-link {
     color: var(--tan-light);
