@@ -1,0 +1,25 @@
+:root {
+    --tan-light:#FAF1E4;
+    --tan-dark:#cec5b7;
+}
+
+body {
+    background-color: var(--tan-light);
+}
+
+.navbar {
+    background-color: #40513B !important;
+}
+.nav-link {
+    color: var(--tan-light);
+}
+.nav-link:hover {
+    color: var(--tan-dark);
+}
+
+.navbar-brand {
+    color: var(--tan-light);
+}
+.navbar-brand:hover {
+    color: var(--tan-dark);
+}
