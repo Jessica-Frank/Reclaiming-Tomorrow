@@ -20,6 +20,14 @@
     <a href="/rewards/redemption">Rewards page link</a>
     <br>
     <a href="/admin/dashboard">Preview of Admin Dashboard</a>
+    <br>
+    <a href="/verify/login">User Login Page</a>
+    <br>
+    <a href="/verify/signup">User Signup Page</a>
+    <br>
+    <a href="/admin_verify/admin_login"> Admin Login Page</a>
+    <br>
+    <a href="/admin_verify/admin_signup">Admin Signup Page</a>
 </body>
 
 </html>
