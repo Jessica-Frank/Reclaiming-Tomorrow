@@ -95,7 +95,7 @@ function login($data)
 
 function database_run($query,$vars = array())
 {
-    $string = "mysql:host=localhost;dbname=verify_db";
+    $string = "mysql:host=localhost;dbname=reclaiming_tomorrow_db";
     $con = new PDO($string, 'root', '');
 
     if(!$con){

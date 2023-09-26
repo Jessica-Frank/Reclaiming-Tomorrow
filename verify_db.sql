@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `verify_db`
+-- Database: `reclaiming_tomorrow_db`
 --
 
 -- --------------------------------------------------------
@@ -81,6 +81,7 @@ CREATE TABLE `users` (
   `email_verification` varchar(200) DEFAULT NULL,
   `username` varchar(50) NOT NULL,
   `password` varchar(200) NOT NULL,
+  `reward_points` int(255) NOT NULL DEFAULT 0,
   `date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
