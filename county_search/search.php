@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <title>Reclaiming Tomorrow</title>
 
     <meta charset="UTF-8">
@@ -10,10 +11,27 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
     <link href="style.css" rel="stylesheet">
-</head>
-<body>
-    <?php include '../include/header.php'; ?>
 <style>
+body {
+    background-color: #FAF1E4;
+}
+
+.navbar {
+    background-color: #40513B;
+}
+.nav-link {
+    color: #FAF1E4;
+}
+.nav-link:hover {
+    color: #CEC5B7;
+}
+
+.navbar-brand {
+    color:#FAF1E4;
+}
+.navbar-brand:hover {
+    color: #CEC5B7;
+}
 /* Style The Dropdown Button */
 .dropbtn {
   background-color: #40513B;
@@ -61,9 +79,13 @@
   background-color: #40513B;
 }
 </style>
+</head>
+<body>
+    <?php include '../include/header.php'; ?>
+
 
 <div class="dropdown">
-  <button class="dropbtn">Dropdown</button>
+  <button class="dropbtn">Counties</button>
   <div class="dropdown-content">
     <a href="#">County 1</a>
     <a href="#">County 2</a>
