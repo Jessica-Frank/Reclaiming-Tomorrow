@@ -70,8 +70,6 @@
 <body>
     <h1>Verify</h1>
 
-    <?php include('header.php');?>
-
     <br><br>
     <div>
             <br>A code was sent to your email.<br>
