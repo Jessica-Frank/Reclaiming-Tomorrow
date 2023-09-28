@@ -28,6 +28,8 @@
     <a href="/admin_verify/admin_login"> Admin Login Page</a>
     <br>
     <a href="/admin_verify/admin_signup">Admin Signup Page</a>
+    <br>
+    <a href="/county_search/search"> County Search Page </a>
 </body>
 
 </html>
