@@ -87,11 +87,22 @@ body {
 <div class="dropdown">
   <button class="dropbtn">Counties</button>
   <div class="dropdown-content">
+    <a href="county1.php">County 1</a>
+    <a href="#">County 2</a>
+    <a href="#">County 3</a>
+  </div>
+</div>
+
+<div class="dropdown">
+  <button class="dropbtn">Buying Bins</button>
+  <div class="dropdown-content">
     <a href="#">County 1</a>
     <a href="#">County 2</a>
     <a href="#">County 3</a>
   </div>
 </div>
+<h2> County Search</h2>
+<p> Welcome to the County search page!</p>
 
 </body>
 
