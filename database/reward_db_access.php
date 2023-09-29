@@ -1,5 +1,6 @@
 <?php
-function claimTicket($ticket_id, $username) {
+function claimTicket($ticket_id, $user_id)
+{
     try {
         //Get the ticket with the given ID
         $connection = new PDO("mysql:host=localhost;dbname=reclaiming_tomorrow_db", "root", "");
@@ -13,21 +14,21 @@ function claimTicket($ticket_id, $username) {
             //If there are no unclaimed tickets with that ID...
             return null;
         }
-        
+
         //Claim the ticket
         $sql_claim = "UPDATE tickets SET date_redeemed = UTC_TIMESTAMP(), 
         redeeming_user = :user WHERE id = :id ";
         $claim_statement = $connection->prepare($sql_claim);
         $claim_statement->bindParam(':id', $ticket_id, PDO::PARAM_STR);
-        $claim_statement->bindParam(':user', $username, PDO::PARAM_STR);
+        $claim_statement->bindParam(':user', $user_id, PDO::PARAM_STR);
         $claim_statement->execute();
 
         //Add the points
         $sql_add = "UPDATE users SET reward_points = reward_points + :points 
-        WHERE username = :user";
+        WHERE id = :user_id";
         $add_statement = $connection->prepare($sql_add);
         $add_statement->bindParam(':points', $check_result[0]['point_value'], PDO::PARAM_STR);
-        $add_statement->bindParam(':user', $username, PDO::PARAM_STR);
+        $add_statement->bindParam(':user_id', $user_id, PDO::PARAM_STR);
         $add_statement->execute();
 
         //Return the claimed ticket's data
@@ -38,7 +39,8 @@ function claimTicket($ticket_id, $username) {
     }
 }
 
-function getRewards() {
+function getAllRewards()
+{
     try {
         $connection = new PDO("mysql:host=localhost;dbname=reclaiming_tomorrow_db", "root", "");
         $sql_command = "SELECT * FROM rewards";
@@ -52,12 +54,45 @@ function getRewards() {
     }
 }
 
-function getUserPoints($username) {
+function redeemReward($reward_id, $user_id)
+{
     try {
         $connection = new PDO("mysql:host=localhost;dbname=reclaiming_tomorrow_db", "root", "");
-        $sql_command = "SELECT reward_points FROM users WHERE username = :username";
+        $reward_sql = "SELECT * FROM rewards WHERE id = :id";
+        $reward_statement = $connection->prepare($reward_sql);
+        $reward_statement->bindParam(':id', $reward_id, PDO::PARAM_INT);
+        $reward_statement->execute();
+        $reward_data = $reward_statement->fetchAll()[0];
+
+        $points_sql = "SELECT reward_points FROM users WHERE id = :user_id";
+        $points_statement = $connection->prepare($points_sql);
+        $points_statement->bindParam(':user_id', $user_id, PDO::PARAM_STR);
+        $points_statement->execute();
+        $user_points = $points_statement->fetchColumn(0);
+
+        if ($user_points >= $reward_data['price']) {
+            $spend_sql = "UPDATE users SET reward_points = reward_points - :price WHERE id = :user_id";
+            $spend_statement = $connection->prepare($spend_sql);
+            $spend_statement->bindParam(':user_id', $user_id, PDO::PARAM_STR);
+            $spend_statement->bindParam(':price', $reward_data['price'], PDO::PARAM_INT);
+            $spend_statement->execute();
+            return $reward_data;
+        } else {
+            return null;
+        }
+    } catch (PDOException $ex) {
+        echo $ex->getMessage();
+        return null;
+    }
+}
+
+function getUserPoints($user_id)
+{
+    try {
+        $connection = new PDO("mysql:host=localhost;dbname=reclaiming_tomorrow_db", "root", "");
+        $sql_command = "SELECT reward_points FROM users WHERE id = :user_id";
         $statement = $connection->prepare($sql_command);
-        $statement->bindParam(':username', $username, PDO::PARAM_STR);
+        $statement->bindParam(':user_id', $user_id, PDO::PARAM_STR);
         $statement->execute();
         $result = $statement->fetchColumn(0);
         return $result;
