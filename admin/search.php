@@ -30,14 +30,14 @@ require '../connect.php';
         </div>
         <div class="main_content">
             <div class="info">
-            <div class="container my-5">
+            <div class="container my-5" style="text-align: center;">
             <form method="post">
-                <input type="text" placeholder="Search Users" name="search">
+                <input type="text" placeholder="Search Users" name="search" size="60">
                 <button class="btn btn-dark btn-sm" name="submit">Search</button>
             </form>
 
             <div class="container my-5">
-                <table class="table">
+                <table class="table table-hover">
                     <?php
                     if(isset($_POST['submit'])){
                         $search=$_POST['search'];
@@ -45,7 +45,7 @@ require '../connect.php';
                         $result=mysqli_query($db,$sql);
                         if($result){
                             if(mysqli_num_rows($result) > 0) {
-                                echo '<thead>
+                                echo '<thead class="table-dark">
                                 <tr>
                                 <th>ID</th>
                                 <th>Name</th>
@@ -56,7 +56,7 @@ require '../connect.php';
                                 while($row=mysqli_fetch_assoc($result)){
                                 echo '<tbody>
                                 <tr>
-                                <td><a href="userProfile.php?id='.$row['id'].'">'.$row['id'].'</a></td>
+                                <td><a href="userProfile.php?id='.$row['id'].'" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">'.$row['id'].'</a></td>
                                 <td>'.$row['name'].'</td>
                                 <td>'.$row['email'].'</td>
                                 </tr>

@@ -15,7 +15,32 @@ body{
 
 .container my-5{
   background-color: #FAF1E4;
-} 
+}
+
+form { 
+  margin: 0 auto; 
+  width:700px;
+  }
+
+.flex-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-box{
+    width: auto;
+    height: auto;
+    background-color: #9DC08B;
+    font-size: 25px;
+    text-align: center;
+    line-height: 20px;
+    border-radius: 20px;
+    margin: 20px;
+    color: #000000;
+    align-items: center;
+    justify-content: center;
+}
 
 .wrapper{
   display: flex;
@@ -54,7 +79,7 @@ body{
 }
 
 .wrapper .sidebar ul li:hover{
-  background-color: #7EC986;
+  background-color: #9DC08B;
 }
     
 .wrapper .sidebar ul li:hover a{

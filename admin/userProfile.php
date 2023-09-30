@@ -29,6 +29,17 @@ require '../connect.php';
             </ul> 
         </div>
         <div class="main_content">
+            <div style="text-align:center;">
+                <br>
+                <?php
+                session_start();
+                if(!empty($_SESSION['message'])) {
+                    $message = $_SESSION['message'];
+                    echo '<h2 style=color: #000000">'.$message.'</h2>';
+                    session_destroy();
+                }
+                ?>
+            </div>
             <div class="info">
             <?php
                 $data=$_GET['id'];
@@ -36,13 +47,24 @@ require '../connect.php';
                 $result=mysqli_query($db,$sql);
                 if($result){
                     $row=mysqli_fetch_assoc($result);
-                    echo '<div class="container">
-                        <div class="jumbotron">
-                        <h1 class="display-4">'.$row['name'].'</h1>
-                        <p class="lead">Points: </p>
-                        <hr class="my-4">
-                        <p class="lead">
-                            <a class="btn btn-dark btn" href="/admin/search" role="button">Back</a>
+                    echo '<div class="flex-container">
+                        <div class="flex-box">
+                        <h1 style="margin-top: 20px">'.$row['name'].'</h1>
+                        <p style="margin-right: 20px;margin-left: 20px">
+                            Reward Points: '.$row['reward_points'].'
+                            <a class="fas fa-edit link-underline-opacity-0 link-light" href="updatePoints.php?id='.$row['id'].'" role="button"></a>
+                        </p>
+                        <p style="margin-right: 20px;margin-left: 20px">
+                            ID: '.$row['id'].'
+                        </p>
+                        <p style="margin-right: 20px;margin-left: 20px">
+                            Username: '.$row['username'].'
+                        </p>
+                        <p style="margin-right: 20px;margin-left: 20px">
+                            Email: '.$row['email'].'
+                        </p>
+                        <p>
+                            <a class="btn btn-dark btn" href="/admin/search" style="width:100px" role="button">Back</a>
                         </p>
                     </div>
                 </div>';
