@@ -1,130 +1,189 @@
-@import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Poppins');
 
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    list-style: none;
-    text-decoration: none;
-    font-family: 'Josefin Sans', sans-serif;
-  }
-
-:root {
-    --tan-light:#FAF1E4;
-    --tan-dark:#CEC5B7;
-    --green-dark: #40513B;
-    --green-medium: #609966;
-    --green-light: #9DC08B;
+    font-family: 'Poppins', sans-serif;
 }
-
 body {
-    background-color: var(--tan-light);
+  background-color:#FAF1E4;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  background-color: #FAF1E4;
+  min-height: 100vh;
+
 }
 
-.navbar {
-    background-color: var(--green-dark) !important;
-}
-.nav-link {
-    color: var(--tan-light);
-}
-.nav-link:hover {
-    color: var(--tan-dark);
+header {
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px 100px;
+    background: #40513B;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 99;
 }
 
-.navbar-brand {
-    color: var(--tan-light);
+.logo {
+    font-size: 1.2em; /* Adjust the font size for the logo */
+    color: #FAF1E4;
+    user-select: none;
 }
-.navbar-brand:hover {
-    color: var(--tan-dark);
+
+.navigation {
+  /* Move navigation links and login button to the right */
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+ 
+}
+
+.navigation a {
+    position: relative;
+    font-size: 1em; /* Adjust the font size for the navigation links */
+    color: #FAF1E4;
+    text-decoration: none;
+    margin-right: 40px;/* Add some spacing between the links */
+    margin: 0 auto 0 60px;
+}
+
+.navigation a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 3px;
+  background: #FAF1E4;
+  border-radius: 5px;
+  transform-origin: right;
+  transform: scaleX(0);
+  transition: transform .5s;
+
+}
+
+.navigation a:hover::after{
+  transform: scaleX(1);
+}
+
+.navigation .btnLogin-popup {
+    font-size: 1em; /* Adjust the font size for the login button if needed */
+    color: #FAF1E4;
+    background: transparent;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    justify-content: flex-end;
+    transition: .5s;
+    text-decoration: none;
+}
+
+.navigation .btnLogin-popup:hover {
+  background: #CEC5B7;
+  color: #162938;
+  
 }
 
  /*Added in CSS content from Admin pages */
  .container my-5{
-    background-color: #FAF1E4;
+  background-color: #FAF1E4;
+}
+
+form { /*Used to modify forms - as seen wtihin the Admin section: Modify Points*/
+  margin: 0 auto; 
+  width:700px;
   }
-  
-  form { /*Used to modify forms - as seen wtihin the Admin section: Modify Points*/
-    margin: 0 auto; 
-    width:700px;
-    }
-  
-  .flex-container{ /*Used to hold flex-boxes. These are the light green containers within the Admin section: User Profiles & Modify Points*/
-      display: flex;
-      align-items: center;
-      justify-content: center;
-  }
-  
-  .flex-box{ /*Used to hold SQL content within the Admin pages. As seen on the User Profiles & Modify Points pages*/
-      width: auto;
-      height: auto;
-      background-color: #9DC08B;
-      font-size: 25px;
-      text-align: center;
-      line-height: 20px;
-      border-radius: 20px;
-      margin: 20px;
-      color: #000000;
-      align-items: center;
-      justify-content: center;
-  }
-  
+
+.flex-container{ /*Used to hold flex-boxes. These are the light green containers within the Admin section: User Profiles & Modify Points*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-box{ /*Used to hold SQL content within the Admin pages. As seen on the User Profiles & Modify Points pages*/
+    width: auto;
+    height: auto;
+    background-color: #9DC08B;
+    font-size: 25px;
+    text-align: center;
+    line-height: 20px;
+    border-radius: 20px;
+    margin: 20px;
+    color: #000000;
+    align-items: center;
+    justify-content: center;
+}
+
 
 /*STYLES USED TO CREATE THE SIDE NAVIGATION MENU (sidebar) AS SEEN ON ALL ADMIN PAGES*/
-  .wrapper{     /*Used to contain both the sidebar and main page content*/
-    display: flex;
-    position: relative;
-  }
+.wrapper{     /*Used to contain both the sidebar and main page content*/
+  display: flex;
+  position: relative;
 
-  .wrapper .sidebar{ /*Used to maintain content within the sidebar*/
-    width: 200px;
-    height: 100%;
-    background: #609966;
-    padding: 30px 0px;
-    position: fixed;
-  }
-  
-  .wrapper .sidebar h2{
-    color: #FAF1E4;
-    text-transform: uppercase;
-    text-align: center;
-    margin-bottom: 30px;
-  }
-  
-  .wrapper .sidebar ul li{
-    padding: 10px;
-    border-bottom: 1px solid #CEC5B7;
-    border-bottom: 1px solid rgba(0,0,0,0.05);
-    border-top: 1px solid rgba(255,255,255,0.05);
-  }    
-  
-  .wrapper .sidebar ul li a{
-    color: #FAF1E4;
-    display: block;
-  }
-  
-  .wrapper .sidebar ul li a .fas{
-    width: 25px;
-  }
-  
-  .wrapper .sidebar ul li:hover{ /*Used to modify the hovering style on the sidebar*/
-    background-color: #9DC08B;
-  }
-      
-  .wrapper .sidebar ul li:hover a{
-    color: #FAF1E4;
-  } 
-  
-  .wrapper .main_content{ /*Contains the main page content*/
-    width: 100%;
-    margin-left: 200px;
-  }
-  
-  .wrapper .main_content .info{
-    margin: 20px;
-    color: #717171;
-    line-height: 25px;
-  }
-  
-  .wrapper .main_content .info div{
-    margin-bottom: 20px;
-  }
+}
+
+.wrapper .sidebar{ /*Used to maintain content within the sidebar*/
+  width: 200px;
+  height: 100%;
+  background: #609966;
+  padding: 30px 0px;
+  position: fixed;
+}
+
+.wrapper .sidebar h2{
+  color: #FAF1E4;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.wrapper .sidebar ul li{
+  padding: 10px;
+  border-bottom: 1px solid #CEC5B7;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  border-top: 1px solid rgba(255,255,255,0.05);
+}    
+
+.wrapper .sidebar ul li a{
+  color: #FAF1E4;
+  display: block;
+}
+
+.wrapper .sidebar ul li a .fas{
+  width: 25px;
+}
+
+.wrapper .sidebar ul li:hover{ /*Used to modify the hovering style on the sidebar*/
+  background-color: #9DC08B;
+}
+    
+.wrapper .sidebar ul li:hover a{
+  color: #FAF1E4;
+} 
+
+.wrapper .main_content{ /*Contains the main page content*/
+  width: 100%;
+  margin-left: 200px;
+}
+
+.wrapper .main_content .info{
+  margin: 20px;
+  color: #717171;
+  line-height: 25px;
+}
+
+.wrapper .main_content .info div{
+  margin-bottom: 20px;
+}
+
+.login .wrapper {
+ 
+  backdrop-filter: blur(20px);
+  box-shadow: 0 0 30px rgba(0, 0, 0, .5); /*for anyone who want their box to have a shadow like in the login page*/
+}

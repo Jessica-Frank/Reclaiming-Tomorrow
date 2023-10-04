@@ -48,7 +48,6 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
         </div>
 
             <div class="wrapper">
-                <span class="icon-close"><ion-icon name="close"></ion-icon></span>
                 <div class="form-box login">
                     <h2>Login</h2>
                     <form action="#" method="post">

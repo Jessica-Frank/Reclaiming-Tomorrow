@@ -9,17 +9,17 @@
 }
 
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
     background-color:#FAF1E4;
     background-size: cover;
     background-position: center;
-
-}
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    background-color: #FAF1E4;
+    min-height: 100vh;
+  
+  }
 header{
-    position: fixed;
     top:0;
     left:0;
     width: 100%;
@@ -32,59 +32,64 @@ header{
 }
 
 .logo {
-    font-size: 1.5em;
+    font-size: 1.2em; /* Adjust the font size for the logo */
     color: #FAF1E4;
     user-select: none;
 }
 
+.navigation {
+  /* Move navigation links and login button to the right */
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+ 
+}
+
 .navigation a {
     position: relative;
-    font-size: 1em;
+    font-size: 1em; /* Adjust the font size for the navigation links */
     color: #FAF1E4;
     text-decoration: none;
-    font-weight: 500;
-    margin-left: 40px;
-
+    margin-right: 40px;/* Add some spacing between the links */
+    margin: 0 auto 0 60px;
 }
 
 .navigation a::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -6px;
-    width: 100%;
-    height: 3px;
-    background: #FAF1E4;
-    border-radius: 5px;
-    transform-origin: right;
-    transform: scaleX(0);
-    transition: transform .5s;
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 3px;
+  background: #FAF1E4;
+  border-radius: 5px;
+  transform-origin: right;
+  transform: scaleX(0);
+  transition: transform .5s;
 
 }
 
 .navigation a:hover::after{
-    transform: scaleX(1);
+  transform: scaleX(1);
 }
 
 .navigation .btnLogin-popup {
-    width: 100px;
-    height: 50px;
+    font-size: 1em; /* Adjust the font size for the login button if needed */
+    color: #FAF1E4;
     background: transparent;
-    border: 2px solid #fff;
-    outline:none;
-    border-radius: 6px;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
     cursor: pointer;
-    font-size: 1.1em;
-    color: #fff;
-    font-weight: 500;
-    margin-left :40px;
+    justify-content: flex-end;
     transition: .5s;
-
+    text-decoration: none;
 }
 
 .navigation .btnLogin-popup:hover {
-    background: #fff;
-    color: #162938;
+  background: #CEC5B7;
+  color: #162938;
+  
 }
 
 .wrapper {
@@ -232,6 +237,5 @@ header{
 .login-register p a:hover{
     text-decoration: underline;
 }
-
 
 

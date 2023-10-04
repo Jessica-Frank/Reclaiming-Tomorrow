@@ -25,7 +25,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="signup.css">
+
  
   
     
@@ -47,7 +48,6 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
 
         </div>
         <div class="signup-wrapper">
-                <span class="icon-close"><ion-icon name="close"></ion-icon></span>
                 <div class="form-box register">
                     <h2>Signup</h2>
                     <form action="#" method="post">
@@ -78,12 +78,11 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
                 </div>
 
                 <div class="signup-remember-forgot">
-                    <label><input type="checkbox">
-                    I agree to the terms & conditions</label>
                 </div>
                 <button type="submit" class="btn">Signup</button>
-                <div class="login-register">
+                <div class="signup-login-register">
                 <p>Already have an account?<a href="login.php" class="login-link">Login</a></p>
+
             </div>
         </form>
     </div>
