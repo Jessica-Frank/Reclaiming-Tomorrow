@@ -20,7 +20,7 @@
 <div class="container mt-5">
 <div class="container mt-5">
         <h1>Recycling Search</h1>
-        <form method="post" action="search_results">
+        <form method="post" action="locationator">
             <div class="mb-3">
                 <label for="recyclingMaterial" class="form-label">Recycling Material</label>
                 <input type="text" class="form-control" id="recyclingMaterial" name="recyclingMaterial" required>
