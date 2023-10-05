@@ -20,22 +20,28 @@
     <div class="container">
         <?php
         session_start();
+        $ticket = null;
+        $chosen_reward = null;
+        $points_available = null;
 
-        if (isset($_POST['ticket_num'])) {
-            $ticket = claimTicket($_POST['ticket_num'], $_SESSION['USER']->id);
+        if (isset($_POST) && isset($_SESSION['USER'])) {
+            if (isset($_POST['ticket_num'])) {
+                $ticket = claimTicket($_POST['ticket_num'], $_SESSION['USER']->id);
+            }
+            if (isset($_POST['reward_id'])) {
+                $chosen_reward = redeemReward($_POST['reward_id'], $_SESSION['USER']->id);
+            }
+            $points_available = getUserPoints($_SESSION['USER']->id);
         }
-
-        if (isset($_POST['reward_id'])) {
-            $chosen_reward = redeemReward($_POST['reward_id'], $_SESSION['USER']->id);
-        }
-        
         $reward_list = getAllRewards();
-        $points_available = getUserPoints($_SESSION['USER']->id);
         ?>
         <h2>Recycling Rewards</h2>
 
         <h6>Earn tickets by recycling at supporting locations</h6>
-        <h5 style="margin-top: 2rem;">Your current points: <?php echo $points_available; ?></h5>
+        <h5 style="margin-top: 2rem;"> 
+            <?php if(isset($points_available)) {echo "Your current points: "+$points_available;}
+            else {echo "You must log in to view your points and redeem rewards";} ?>
+        </h5>
         <div id="ticket_div" style="width: 50%; padding:2%;">
             <p>Redeem your tickets to earn points, which you can use to get rewards!</p>
             <div style="display: inline-block; margin-bottom:2%;" id="ticket_input_div">
@@ -74,7 +80,7 @@
         <?php } ?>
 
         <div id="reward_display">
-            <?php foreach ($reward_list as $reward) : ?>
+            <?php if ($reward_list != null) { foreach ($reward_list as $reward) : ?>
                 <div class="card" style="width: 22%; margin:1%;display:inline-block;">
                     <div height="250px" class="card-img-top" style="overflow: hidden;">
                         <img height="250px" width="100%" style="object-fit: cover;" alt="Reward Image" src='<?php echo $reward['img_link']; ?>' />
@@ -94,7 +100,7 @@
                         </form>
                     </div>
                 </div>
-            <?php endforeach; ?>
+            <?php endforeach; } else {echo "Error: Unable to load rewards";} ?>
         </div>
     </div>
 </body>

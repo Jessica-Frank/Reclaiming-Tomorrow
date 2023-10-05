@@ -34,7 +34,7 @@ function claimTicket($ticket_id, $user_id)
         //Return the claimed ticket's data
         return $check_result[0];
     } catch (PDOException $ex) {
-        echo $ex->getMessage();
+        echo "Error: Unable to claim this ticket. Please check that you are logged in.";
         return null;
     }
 }
@@ -49,7 +49,7 @@ function getAllRewards()
         $result = $statement->fetchAll();
         return $result;
     } catch (PDOException $ex) {
-        echo $ex->getMessage();
+        echo "Error: Unable to get the list of rewards";
         return null;
     }
 }
@@ -81,7 +81,7 @@ function redeemReward($reward_id, $user_id)
             return null;
         }
     } catch (PDOException $ex) {
-        echo $ex->getMessage();
+        echo "Error: Unable to redeem rewards. Please check that you are logged in.";
         return null;
     }
 }
@@ -97,7 +97,7 @@ function getUserPoints($user_id)
         $result = $statement->fetchColumn(0);
         return $result;
     } catch (PDOException $ex) {
-        echo $ex->getMessage();
+        echo "Error: Unable to load point data. Please check that you are logged in.";
         return null;
     }
 }
