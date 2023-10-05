@@ -299,6 +299,24 @@ ALTER TABLE `users`
 --
 ALTER TABLE `user_verification`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+-- Table structure for table `county_search`
+--
+
+CREATE TABLE `county_search` (
+  `County` varchar(150) NOT NULL,
+  `Local event` varchar(150) NOT NULL,
+  `Pick-up Schedule` varchar(150) NOT NULL,
+  `Associated Links` varchar(600) NOT NULL,
+  `Alternatives` varchar(600) NOT NULL,
+  `Buy Bins` varchar(250) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `county_search`
+--
+
+INSERT INTO `county_search` (`County`, `Local event`, `Pick-up Schedule`, `Associated Links`, `Alternatives`, `Buy Bins`) VALUES
+('Gilford County', 'Oak Ridges Recycles: November 4, 2023\r\nPleasant Garden Recycles: March 16, 2024\r\nGuilford County Spring Cleanup: April 27, 2024', 'Every Other Tuesday', 'https://www.guilfordcountync.gov/our-county/planning-development/environmental-services/recycling\r\n\r\nhttps://www.guilfordcountync.gov/our-county/planning-development/environmental-services/electronics-recycling\r\n\r\nhttps://www.guilfordcountync.gov/our', ' single-use k cups ', 'https://www.homedepot.com/p/Rubbermaid-Roughneck-45-Gal-Vented-Blue-Wheeled-Recycling-Trash-Container-2149498/316790901?source=shoppingads&locale=en-US&pla&mtc=SHOPPING-BF-AIB-GGL-Multi-Multi-NA-NA-NA-PLALIA-NA-IIM-NA-NA-NBR-NA-NA-NEW-PRIO_CLASS&cm_m');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
