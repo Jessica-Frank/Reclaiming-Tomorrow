@@ -10,7 +10,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
     
     if(count($errors) == 0)
     {
-        header("Location: admin_profile.php");
+        header("Location: ../admin/dashboard.php");
         die;
     }
 }
@@ -32,7 +32,6 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
 </head>
 <body>
     <?php include '../verify/index.php';?>
-
     <h1></h1>
 
     

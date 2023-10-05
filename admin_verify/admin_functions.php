@@ -44,9 +44,10 @@ function signup($data)
         $arr['email'] = $data['email'];
         $arr['username'] = $data['username'];
         $arr['password'] = password_hash($data['password'], PASSWORD_DEFAULT) ;
+        $arr['role'] = "admin";
         $arr['date'] = date("Y-m-d H:i:s");
-        $query = "insert into admin (name,email,username,password,date) values 
-        (:name,:email,:username,:password,:date)";
+        $query = "insert into admin (name,email,username,password,role,date) values 
+        (:name,:email,:username,:password,:role,:date)";
 
         database_run($query,$arr);
 
@@ -82,6 +83,7 @@ function login($data)
             if (password_verify($data['password'], $hash)) {
                 $_SESSION['USER'] = $row;
                 $_SESSION['LOGGED_IN'] = true;
+                $_SESSION['admin'] = true;
             } else {
                 $errors[] = "Wrong email/username or password";
             }

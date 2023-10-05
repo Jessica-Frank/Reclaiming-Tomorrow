@@ -1,3 +1,10 @@
+<?php
+  session_start();
+
+  include "../admin_verify/admin_access.php";
+  access('ADMIN');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
