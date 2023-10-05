@@ -81,6 +81,7 @@ function login($data)
             $hash = $row->password;
 
             if (password_verify($data['password'], $hash)) {
+                $_SESSION['current'] = $user_id;
                 $_SESSION['USER'] = $row;
                 $_SESSION['LOGGED_IN'] = true;
                 $_SESSION['admin'] = true;
