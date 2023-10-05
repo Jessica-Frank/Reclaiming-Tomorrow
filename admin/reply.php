@@ -4,21 +4,35 @@ require '../connect.php';
 
 <?php
 $id=$_GET['id'];
-$sql="SELECT * FROM users WHERE id=$id";
+$sql="SELECT * FROM admin_inbox WHERE id=$id";
 $result=mysqli_query($db,$sql);
 $row=mysqli_fetch_assoc($result);
-$name=$row['name'];
-$reward_points=$row['reward_points'];
+$user_id=$row['from_id'];
+$user_name=$row['from_name'];
+$reply_title="RE: ".$row['title'];
 
 if(isset($_POST['submit'])){
-    $reward_points=$_POST['reward_points'];
+    $from_id=0;
+    $from_name="admin";
+    $to_id=$user_id;
+    $message=$_POST['message'];
+    $title=$reply_title;
 
-    $sql="UPDATE users SET reward_points='$reward_points' WHERE id=$id";
+    $sql="INSERT INTO user_inbox (from_id, from_name, to_id, message, title)
+    VALUES('$from_id','$from_name','$to_id','$message','$title')";
+    $result=mysqli_query($db,$sql);
+    if($result){
+    } else {
+        die(mysqli_error($db));
+    }
+
+    $sql="INSERT INTO admin_inbox (from_id, from_name, to_id, message, title)
+    VALUES('$from_id','$from_name','$to_id','$message','$title')";
     $result=mysqli_query($db,$sql);
     if($result){
         session_start();
-        $_SESSION['message'] = 'Successfully updated points!';
-        header('location:../admin/userProfile.php?id='.$id.'');
+        $_SESSION['message'] = 'Successfully sent message!';
+        header('location:../admin/admin_inbox');
     } else {
         die(mysqli_error($db));
     }
@@ -35,7 +49,19 @@ if(isset($_POST['submit'])){
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
     <link href="../style.css" rel="stylesheet">
-    <title>Update Points</title>
+    <title>Reply</title>
+
+    <script>
+        function countChar(val) {
+        var len = val.value.length;
+        if (len >= 255) {
+            val.value = val.value.substring(0, 255);
+        } else {
+            $('#charNum').text(255 - len);
+        }
+        };
+    </script>
+
 </head>
 <body>
 <?php include "../admin/header.php"; ?>
@@ -56,16 +82,19 @@ if(isset($_POST['submit'])){
                 <div class="flex-box">
                     <form method="post" style="margin-top: 20px; margin-bottom: 20px">
                         <div>
-                            <h1><?php echo $name;?></h1>
+                            <h1><?php echo $reply_title;?></h1>
+                            <p>
+                                To: <?php echo $user_name;?>
+                            </p>
                         </div>
                         <div>
-                            <label>Reward Points:</label>
-                            <input type="text" placeholder="points" name="reward_points" value="<?php
-                            echo $reward_points;?>" size="5">
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+                            <textarea rows="12" cols="40" onkeyup="countChar(this)" style="margin-right: 20px;margin-left: 20px;margin-bottom: 10px;resize: none;text-align: left;padding: 5px;" placeholder="Type message here" name="message"></textarea>
+                            <div id="charNum" style="margin-bottom: 20px;text-align: left;margin-right: 20px;margin-left: 93px;"></div>
                         </div>
 
-                        <a class="btn btn-dark btn" href="/admin/userProfile.php?id=<?php echo $id ?>" style="width:60px" role="button">Back</a>
-                        <button type="submit" class="btn btn-dark" name="submit">Update Points</button>
+                        <a class="btn btn-dark btn" href="/admin/openMessage.php?id=<?php echo $id?>" style="width:60px" role="button">Back</a>
+                        <button type="submit" class="btn btn-dark" name="submit">Send</button>
                 </form>
             </div>
         </div>

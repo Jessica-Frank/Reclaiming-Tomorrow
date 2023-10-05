@@ -5,7 +5,7 @@
         <a href="../county_search/search">Search</a>
         <a href="#">Local Information</a>
         <a href="/rewards/redemption">Rewards</a>
-        <a href="#">Contact Us</a>
+        <a href="../verify/inbox">Contact Us</a>
         <a href="../verify/login" class="btnLogin-popup">Login</a>
     </nav>
 </header>

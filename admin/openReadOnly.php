@@ -2,29 +2,6 @@
 require '../connect.php';
 ?>
 
-<?php
-$id=$_GET['id'];
-$sql="SELECT * FROM users WHERE id=$id";
-$result=mysqli_query($db,$sql);
-$row=mysqli_fetch_assoc($result);
-$name=$row['name'];
-$reward_points=$row['reward_points'];
-
-if(isset($_POST['submit'])){
-    $reward_points=$_POST['reward_points'];
-
-    $sql="UPDATE users SET reward_points='$reward_points' WHERE id=$id";
-    $result=mysqli_query($db,$sql);
-    if($result){
-        session_start();
-        $_SESSION['message'] = 'Successfully updated points!';
-        header('location:../admin/userProfile.php?id='.$id.'');
-    } else {
-        die(mysqli_error($db));
-    }
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,7 +12,7 @@ if(isset($_POST['submit'])){
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
     <link href="../style.css" rel="stylesheet">
-    <title>Update Points</title>
+    <title>Message</title>
 </head>
 <body>
 <?php include "../admin/header.php"; ?>
@@ -52,25 +29,33 @@ if(isset($_POST['submit'])){
         </div>
         <div class="main_content">
             <div class="info">
-            <div class="flex-container">
-                <div class="flex-box">
-                    <form method="post" style="margin-top: 20px; margin-bottom: 20px">
-                        <div>
-                            <h1><?php echo $name;?></h1>
-                        </div>
-                        <div>
-                            <label>Reward Points:</label>
-                            <input type="text" placeholder="points" name="reward_points" value="<?php
-                            echo $reward_points;?>" size="5">
-                        </div>
-
-                        <a class="btn btn-dark btn" href="/admin/userProfile.php?id=<?php echo $id ?>" style="width:60px" role="button">Back</a>
-                        <button type="submit" class="btn btn-dark" name="submit">Update Points</button>
-                </form>
-            </div>
-        </div>
+            <?php
+                $data=$_GET['id'];
+                $sql="SELECT * FROM admin_inbox WHERE id=$data";
+                $result=mysqli_query($db,$sql);
+                if($result){
+                    $row=mysqli_fetch_assoc($result);
+                    echo '<div class="flex-container">
+                        <div class="flex-box">
+                        <h1 style="margin-top: 20px">'.$row['title'].'</h1>
+                        <p style="margin-right: 20px;margin-left: 20px">
+                           '.$row['date_sent'].'
+                        </p>
+                        <p style="margin-right: 20px;margin-left: 20px">
+                            ID: '.$row['from_name'].'
+                        </p>
+                        <textarea rows="12" cols="40" style="margin-right: 20px;margin-left: 20px;margin-bottom: 10px;resize: none;text-align: left;padding: 5px;" readonly>'.$row['message'].'</textarea>
+                        <p>
+                            <a class="btn btn-dark btn" href="/admin/sent" role="button">Back</a>
+                        </p>
+                    </div>
+                </div>';
+                }
+            ?>
       </div>
     </div>
 </div>
 </body>
 </html>
+
+

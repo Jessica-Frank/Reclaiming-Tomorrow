@@ -26,12 +26,12 @@
             <li><a href="/admin/search"><i class="fas fa-user"></i>Search Users</a></li>
             <li><a href="#"><i class="fas fa-recycle"></i>Modify Content</a></li>
             <li><a href="#"><i class="fas fa-ticket-alt"></i>Modify Rewards</a></li>
-            <li><a href="#"><i class="fas fa-envelope"></i>Inbox</a></li>
+            <li><a href="/admin/admin_inbox"><i class="fas fa-envelope"></i>Inbox</a></li>
         </ul> 
     </div>
     <div class="main_content">
         <div class="info">
-          <div>When the home page is finished it will go here. :]</div>
+          <div>INSERT HOME PAGE HERE WHEN IT'S FINISHED</div>
       </div>
     </div>
 </div>

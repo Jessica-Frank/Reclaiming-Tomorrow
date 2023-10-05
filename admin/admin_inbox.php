@@ -12,7 +12,7 @@ require '../connect.php';
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
     <link href="../style.css" rel="stylesheet">
-    <title>Search Users</title>
+    <title>Inbox</title>
 </head>
 <body>
 <?php include "../admin/header.php"; ?>
@@ -28,45 +28,52 @@ require '../connect.php';
             </ul> 
         </div>
         <div class="main_content">
+            <div style="text-align:center;">
+                <br>
+                <?php
+                session_start();
+                if(!empty($_SESSION['message'])) {
+                    $message = $_SESSION['message'];
+                    echo '<h2 style="color: #000000">'.$message.'</h2>';
+                    unset($_SESSION['message']);
+                }
+                ?>
+            </div>
             <div class="info">
             <div class="container my-5" style="text-align: center;">
-            <form method="post">
-                <input type="text" placeholder="Search Users" name="search" size="60">
-                <button class="btn btn-dark btn-sm" name="submit">Search</button>
-            </form>
-
+            <h1 style="color: #000000">Inbox / <a href="sent" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Sent</a></h1>
             <div class="container my-5">
                 <table class="table table-hover">
                     <?php
-                    if(isset($_POST['submit'])){
-                        $search=$_POST['search'];
-                        $sql="SELECT * FROM users WHERE id LIKE '%$search%' OR name LIKE '%$search%' OR email LIKE '%$search%'";
+                        $to_id="admin";
+                        $sql="SELECT * FROM admin_inbox WHERE to_id='$to_id'";
                         $result=mysqli_query($db,$sql);
                         if($result){
                             if(mysqli_num_rows($result) > 0) {
                                 echo '<thead class="table-dark">
                                 <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Email</th>
+                                <th>From</th>
+                                <th>Title</th>
+                                <th>Date</th>
+                                <th></th>
                                 </tr>
                                 </thead>
                                 ';
                                 while($row=mysqli_fetch_assoc($result)){
                                 echo '<tbody>
                                 <tr>
-                                <td><a href="userProfile.php?id='.$row['id'].'" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">'.$row['id'].'</a></td>
-                                <td>'.$row['name'].'</td>
-                                <td>'.$row['email'].'</td>
+                                <td>'.$row['from_name'].'</td>
+                                <td><a href="openMessage.php?id='.$row['id'].'" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">'.$row['title'].'</a></td>
+                                <td>'.$row['date_sent'].'</td>
+                                <td><a class="link-dark" href="deleteMessage.php?id='.$row['id'].'"><i class="fas fa-trash-alt"></i></a></td>
                                 </tr>
                                 </tbody>
                                 ';
                                 }
                             } else {
-                                echo '<h2 class=text-danger>No users found</h2>';
+                                echo '<h2 class=text-danger>No messages found</h2>';
                             }
                         } 
-                    }
                     ?>
                 </table>
             </div>

@@ -33,6 +33,10 @@ $loggedInUsers = getLoggedInUsers();
             </a>
         <?php endif; ?>
 
+        <a href="inbox.php">
+                <button>Inbox</button>
+            </a>
+
         <br><br>
 
         <?php if (!empty($loggedInUsers)): ?>

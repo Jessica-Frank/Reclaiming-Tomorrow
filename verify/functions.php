@@ -84,6 +84,7 @@ function login($data)
                 if (password_verify($data['password'], $hash)) {
                     // Update the is_logged_in column to 1 for the logged-in user
                     $user_id = $row->id; 
+                    $_SESSION['current'] = $user_id;
                     updateUserLoginStatus($user_id, 1); // Call the function to update is_logged_in
     
                     $_SESSION['USER'] = $row;

@@ -319,6 +319,36 @@ INSERT INTO `county_search` (`County`, `Local event`, `Pick-up Schedule`, `Assoc
 ('Gilford County', 'Oak Ridges Recycles: November 4, 2023\r\nPleasant Garden Recycles: March 16, 2024\r\nGuilford County Spring Cleanup: April 27, 2024', 'Every Other Tuesday', 'https://www.guilfordcountync.gov/our-county/planning-development/environmental-services/recycling\r\n\r\nhttps://www.guilfordcountync.gov/our-county/planning-development/environmental-services/electronics-recycling\r\n\r\nhttps://www.guilfordcountync.gov/our', ' single-use k cups ', 'https://www.homedepot.com/p/Rubbermaid-Roughneck-45-Gal-Vented-Blue-Wheeled-Recycling-Trash-Container-2149498/316790901?source=shoppingads&locale=en-US&pla&mtc=SHOPPING-BF-AIB-GGL-Multi-Multi-NA-NA-NA-PLALIA-NA-IIM-NA-NA-NBR-NA-NA-NEW-PRIO_CLASS&cm_m');
 COMMIT;
 
+--
+
+DROP TABLE IF EXISTS admin_inbox;
+CREATE TABLE admin_inbox (
+  id int(20) NOT NULL AUTO_INCREMENT,
+  from_id int(20) NOT NULL,
+  from_name varchar(255) NOT NULL,
+  to_id varchar(255) NOT NULL,
+  message varchar(255) NOT NULL,
+  title varchar(100) NOT NULL,
+  date_sent datetime NOT NULL DEFAULT current_timestamp(),
+  read_receipt int(5) NOT NULL DEFAULT 0,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+
+DROP TABLE IF EXISTS user_inbox;
+CREATE TABLE user_inbox (
+  id int(20) NOT NULL AUTO_INCREMENT,
+  from_id int(20) NOT NULL,
+  from_name varchar(255) NOT NULL,
+  to_id varchar(255) NOT NULL,
+  message varchar(255) NOT NULL,
+  title varchar(100) NOT NULL,
+  date_sent datetime NOT NULL DEFAULT current_timestamp(),
+  read_receipt int(5) NOT NULL DEFAULT 0,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
