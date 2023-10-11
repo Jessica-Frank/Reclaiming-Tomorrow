@@ -101,3 +101,35 @@ function getUserPoints($user_id)
         return null;
     }
 }
+
+function getTicketsFromOrg($organization)
+{
+    try {
+        $connection = new PDO("mysql:host=localhost;dbname=reclaiming_tomorrow_db", "root", "");
+        $sql_command = "SELECT * FROM tickets WHERE organization = :user_org";
+        $statement = $connection->prepare($sql_command);
+        $statement->bindParam(':user_org', $organization, PDO::PARAM_STR);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        return $result;
+    } catch (PDOException $ex) {
+        return null;
+    }
+}
+
+function addTicketForOrg($organization, $ticket_code, $ticket_points)
+{
+    try {
+        $connection = new PDO("mysql:host=localhost;dbname=reclaiming_tomorrow_db", "root", "");
+        $sql_command = "INSERT INTO tickets (organization, id, point_value, date_created) VALUES (:org, :id, :points, UTC_TIMESTAMP())";
+        $statement = $connection->prepare($sql_command);
+        $statement->bindParam(':org', $organization, PDO::PARAM_STR);
+        $ticket_code = strtoupper($ticket_code);
+        $statement->bindParam(':id', $ticket_code, PDO::PARAM_STR);
+        $statement->bindParam(':points', $ticket_points, PDO::PARAM_INT);
+        $statement->execute();
+        return true;
+    } catch (PDOException $ex) {
+        return false;
+    }
+}

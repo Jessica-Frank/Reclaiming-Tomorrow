@@ -17,7 +17,8 @@
     <?php include "include/header.php"; ?>
 
     <p>This is the main page</p>
-    <a href="/rewards/redemption">Rewards page link</a>
+    <a href="/rewards/redemption">Rewards Page</a>
+    <a href="/rewards/manage_tickets">Manage Tickets</a>
     <br>
     <a href="/admin/dashboard">Preview of Admin Dashboard</a>
     <br>

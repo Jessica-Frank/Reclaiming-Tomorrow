@@ -39,7 +39,7 @@
 
         <h6>Earn tickets by recycling at supporting locations</h6>
         <h5 style="margin-top: 2rem;"> 
-            <?php if(isset($points_available)) {echo "Your current points: ".$points_available;}
+            <?php if(isset($points_available)) {echo "Your current points: "; echo $points_available;}
             else {echo "You must log in to view your points and redeem rewards";} ?>
         </h5>
         <div id="ticket_div" style="width: 50%; padding:2%;">
