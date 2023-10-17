@@ -22,16 +22,16 @@
                 echo "<p>" . $row['Local event'] . "</p";
 
                 echo "<h3>Associated Links</h3>";
-                echo "<p>" . $row['associated_links'] . "</p";
+                echo "<p>" . $row['Associated Links'] . "</p";
 
                 echo "<h3>Pick-up Schedule</h3>";
-                echo "<p>" . $row['pick_up_schedule'] . "</p";
+                echo "<p>" . $row['Pick-up Scedule'] . "</p";
 
                 echo "<h3>Buy Bin</h3>";
-                echo "<p>" . $row['buy_bin'] . "</p";
+                echo "<p>" . $row['Buy Bins'] . "</p";
 
                 echo "<h3>Alternatives</h3>";
-                echo "<p>" . $row['alternatives'] . "</p";
+                echo "<p>" . $row['Alternatives'] . "</p";
             }
         } else {
             echo "County not found or data not available.";
@@ -40,3 +40,4 @@
 
     $conn->close();
     ?>
+
