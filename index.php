@@ -30,7 +30,7 @@
     <br>
     <a href="/admin_verify/admin_signup">Admin Signup Page</a>
     <br>
-    <a href="/county_search/search"> County Search Page </a>
+    <a href="/county_search/county"> County Search Page </a>
     <br>
     <a href="/maps/search">Recycling Location Search</a>
 </body>
