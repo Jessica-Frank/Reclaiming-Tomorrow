@@ -13,81 +13,94 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
 </head>
-
 <body>
     <?php include '../include/header.php';?>
 
-    <div id="map"></div>
+    <div id="map" style="height: 500px;"></div>
 
     <script>
-       var map = L.map('map').setView([36.089987, -79.829674], 11);
+        var map = L.map('map').setView([36.089987, -79.829674], 11);
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
 
-        var marker = L.marker([36.089987, -79.829674]).addTo(map);
+        var locations = [
+            // PHP will populate this array with data from the database
+        ];
 
-        var circle = L.circle([36.089987, -79.829674], {
-        color: 'red',
-        fillColor: '#f03',
-        fillOpacity: 0.5,
-        radius: 500
-        }).addTo(map);
+        // PHP code to fetch data from your SQL database and populate the locations array
+        <?php
+        // Database configuration
+        $dbHost = 'localhost'; // Change to your database host
+        $dbUsername = 'root'; // Change to your database username
+        $dbPassword = ''; // Change to your database password
+        $dbName = 'locations_db'; // Change to your database name
 
-        var polygon = L.polygon([
-        [36.089987, -79.829674],
-        [36.089981, -79.829674],
-        [36.089983, -79.829674]
-        ]).addTo(map);
+        // Create a database connection
+        $conn = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
 
-        marker.bindPopup("<b>Welcome To Greensboro!</b><br>I am a popup.").openPopup();
-
-        var popup = L.popup();
-
-        function onMapClick(e) {
-        popup
-        .setLatLng(e.latlng)
-        .setContent("You clicked the map at " + e.latlng.toString())
-        .openOn(map);
+        // Check the connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
         }
 
-map.on('click', onMapClick);
+        // Query to fetch locations from the database
+        $sql = "SELECT name, address, latitude, longitude FROM recycling_center";
+        $result = $conn->query($sql);
 
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                // Add each location to the JavaScript array
+                echo "locations.push({
+                    name: '{$row['name']}',
+                    address: '{$row['address']}',
+                    latitude: {$row['latitude']},
+                    longitude: {$row['longitude']}
+                });\n";
+            }
+        }
+
+        $conn->close();
+        ?>
+        
+        // Add markers for each location
+        locations.forEach(function(location) {
+            L.marker([location.latitude, location.longitude])
+                .addTo(map)
+                .bindPopup(location.name + '<br>' + location.address);
+        });
     </script>
 
-<?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $recyclingMaterial = $_POST["recyclingMaterial"];
-    $currentLocation = $_POST["currentLocation"];
-    $distance = $_POST["distance"];
-
-    echo "<h2>Search Results</h2>";
-    echo "<p>Distance willing to travel: $distance miles</p>";
-
-    // Display the recycling center information here
-    echo '<div class="container">';
-    echo '  <div class="row justify-content-md-center">';
-    echo '    <div class="col col-lg-2 border">';
-    echo '      Recycling Center';
-    echo '    </div>';
-    echo '    <div class="col-md-auto border">';
-    echo '      Address';
-    echo "<p>Current Location: $currentLocation</p>";
-    echo '    </div>';
-    echo '    <div class="col col-lg-2 border">';
-    echo '      What They Recycle';
-    echo "<p>Recycling Material: $recyclingMaterial</p>";
-    echo '    </div>';
-    echo '  </div>';
-    echo '</div>';
-} else {
-    echo "<h1>Error</h1>";
-}
-?>
-
+    <?php
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $recyclingMaterial = $_POST["recyclingMaterial"];
+        $currentLocation = $_POST["currentLocation"];
+        $distance = $_POST["distance"];
     
+        echo "<h2>Search Results</h2>";
+        echo "<p>Distance willing to travel: $distance miles</p>";
+    
+        // Display the recycling center information here
+        echo '<div class="container">';
+        echo '  <div class="row justify-content-md-center">';
+        echo '    <div class="col col-lg-2 border">';
+        echo '      Recycling Center';
+        echo '    </div>';
+        echo '    <div class="col-md-auto border">';
+        echo '      Address';
+        echo "<p>Current Location: $currentLocation</p>";
+        echo '    </div>';
+        echo '    <div class="col col-lg-2 border">';
+        echo '      What They Recycle';
+        echo "<p>Recycling Material: $recyclingMaterial</p>";
+        echo '    </div>';
+        echo '  </div>';
+        echo '</div>';
+    } else {
+        echo "<h1>Error</h1>";
+    }
+    ?>
 </body>
-
 </html>
