@@ -4,35 +4,24 @@ require '../connect.php';
 
 <?php
 $id=$_GET['id'];
-$sql="SELECT * FROM admin_inbox WHERE id=$id";
+$sql="SELECT * FROM rewards WHERE id=$id";
 $result=mysqli_query($db,$sql);
 $row=mysqli_fetch_assoc($result);
-$user_id=$row['from_id'];
-$user_name=$row['from_name'];
-$reply_title="RE: ".$row['title'];
+$name=$row['name'];
+$price=$row['price'];
+$img_link=$row['img_link'];
 
 if(isset($_POST['submit'])){
-    $from_id=0;
-    $from_name="admin";
-    $to_id=$user_id;
-    $message=$_POST['message'];
-    $title=$reply_title;
+    $new_name=$_POST['name'];
+    $new_price=$_POST['price'];
+    $new_img=$_POST['img_link'];
 
-    $sql="INSERT INTO user_inbox (from_id, from_name, to_id, message, title, read_receipt)
-    VALUES('$from_id','$from_name','$to_id','$message','$title',1)";
-    $result=mysqli_query($db,$sql);
-    if($result){
-    } else {
-        die(mysqli_error($db));
-    }
-
-    $sql="INSERT INTO admin_inbox (from_id, from_name, to_id, message, title)
-    VALUES('$from_id','$from_name','$to_id','$message','$title')";
+    $sql="UPDATE rewards SET name='$new_name', price='$new_price', img_link='$new_img' WHERE id=$id";
     $result=mysqli_query($db,$sql);
     if($result){
         session_start();
-        $_SESSION['message'] = 'Successfully sent message!';
-        header('location:../admin/admin_inbox');
+        $_SESSION['message'] = 'Successfully updated reward!';
+        header('location:../admin/modifyRewards.php');
     } else {
         die(mysqli_error($db));
     }
@@ -49,19 +38,7 @@ if(isset($_POST['submit'])){
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
     <link href="../style.css" rel="stylesheet">
-    <title>Reply</title>
-
-    <script>
-        function countChar(val) {
-        var len = val.value.length;
-        if (len >= 255) {
-            val.value = val.value.substring(0, 255);
-        } else {
-            $('#charNum').text(255 - len);
-        }
-        };
-    </script>
-
+    <title>Update Reward</title>
 </head>
 <body>
 <?php include "../admin/header.php"; ?>
@@ -82,19 +59,24 @@ if(isset($_POST['submit'])){
                 <div class="flex-box">
                     <form method="post" style="margin-top: 20px; margin-bottom: 20px">
                         <div>
-                            <h1><?php echo $reply_title;?></h1>
-                            <p>
-                                To: <?php echo $user_name;?>
-                            </p>
+                            <h1>Update Reward</h1>
                         </div>
                         <div>
-                            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-                            <textarea rows="12" cols="40" onkeyup="countChar(this)" style="margin-right: 20px;margin-left: 20px;margin-bottom: 10px;resize: none;text-align: left;padding: 5px;" placeholder="Type message here" name="message"></textarea>
-                            <div id="charNum" style="margin-bottom: 20px;text-align: left;margin-right: 20px;margin-left: 93px;"></div>
+                            <label style="margin-bottom: 20px;">Reward Name:</label>
+                            <input type="text" name="name" value="<?php
+                            echo $name;?>" size="20">
+                            <br>
+                            <label style="margin-bottom: 20px;">Price:</label>
+                            <input type="text" name="price" value="<?php
+                            echo $price;?>" size="20">
+                            <br>
+                            <label style="margin-bottom: 20px;">Image Link:</label>
+                            <input type="text" name="img_link" value="<?php
+                            echo $img_link;?>" size="20">
                         </div>
 
-                        <a class="btn btn-dark btn" href="/admin/openMessage.php?id=<?php echo $id?>" style="width:60px" role="button">Back</a>
-                        <button type="submit" class="btn btn-dark" name="submit">Send</button>
+                        <a class="btn btn-dark btn" href="/admin/modifyRewards" style="width:60px" role="button">Back</a>
+                        <button type="submit" class="btn btn-dark" name="submit">Update Reward</button>
                 </form>
             </div>
         </div>

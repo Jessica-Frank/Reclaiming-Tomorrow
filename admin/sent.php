@@ -23,8 +23,8 @@ require '../connect.php';
                 <li><a href="/admin/dashboard"><i class="fas fa-home"></i>Home</a></li>
                 <li><a href="/admin/search"><i class="fas fa-user"></i>Search Users</a></li>
                 <li><a href="#"><i class="fas fa-recycle"></i>Modify Content</a></li>
-                <li><a href="#"><i class="fas fa-ticket-alt"></i>Modify Rewards</a></li>
-                <li><a href="/admin/admin_inbox"><i class="fas fa-envelope"></i>Inbox</a></li>
+                <li><a href="/admin/modifyRewards"><i class="fas fa-ticket-alt"></i>Modify Rewards</a></li>
+                <li><a href="/admin/inbox"><i class="fas fa-envelope"></i>Inbox</a></li>
             </ul> 
         </div>
         <div class="main_content">
@@ -41,12 +41,12 @@ require '../connect.php';
             </div>
             <div class="info">
             <div class="container my-5" style="text-align: center;">
-            <h1 style="color: #000000"><a href="admin_inbox" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Inbox</a> / Sent</h1>
+            <h1 style="color: #000000"><a href="inbox" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Inbox</a> / Sent</h1>
             <div class="container my-5">
                 <table class="table table-hover">
                     <?php
                         $from_name="admin";
-                        $sql="SELECT * FROM admin_inbox WHERE from_name='$from_name'";
+                        $sql="SELECT * FROM admin_inbox WHERE from_name='$from_name' ORDER BY id DESC";
                         $result=mysqli_query($db,$sql);
                         if($result){
                             if(mysqli_num_rows($result) > 0) {
@@ -63,7 +63,7 @@ require '../connect.php';
                                 <tr>
                                 <td><a href="openReadOnly.php?id='.$row['id'].'" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">'.$row['title'].'</a></td>
                                 <td>'.$row['date_sent'].'</td>
-                                <td><a class="link-dark" href="deleteMessage.php?id='.$row['id'].'"><i class="fas fa-trash-alt"></i></a></td>
+                                <td><a class="link-dark" href="deleteSentMessage.php?id='.$row['id'].'"><i class="fas fa-trash-alt"></i></a></td>
                                 </tr>
                                 </tbody>
                                 ';

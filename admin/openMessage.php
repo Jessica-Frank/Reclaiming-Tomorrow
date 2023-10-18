@@ -23,14 +23,16 @@ require '../connect.php';
                 <li><a href="/admin/dashboard"><i class="fas fa-home"></i>Home</a></li>
                 <li><a href="/admin/search"><i class="fas fa-user"></i>Search Users</a></li>
                 <li><a href="#"><i class="fas fa-recycle"></i>Modify Content</a></li>
-                <li><a href="#"><i class="fas fa-ticket-alt"></i>Modify Rewards</a></li>
-                <li><a href="/admin/admin_inbox"><i class="fas fa-envelope"></i>Inbox</a></li>
+                <li><a href="/admin/modifyRewards"><i class="fas fa-ticket-alt"></i>Modify Rewards</a></li>
+                <li><a href="/admin/inbox"><i class="fas fa-envelope"></i>Inbox</a></li>
             </ul> 
         </div>
         <div class="main_content">
             <div class="info">
             <?php
                 $data=$_GET['id'];
+                $sql="UPDATE admin_inbox SET read_receipt=0 WHERE id=$data";
+                $result=mysqli_query($db,$sql);
                 $sql="SELECT * FROM admin_inbox WHERE id=$data";
                 $result=mysqli_query($db,$sql);
                 if($result){
@@ -42,11 +44,11 @@ require '../connect.php';
                            '.$row['date_sent'].'
                         </p>
                         <p style="margin-right: 20px;margin-left: 20px">
-                            ID: '.$row['from_name'].'
+                            ID: <a href="userProfile.php?id='.$row['from_id'].'" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">'.$row['from_name'].'</a>
                         </p>
                         <textarea rows="12" cols="40" style="margin-right: 20px;margin-left: 20px;margin-bottom: 10px;resize: none;text-align: left;padding: 5px;" readonly>'.$row['message'].'</textarea>
                         <p>
-                            <a class="btn btn-dark btn" href="/admin/admin_inbox" role="button">Back</a>
+                            <a class="btn btn-dark btn" href="/admin/inbox" role="button">Back</a>
                             <a class="btn btn-dark btn" href="reply.php?id='.$row['id'].'" style="width:100px" role="button">Reply</a>
                         </p>
                     </div>

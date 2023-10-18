@@ -8,7 +8,7 @@ if(isset($_GET['id'])) {
     if($result){
         session_start();
         $_SESSION['message'] = 'Successfully deleted message!';
-        header('location:../admin/inbox');
+        header('location:../admin/sent');
     }
     else {
         die(mysqli_error($db));

@@ -23,8 +23,8 @@ require '../connect.php';
                 <li><a href="/admin/dashboard"><i class="fas fa-home"></i>Home</a></li>
                 <li><a href="/admin/search"><i class="fas fa-user"></i>Search Users</a></li>
                 <li><a href="#"><i class="fas fa-recycle"></i>Modify Content</a></li>
-                <li><a href="#"><i class="fas fa-ticket-alt"></i>Modify Rewards</a></li>
-                <li><a href="/admin/admin_inbox"><i class="fas fa-envelope"></i>Inbox</a></li>
+                <li><a href="/admin/modifyRewards"><i class="fas fa-ticket-alt"></i>Modify Rewards</a></li>
+                <li><a href="/admin/inbox"><i class="fas fa-envelope"></i>Inbox</a></li>
             </ul> 
         </div>
         <div class="main_content">
@@ -46,12 +46,13 @@ require '../connect.php';
                 <table class="table table-hover">
                     <?php
                         $to_id="admin";
-                        $sql="SELECT * FROM admin_inbox WHERE to_id='$to_id'";
+                        $sql="SELECT * FROM admin_inbox WHERE to_id='$to_id' ORDER BY id DESC";
                         $result=mysqli_query($db,$sql);
                         if($result){
                             if(mysqli_num_rows($result) > 0) {
                                 echo '<thead class="table-dark">
                                 <tr>
+                                <th></th>
                                 <th>From</th>
                                 <th>Title</th>
                                 <th>Date</th>
@@ -62,7 +63,8 @@ require '../connect.php';
                                 while($row=mysqli_fetch_assoc($result)){
                                 echo '<tbody>
                                 <tr>
-                                <td>'.$row['from_name'].'</td>
+                                <td>'.($row['read_receipt'] != 0 ? "<i class=\"fas fa-circle fa-sm\"></i>" : "" ).'</td>
+                                <td><a href="userProfile.php?id='.$row['from_id'].'" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">'.$row['from_name'].'</a></td>
                                 <td><a href="openMessage.php?id='.$row['id'].'" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">'.$row['title'].'</a></td>
                                 <td>'.$row['date_sent'].'</td>
                                 <td><a class="link-dark" href="deleteMessage.php?id='.$row['id'].'"><i class="fas fa-trash-alt"></i></a></td>

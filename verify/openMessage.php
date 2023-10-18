@@ -19,6 +19,8 @@ require '../connect.php';
             <div class="info">
             <?php
                 $data=$_GET['id'];
+                $sql="UPDATE user_inbox SET read_receipt=0 WHERE id=$data";
+                $result=mysqli_query($db,$sql);
                 $sql="SELECT * FROM user_inbox WHERE id=$data";
                 $result=mysqli_query($db,$sql);
                 if($result){

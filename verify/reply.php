@@ -30,8 +30,8 @@ if(isset($_POST['submit'])){
         die(mysqli_error($db));
     }
 
-    $sql="INSERT INTO admin_inbox (from_id, from_name, to_id, message, title)
-    VALUES('$from_id','$from_name','$to_id','$message','$title')";
+    $sql="INSERT INTO admin_inbox (from_id, from_name, to_id, message, title, read_receipt)
+    VALUES('$from_id','$from_name','$to_id','$message','$title',1)";
     $result=mysqli_query($db,$sql);
     if($result){
         session_start();

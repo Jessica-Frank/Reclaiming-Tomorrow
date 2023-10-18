@@ -27,7 +27,7 @@ require '../connect.php';
         <table class="table table-hover">
             <?php
                 $from_id=$_SESSION['current'];
-                $sql="SELECT * FROM user_inbox WHERE from_id='$from_id'";
+                $sql="SELECT * FROM user_inbox WHERE from_id='$from_id' ORDER BY id DESC";
                 $result=mysqli_query($db,$sql);
                 if($result){
                     if(mysqli_num_rows($result) > 0) {
@@ -44,7 +44,7 @@ require '../connect.php';
                         <tr>
                         <td><a href="openReadOnly.php?id='.$row['id'].'" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">'.$row['title'].'</a></td>
                         <td>'.$row['date_sent'].'</td>
-                        <td><a class="link-dark" href="deleteMessage.php?id='.$row['id'].'"><i class="fas fa-trash-alt"></i></a></td>
+                        <td><a class="link-dark" href="deleteSentMessage.php?id='.$row['id'].'"><i class="fas fa-trash-alt"></i></a></td>
                         </tr>
                         </tbody>
                         ';
