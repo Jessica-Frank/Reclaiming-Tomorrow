@@ -35,11 +35,13 @@
             //Add another row when the plus button is pressed
             $(".addFieldsButton").click(function() {
                 rowCount++;
-                var rowStr = "<div>\n" +
-                    `<input placeholder=\"Ticket Code\" name=\"ticket[${rowCount}][ticket_code]\" required=\"true\"></input>\n` +
-                    `<input placeholder=\"Points\" name=\"ticket[${rowCount}][ticket_points]\" type=\"number\" required=\"true\"></input>\n` +
-                    "</div>\n";
+                
+                var rowStr = `<input placeholder=\"Ticket Code\" name=\"ticket[${rowCount}][ticket_code]\" required=\"true\"></input>\n` +
+                    `<input placeholder=\"Points\" name=\"ticket[${rowCount}][ticket_points]\" type=\"number\" required=\"true\"></input>\n`
+                    +`<button type="button" class="btn btn-light removeFieldsButton" onclick="return this.parentNode.remove();" style="font-size: 0.75em;">&times;</button>`;
+                
                 const rowDiv = document.createElement("div");
+                rowDiv.setAttribute("style", "white-space: nowrap;");
                 $("#ticketFormFieldDiv").append(rowDiv);
                 rowDiv.innerHTML = rowStr;
             });
@@ -55,7 +57,7 @@
     <div class="container">
         <h1 class="center-heading">Manage Tickets</h1>
         <div style="text-align: center;">
-            <button id="showTicketModalButton" class="btn btn-dark" style="margin-bottom: 1.5em;" type="button">Add New Ticket</button>
+            <button id="showTicketModalButton" class="btn btn-dark" style="margin-bottom: 1.5em;" type="button">Create New Tickets</button>
         </div>
         <?php
         $user_org = "ABC Recycling";
@@ -100,21 +102,22 @@
         ?>
 
         <div class="modal" id="newTicketModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="background-color: rgba(0,0,0,0.5);">
-            <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-dialog modal-dialog-centered" style="width:auto" role="document">
                 <form method="POST">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">Add Tickets</h5>
+                            <h5 class="modal-title">Create Tickets</h5>
                             <span type="button" class="ticket-modal-close" aria-label="Close"><span aria-hidden="true">&times;</span></span>
                         </div>
                         <div class="modal-body">
-                            <div id="ticketFormFieldDiv" style="display: inline-block;">
-                                <div>
+                            <div id="ticketFormFieldDiv">
+                                <div style="white-space: nowrap;">
                                     <input placeholder="Ticket Code" name="ticket[0][ticket_code]" required="true"></input>
                                     <input placeholder="Points" name="ticket[0][ticket_points]" type="number" required="true"></input>
+
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-light addFieldsButton" id="addFieldsButton1">+</button>
+                            <button type="button" class="btn btn-light addFieldsButton" id="addFieldsButton1" style="font-size: 0.75em;">+ Add another</button>
 
                         </div>
                         <div class="modal-footer">
