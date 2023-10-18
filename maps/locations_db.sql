@@ -32,7 +32,25 @@ INSERT INTO recycling_center (name, address, material_recycled, latitude, longit
 ('ARC', '2091 Bishop Rd, Greensboro, NC 27406', 'Aluminum', 36.99517, -79.84645),
 ('Securis', '1108 N. O.Henry Blvd, Greensboro, NC 27405', 'Aluminum', 36.08940, -79.76568),
 ('Piedmont Paper Stock Co', '3909 Riverdale Rd, Greensboro, NC 27406', 'Aluminum', 36.01555, -79.77916),
-('D.H. Griffin Wrecking Co., Inc. - Scrap Yard', '4700Hilltop Rd, Greensboro, NC 27406', 'Aluminum', 36.03919, -79.88258);
+('D.H. Griffin Wrecking Co., Inc. - Scrap Yard', '4700 Hilltop Rd, Greensboro, NC 27406', 'Aluminum', 36.03919, -79.88258),
+('Forsyth County Recycling Center', 'Pfafftown, NC 27040', 'Aluminum', 36.17918, -80.40765),
+('Recycling Station', '325 W Hanes Mill Rd, Winston-Salem, NC 27105', 'Aluminum', 36.19798, -80.28614),
+('The 3RC EnviroStation', '1401 S Martin Luther King Jr Dr, Winston-Salem, NC 27107', 'Aluminum', 36.09091, -80.22327),
+('WM - Winston-Salem Recycle Center', '280 Business Park Dr, Winston-Salem, NC 27107', 'Aluminum', 36.04984, -80.15667),
+('Sonoco Recycling', '4175 N Glenn Ave, Winston-Salem, NC 27105', 'Aluminum', 36.15470, -80.23083),
+('Recycle America of The Piedmont', '1330 Ivy Ave, Winston-Salem, NC 27105', 'Aluminum', 36.12253, -80.23975),
+('Reflective Recycling Inc', '3380 Old Lexington Rd #2, Winston-Salem, NC 27107', 'Aluminum', 36.06372, -80.22396),
+('leisure time recycling', '1801 Ivy Ave, Winston-Salem, NC 27105', 'Aluminum', 36.13141, -80.23701),
+('Hanes Mill Road Solid Waste Facility', '325 W Hanes Mill Rd, Winston-Salem, NC 27105', 'Plastic', 36.19635, -80.28037),
+('Abbey Green (DBA A-1 Service Group)', '5030 Overdale Rd, Winston-Salem, NC 27107', 'Copper', 36.04818, -80.23220),
+('OmniSource Corporation', '1426 W Mountain St, Kernersville, NC 27284', 'Metal',36.13971, -80.10225),
+('Industrial Electronic Recycling', '1381 S Park Dr Q, Kernersville, NC 27284', 'Electronics', 36.10989, -80.06505),
+('Kernersville Town Recycling', '720 Mckaughan St, Kernersville, NC 27284', 'Metal', 36.11444, -80.06988),
+('Feest-Ferry', '652 Gralin St, Kernersville, NC 27284', 'Plastic', 36.12082, -80.06026),
+('Piney Hill Acres', '2020 Piney Grv Rd, Kernersville, NC 27284', 'Plastic', 36.17710, -80.06146),
+('Rural Garbage Services', '2838, 302 E Bodenhamer St Suite B, Kernersville, NC 27284', 'Metal', 36.12276, -80.06850),
+('ecoATM', '1130 S Main St, Kernersville, NC 27284', 'Electronics', 36.11379, -80.10047);
+
 
 INSERT INTO search_query (recycling_material, current_location, distance) VALUES
-()
+();

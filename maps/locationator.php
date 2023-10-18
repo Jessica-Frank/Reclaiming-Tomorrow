@@ -62,7 +62,8 @@
             }
         }
 
-        $conn->close();
+        $sql = "SELECT name, address, material_recycled FROM recycling_center";
+        $result = $conn->query($sql);
         ?>
         
         // Add markers for each location
@@ -72,6 +73,33 @@
                 .bindPopup(location.name + '<br>' + location.address);
         });
     </script>
+
+    <h2>Recycing Centers Available</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Item Recycled</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    echo "<tr>";
+                    echo "<td>{$row['name']}</td>";
+                    echo "<td>{$row['address']}</td>";
+                    echo "<td>{$row['material_recycled']}</td>";
+                    echo "</tr>";
+                }
+            } else {
+                echo "<tr><td colspan='4'>No data available</td></tr>";
+            }
+            $conn->close();
+            ?>
+        </tbody>
+    </table>
 
     <?php
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
