@@ -10,19 +10,10 @@ CREATE TABLE recycling_center (
     longitude DECIMAL(10, 8) NOT NULL
 );
 
-DROP TABLE IF EXISTS search_query;
-
-CREATE TABLE search_query (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    recycling_material VARCHAR(100) NOT NULL,
-    current_location VARCHAR(100) NOT NULL,
-    distance DECIMAL(5, 2) NOT NULL
-);
-
 INSERT INTO recycling_center (name, address, material_recycled, latitude, longitude) VALUES
-('Aluminum Recycling', '2412 S Elm-Eugene St. Greensboro, NC 27406', 'Aluminum', 36.04388, -79.79174),
-('ReCommunity Greensboro', '706 Patton Ave, Greensboro, NC 27406', 'Aluminum', 36.04194, -79.77545),
-('Greensboro Recycling', '2300 W Meadowview Rd #207 Greensboro, NC 27407', 'Aluminum', 36.05143, -79.84160),
+('Aluminum Recycling', '2412 S Elm-Eugene St. Greensboro, NC 27406', 'Aluminum, Plastic, Paper', 36.04388, -79.79174),
+('ReCommunity Greensboro', '706 Patton Ave, Greensboro, NC 27406', 'Plastic, Metal, Aluminum', 36.04194, -79.77545),
+('Greensboro Recycling', '2300 W Meadowview Rd #207 Greensboro, NC 27407', 'Aluminum, Electronics, Metal, Plastic', 36.05143, -79.84160),
 ('J & M Recycling', '2307 W Cone Blvd #180, Greensboro, NC 27408', 'Aluminum', 36.11063, -79.82725),
 ('Gate City Recycling', '610 Industrial Ave, Greensboro, NC 27406', 'Aluminum', 36.02768, -79.77424),
 ('A & A Recycling', '3934 Hahns Ln, Greensboro, NC 27401', 'Aluminum', 36.07986, -79.74060),
@@ -50,7 +41,3 @@ INSERT INTO recycling_center (name, address, material_recycled, latitude, longit
 ('Piney Hill Acres', '2020 Piney Grv Rd, Kernersville, NC 27284', 'Plastic', 36.17710, -80.06146),
 ('Rural Garbage Services', '2838, 302 E Bodenhamer St Suite B, Kernersville, NC 27284', 'Metal', 36.12276, -80.06850),
 ('ecoATM', '1130 S Main St, Kernersville, NC 27284', 'Electronics', 36.11379, -80.10047);
-
-
-INSERT INTO search_query (recycling_material, current_location, distance) VALUES
-();

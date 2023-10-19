@@ -26,33 +26,26 @@
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
 
-        var locations = [
-            // PHP will populate this array with data from the database
-        ];
+        var locations = [];
 
-        // PHP code to fetch data from your SQL database and populate the locations array
         <?php
-        // Database configuration
-        $dbHost = 'localhost'; // Change to your database host
-        $dbUsername = 'root'; // Change to your database username
-        $dbPassword = ''; // Change to your database password
-        $dbName = 'locations_db'; // Change to your database name
 
-        // Create a database connection
+        $dbHost = 'localhost';
+        $dbUsername = 'root';
+        $dbPassword = ''; 
+        $dbName = 'locations_db';
+
         $conn = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
 
-        // Check the connection
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
 
-        // Query to fetch locations from the database
         $sql = "SELECT name, address, latitude, longitude FROM recycling_center";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
-                // Add each location to the JavaScript array
                 echo "locations.push({
                     name: '{$row['name']}',
                     address: '{$row['address']}',
@@ -66,7 +59,6 @@
         $result = $conn->query($sql);
         ?>
         
-        // Add markers for each location
         locations.forEach(function(location) {
             L.marker([location.latitude, location.longitude])
                 .addTo(map)
@@ -74,60 +66,57 @@
         });
     </script>
 
-    <h2>Recycing Centers Available</h2>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Address</th>
-                <th>Item Recycled</th>
-            </tr>
-        </thead>
-        <tbody>
-        <?php
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    echo "<tr>";
-                    echo "<td>{$row['name']}</td>";
-                    echo "<td>{$row['address']}</td>";
-                    echo "<td>{$row['material_recycled']}</td>";
-                    echo "</tr>";
-                }
-            } else {
-                echo "<tr><td colspan='4'>No data available</td></tr>";
-            }
-            $conn->close();
-            ?>
-        </tbody>
-    </table>
+    <div class="text-center">
+        <h1>Search Results</h1>
+    </div>
 
     <?php
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $recyclingMaterial = $_POST["recyclingMaterial"];
         $currentLocation = $_POST["currentLocation"];
         $distance = $_POST["distance"];
+
+        $recyclingMaterial = explode(',', $recyclingMaterial);
+
+        $placeholders = str_repeat('?,', count($recyclingMaterial) - 1) . '?';
+
+        $query = "SELECT name, address, material_recycled, latitude, longitude
+              FROM recycling_center
+              WHERE material_recycled IN ($placeholders)";
+
+        $stmt = $conn->prepare($query);
+        $paramTypes = str_repeat('s', count($recyclingMaterial));
+        $stmt->bind_param($paramTypes, ...$recyclingMaterial);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+
+        while ($row = $result->fetch_assoc()) {
+            echo '<div class="container">';
+            echo '  <div class="row justify-content-md-center">';
+            echo '    <div class="col-md-3 border">';
+            echo '      Recycling Center:';
+            echo "<p>" . $row["name"] . "</p>";
+            echo '    </div>';
+            echo '    <div class="col-md-3 border">';
+            echo '      Address:';
+            echo "<p>" . $row["address"] . "</p>";
+            echo '    </div>';
+            echo '    <div class="col-md-3 border">';
+            echo '      Recycling Material Accepted:';
+            $materials = explode(', ', $row["material_recycled"]);
+            echo "<ul>";
+            foreach ($materials as $material) {
+                echo "<li>" . $material . "</li>";
+            }
+            echo "</ul>";
+            echo '    </div>';
+            echo '  </div>';
+            echo '</div>';
+        }
     
-        echo "<h2>Search Results</h2>";
-        echo "<p>Distance willing to travel: $distance miles</p>";
-    
-        // Display the recycling center information here
-        echo '<div class="container">';
-        echo '  <div class="row justify-content-md-center">';
-        echo '    <div class="col col-lg-2 border">';
-        echo '      Recycling Center';
-        echo '    </div>';
-        echo '    <div class="col-md-auto border">';
-        echo '      Address';
-        echo "<p>Current Location: $currentLocation</p>";
-        echo '    </div>';
-        echo '    <div class="col col-lg-2 border">';
-        echo '      What They Recycle';
-        echo "<p>Recycling Material: $recyclingMaterial</p>";
-        echo '    </div>';
-        echo '  </div>';
-        echo '</div>';
-    } else {
-        echo "<h1>Error</h1>";
+        $stmt->close();
+        $conn->close();
     }
     ?>
 </body>
