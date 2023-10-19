@@ -35,11 +35,11 @@
             //Add another row when the plus button is pressed
             $(".addFieldsButton").click(function() {
                 rowCount++;
-                
+
                 var rowStr = `<input placeholder=\"Ticket Code\" name=\"ticket[${rowCount}][ticket_code]\" required=\"true\"></input>\n` +
-                    `<input placeholder=\"Points\" name=\"ticket[${rowCount}][ticket_points]\" type=\"number\" required=\"true\"></input>\n`
-                    +`<button type="button" class="btn btn-light removeFieldsButton" onclick="return this.parentNode.remove();" style="font-size: 0.75em;">&times;</button>`;
-                
+                    `<input placeholder=\"Points\" name=\"ticket[${rowCount}][ticket_points]\" type=\"number\" required=\"true\"></input>\n` +
+                    `<button type="button" class="btn btn-light removeFieldsButton" onclick="return this.parentNode.remove();" style="font-size: 0.75em;">&times;</button>`;
+
                 const rowDiv = document.createElement("div");
                 rowDiv.setAttribute("style", "white-space: nowrap;");
                 $("#ticketFormFieldDiv").append(rowDiv);
@@ -56,11 +56,21 @@
 
     <div class="container">
         <h1 class="center-heading">Manage Tickets</h1>
+
+        <?php session_start(); 
+        if (isset($_SESSION['USER'])) {
+            $user_org = $_SESSION['USER']->name; 
+        } 
+        else {
+            echo "You must be logged in to access this page."; 
+            die;
+        }?>
+
         <div style="text-align: center;">
             <button id="showTicketModalButton" class="btn btn-dark" style="margin-bottom: 1.5em;" type="button">Create New Tickets</button>
         </div>
+
         <?php
-        $user_org = "ABC Recycling";
         if (isset($_POST['ticket'])) {
             $successful_tickets = [];
             $failed_tickets =  [];
@@ -71,12 +81,12 @@
                     array_push($failed_tickets, $ticket);
                 }
             }
-            
+
             if (sizeof($successful_tickets) > 0) { ?>
                 <div class="alert alert-success alert-dismissable" role="alert">
                     You have successfully created
                     <span><?php echo sizeof($successful_tickets); ?></span> ticket(s):
-                    <span type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></span>
+                    <span type="button" class="close" data-bs-dismiss="alert" aria-label="Close" style="float: right;"><span aria-hidden="true">&times;</span></span>
                     <?php foreach ($successful_tickets as $ticket) {
                         $code = strtoupper($ticket['ticket_code']);
                         $points = $ticket['ticket_points'];
@@ -88,7 +98,7 @@
             if (sizeof($failed_tickets) > 0) { ?>
                 <div class="alert alert-danger alert-dismissable" role="alert">
                     An error occured when creating the following ticket(s):
-                    <span type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></span>
+                    <span type="button" class="close" data-bs-dismiss="alert" aria-label="Close" style="float: right;"><span aria-hidden="true">&times;</span></span>
                     <?php foreach ($failed_tickets as $ticket) {
                         $code = strtoupper($ticket['ticket_code']);
                         $points = $ticket['ticket_points'];
@@ -129,28 +139,30 @@
             </div>
         </div>
 
-        <?php if (isset($existing_tickets)) {?>
-        <table class="table table-hover">
-            <thead class="table-dark">
-                <tr>
-                    <th>Code</th>
-                    <th>Point Value</th>
-                    <th>Date Created</th>
-                    <th>Date Redeemed</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($existing_tickets as $ticket) { ?>
+        <?php if (isset($existing_tickets) && !empty($existing_tickets)) {?>
+            <table class="table table-hover">
+                <thead class="table-dark">
                     <tr>
-                        <td><?php echo $ticket['id']; ?></td>
-                        <td><?php echo $ticket['point_value']; ?></td>
-                        <td><?php echo $ticket['date_created']; ?></td>
-                        <td><?php echo $ticket['date_redeemed']; ?></td>
+                        <th>Code</th>
+                        <th>Point Value</th>
+                        <th>Date Created</th>
+                        <th>Date Redeemed</th>
                     </tr>
-                <?php } ?>
-            </tbody>
-        </table>
-        <?php } else {echo "Error: Unable to load your organization's ticket data. Please make sure you are logged in.";} ?>
+                </thead>
+                <tbody>
+                    <?php foreach ($existing_tickets as $ticket) { ?>
+                        <tr>
+                            <td><?php echo $ticket['id']; ?></td>
+                            <td><?php echo $ticket['point_value']; ?></td>
+                            <td><?php echo $ticket['date_created']; ?></td>
+                            <td><?php echo $ticket['date_redeemed']; ?></td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+        <?php } else {
+            echo "Unable to load your organization's ticket data. Have you created a ticket yet?";
+        } ?>
     </div>
 
 </body>

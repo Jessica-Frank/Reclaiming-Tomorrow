@@ -46,7 +46,7 @@
             <p>Redeem your tickets to earn points, which you can use to get rewards!</p>
             <div style="display: inline-block; margin-bottom:2%;" id="ticket_input_div">
                 <form method="POST">
-                    <input placeholder="Ticket number" name="ticket_num" required style="vertical-align: middle;"></input>
+                    <input placeholder="Ticket code" name="ticket_num" required style="vertical-align: middle;"></input>
                     <button class="btn btn-dark" type="submit">Redeem</button>
                 </form>
             </div>
