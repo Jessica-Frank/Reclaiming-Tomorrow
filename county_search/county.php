@@ -8,7 +8,7 @@
  <style>
         
         table {
-            width: 80%;
+            width: 80%; /* Reduce the width of the table */
             background-color: #FAF1E4;
             color: #40513B;
             border-collapse: collapse;
@@ -16,7 +16,7 @@
 
         table, th, td {
             border: 1px solid #40513B;
-            padding: 5px;
+            padding: 5px; /* Reduce the padding for a smaller table */
         }
 
         th {
@@ -25,7 +25,9 @@
             color: #FAF1E4;
             border: 1px solid #FAF1E4;
         }
-
+ .search-button {
+            background-color: #40513B; 
+            color: #FAF1E4;         }
     </style>
 </head>
 <body>
@@ -40,7 +42,7 @@
 <form method="post" action="">
     <label for="County">Search for County:</label>
     <input type="text" name="County" id="County">
-    <input type="submit" value="Search">
+    <input type="submit" value="Search" class="search-button">
 </form>
 
 
