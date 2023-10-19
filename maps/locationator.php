@@ -33,7 +33,7 @@
         $dbHost = 'localhost';
         $dbUsername = 'root';
         $dbPassword = ''; 
-        $dbName = 'locations_db';
+        $dbName = 'reclaiming_tomorrow_db';
 
         $conn = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
 

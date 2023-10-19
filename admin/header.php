@@ -6,9 +6,15 @@
         <a href="#">Local Information</a>
         <a href="/rewards/redemption">Rewards</a>
         <a href="#">Contact Us</a>
-        <a href="../verify/login" class="btnLogin-popup">Login</a>
+        <a href="../admin_verify/admin_logout" class="btnLogin-popup">Logout</a>
     </nav>
 </header>
+
+   
+
+
+   
+
 
    
 
