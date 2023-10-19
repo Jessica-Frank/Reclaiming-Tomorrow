@@ -72,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['County'])) {
             echo "<tr>";
             echo "<td>" . $row['Local event'] . "</td>";
              echo "<td><a href='" . $row['Associated Links'] . "'>" . $row['Associated Links'] . "</a></td>";
-            echo "<td>" . $row['Pick-up Schedule'] . "</td>";
+             echo "<td><a href='" . $row['Pick-up Schedule'] . "'>" . $row['Pick-up Schedule'] . "</a></td>";
              echo "<td><a href='" . $row['Buy Bins'] . "'>" . $row['Buy Bins'] . "</a></td>";
             echo "<td>" . $row['Alternatives'] . "</td>";
             echo "</tr>";
