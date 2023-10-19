@@ -10,27 +10,27 @@ $row=mysqli_fetch_assoc($result);
 $user_name=$row['name'];
 
 if(isset($_POST['submit'])){
-    $from_id=$id;
-    $from_name=$user_name;
-    $to_id="admin";
+    $from_id=0;
+    $from_name="admin";
+    $to_id=$id;
     $message=$_POST['message'];
     $title=$_POST['title'];
 
-    $sql="INSERT INTO user_inbox (from_id, from_name, to_id, message, title)
-    VALUES('$from_id','$from_name','$to_id','$message','$title')";
+    $sql="INSERT INTO user_inbox (from_id, from_name, to_id, message, title, read_receipt)
+    VALUES('$from_id','$from_name','$to_id','$message','$title',1)";
     $result=mysqli_query($db,$sql);
     if($result){
     } else {
         die(mysqli_error($db));
     }
 
-    $sql="INSERT INTO admin_inbox (from_id, from_name, to_id, message, title, read_receipt)
-    VALUES('$from_id','$from_name','$to_id','$message','$title',1)";
+    $sql="INSERT INTO admin_inbox (from_id, from_name, to_id, message, title)
+    VALUES('$from_id','$from_name','$to_id','$message','$title')";
     $result=mysqli_query($db,$sql);
     if($result){
         session_start();
         $_SESSION['message'] = 'Successfully sent message!';
-        header('location:../verify/inbox');
+        header('location:../admin/userProfile.php?id='.$id.'');
     } else {
         die(mysqli_error($db));
     }
@@ -68,6 +68,9 @@ if(isset($_POST['submit'])){
                 <div class="flex-box">
                     <form method="post" style="margin-top: 20px; margin-bottom: 20px">
                         <div>
+                            <h3>Message to <?php echo $user_name?></h3>
+                        </div>
+                        <div>
                             <input style="margin-bottom: 20px" type="text" placeholder="Title" name="title" size="26">
                         </div>
                         <div>
@@ -76,7 +79,7 @@ if(isset($_POST['submit'])){
                             <div id="charNum" style="margin-bottom: 20px;text-align: left;margin-right: 20px;margin-left: 93px;"></div>
                         </div>
 
-                        <a class="btn btn-dark btn" href="/verify/inbox.php?id=<?php echo $id?>" style="width:60px" role="button">Back</a>
+                        <a class="btn btn-dark btn" href="/admin/userProfile.php?id=<?php echo $id?>" style="width:60px" role="button">Back</a>
                         <button type="submit" class="btn btn-dark" name="submit">Send</button>
                 </form>
             </div>

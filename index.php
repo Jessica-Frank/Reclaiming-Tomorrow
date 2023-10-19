@@ -24,11 +24,7 @@
     <br>
     <a href="/verify/login">User Login Page</a>
     <br>
-    <a href="/verify/signup">User Signup Page</a>
-    <br>
     <a href="/admin_verify/admin_login"> Admin Login Page</a>
-    <br>
-    <a href="/admin_verify/admin_signup">Admin Signup Page</a>
     <br>
     <a href="/county_search/county"> County Search Page </a>
     <br>

@@ -64,6 +64,7 @@ require '../connect.php';
                         </p>
                         <p>
                             <a class="btn btn-dark btn" href="/admin/search" style="width:100px" role="button">Back</a>
+                            <a class="btn btn-dark btn" href="/admin/composeMessage?id='.$row['id'].'" style="width:100px" role="button">Message</a>
                         </p>
                     </div>
                 </div>';

@@ -32,7 +32,7 @@ if(isset($_POST['submit'])){
     if($result){
         session_start();
         $_SESSION['message'] = 'Successfully sent message!';
-        header('location:../admin/admin_inbox');
+        header('location:../admin/inbox');
     } else {
         die(mysqli_error($db));
     }

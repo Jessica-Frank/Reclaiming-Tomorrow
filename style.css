@@ -103,6 +103,11 @@ form { /*Used to modify forms - as seen wtihin the Admin section: Modify Points*
   width:700px;
   }
 
+  textarea {
+    width: 600px;
+    height: 250px;
+  }
+
 .flex-container{ /*Used to hold flex-boxes. These are the light green containers within the Admin section: User Profiles & Modify Points*/
     display: flex;
     align-items: center;

@@ -31,7 +31,7 @@ require '../connect.php';
             <div class="info">
             <div class="container my-5" style="text-align: center;">
             <form method="post">
-                <input type="text" placeholder="Search Users" name="search" size="60">
+                <input type="text" placeholder="Search Users" name="search" size="30"/>
                 <button class="btn btn-dark btn-sm" name="submit">Search</button>
             </form>
 
