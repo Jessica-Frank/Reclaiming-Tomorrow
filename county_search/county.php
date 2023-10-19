@@ -8,7 +8,7 @@
  <style>
         
         table {
-            width: 80%; /* Reduce the width of the table */
+            width: 80%;
             background-color: #FAF1E4;
             color: #40513B;
             border-collapse: collapse;
@@ -16,7 +16,7 @@
 
         table, th, td {
             border: 1px solid #40513B;
-            padding: 5px; /* Reduce the padding for a smaller table */
+            padding: 5px;
         }
 
         th {
