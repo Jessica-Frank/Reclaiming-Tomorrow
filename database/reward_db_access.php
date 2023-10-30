@@ -1,4 +1,6 @@
 <?php
+require("point_log_access.php");
+
 function claimTicket($ticket_id, $user_id)
 {
     try {
@@ -31,7 +33,7 @@ function claimTicket($ticket_id, $user_id)
         $add_statement->bindParam(':user_id', $user_id, PDO::PARAM_STR);
         $add_statement->execute();
 
-        //Return the claimed ticket's data
+        logTicketRedemption($user_id, $check_result[0]['point_value']);
         return $check_result[0];
     } catch (PDOException $ex) {
         echo "Error: Unable to claim this ticket. Please check that you are logged in.";
@@ -76,6 +78,8 @@ function redeemReward($reward_id, $user_id)
             $spend_statement->bindParam(':user_id', $user_id, PDO::PARAM_STR);
             $spend_statement->bindParam(':price', $reward_data['price'], PDO::PARAM_INT);
             $spend_statement->execute();
+
+            logRewardRedemption($user_id, $reward_id, $reward_data['price']);
             return $reward_data;
         } else {
             return null;
