@@ -27,7 +27,7 @@ SET time_zone = "+00:00";
 -- table drops if they exist(this is just to get rid of errors in sql) 
 --
 
-DROP TABLE IF EXISTS admin;
+DROP TABLE IF EXISTS `admin`;
 
 DROP TABLE IF EXISTS `admin_inbox`;
 
@@ -42,6 +42,8 @@ DROP TABLE IF EXISTS `tickets`;
 DROP TABLE IF EXISTS `users`;
 
 DROP TABLE IF EXISTS `user_inbox`;
+
+DROP TABLE IF EXISTS `user_location`;
 
 --
 -- Table structure for table `admin`
@@ -166,6 +168,33 @@ INSERT INTO `recycling_center` (`id`, `name`, `address`, `material_recycled`, `l
 
 -- --------------------------------------------------------
 
+-- 
+-- Table that has preset locations the current user can select
+-- 
+
+CREATE TABLE `user_location` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `latitude` decimal(18,14) NOT NULL,
+  `longitude` decimal(18,14) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- 
+-- Dumping Data for `user_location` table
+-- 
+
+INSERT INTO `user_location`(`id`, `name`, `latitude`, `longitude`) VALUES
+(1, 'Winston-Salem', 36.09876130297125, -80.2177621873731),
+(2, 'Kernersville', 36.119555590227506, -80.0753065511485),
+(3, 'Greensboro', 36.07137630005988, -79.78462974776795),
+(4, 'Durham', 35.995679100535334, -78.91840797740873),
+(5, 'Raleigh', 35.78017687102294, -78.63820201807128),
+(6, 'Holy Springs', 35.6515286972336, -78.83308449375141),
+(7, 'Fayetteville', 35.05192110480352, -78.86821841514231),
+(8, 'Charlotte', 35.22635799264409, -80.82422108147652),
+(9, 'Boone', 36.216725063658004, -81.6733479815449),
+(10, 'Wilmington', 34.209968282244674, -77.88357211052265);
+-- --------------------------------------------------------
 --
 -- Table structure for table `rewards`
 --

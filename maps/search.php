@@ -16,9 +16,8 @@
 </head>
 
 <body>
-<?php include '../include/header.php';?>
-<div class="container mt-5">
-<div class="container mt-5">
+    <?php include '../include/header.php'; ?>
+    <div class="container mt-5">
         <h1>Recycling Search</h1>
         <form method="post" action="locationator">
             <div class="mb-3">
@@ -27,15 +26,36 @@
             </div>
             <div class="mb-3">
                 <label for="currentLocation" class="form-label">Current Location</label>
-                <input type="text" class="form-control" id="currentLocation" name="currentLocation" required>
+                <select class="form-select" id="currentLocation" name="currentLocation" required>
+                    <option value=''>Select your current location</option>
+                    <?php
+
+                    $dbHost = 'localhost';
+                    $dbUsername = 'root';
+                    $dbPassword = '';
+                    $dbName = 'reclaiming_tomorrow_db';
+
+                    $conn = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
+
+                    $sql = 'SELECT name FROM user_location';
+                    $result = mysqli_query($conn, $sql);
+
+                    if (mysqli_num_rows($result) > 0) {
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            echo '<option>' . $row['name'] . '</option>';
+                        }
+                    }
+                    ?>
+
+                </select>
             </div>
+
             <div class="mb-3">
                 <label for="distance" class="form-label">Distance willing to travel (in miles)</label>
                 <input type="number" class="form-control" id="distance" name="distance" required>
             </div>
             <button type="submit" class="btn btn-primary">Search</button>
         </form>
-    </div>
     </div>
 </body>
 
