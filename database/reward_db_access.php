@@ -33,7 +33,7 @@ function claimTicket($ticket_id, $user_id)
         $add_statement->bindParam(':user_id', $user_id, PDO::PARAM_STR);
         $add_statement->execute();
 
-        logTicketRedemption($user_id, $check_result[0]['point_value']);
+        logTicketRedemption($user_id, $check_result[0]['id'], $check_result[0]['point_value']);
         return $check_result[0];
     } catch (PDOException $ex) {
         echo "Error: Unable to claim this ticket. Please check that you are logged in.";
@@ -56,15 +56,26 @@ function getAllRewards()
     }
 }
 
+function getRewardById($reward_id)
+{
+    try {
+        $connection = new PDO("mysql:host=localhost;dbname=reclaiming_tomorrow_db", "root", "");
+        $sql = "SELECT * FROM rewards WHERE id = :id";
+        $statement = $connection->prepare($sql);
+        $statement->bindParam(':id', $reward_id, PDO::PARAM_INT);
+        $statement->execute();
+        $result = $statement->fetchAll()[0];
+        return $result;
+    } catch (PDOException $ex) {
+        return null;
+    }
+}
+
 function redeemReward($reward_id, $user_id)
 {
     try {
         $connection = new PDO("mysql:host=localhost;dbname=reclaiming_tomorrow_db", "root", "");
-        $reward_sql = "SELECT * FROM rewards WHERE id = :id";
-        $reward_statement = $connection->prepare($reward_sql);
-        $reward_statement->bindParam(':id', $reward_id, PDO::PARAM_INT);
-        $reward_statement->execute();
-        $reward_data = $reward_statement->fetchAll()[0];
+        $reward_data = getRewardById($reward_id);
 
         $points_sql = "SELECT reward_points FROM users WHERE id = :user_id";
         $points_statement = $connection->prepare($points_sql);
