@@ -23,6 +23,26 @@ SET time_zone = "+00:00";
 
 -- --------------------------------------------------------
 
+-- 
+-- table drops if they exist(this is just to get rid of errors in sql) 
+--
+
+DROP TABLE IF EXISTS admin;
+
+DROP TABLE IF EXISTS `admin_inbox`;
+
+DROP TABLE IF EXISTS `county_search`;
+
+DROP TABLE IF EXISTS `rewards`;
+
+DROP TABLE IF EXISTS `recycling_center`;
+
+DROP TABLE IF EXISTS `tickets`;
+
+DROP TABLE IF EXISTS `users`;
+
+DROP TABLE IF EXISTS `user_inbox`;
+
 --
 -- Table structure for table `admin`
 --
