@@ -195,3 +195,18 @@ form { /*Used to modify forms - as seen wtihin the Admin section: Modify Points*
   backdrop-filter: blur(20px);
   box-shadow: 0 0 30px rgba(0, 0, 0, .5); /*for anyone who want their box to have a shadow like in the login page*/
 }
+.button-link {
+  display: inline-block;
+  background-color: #40513B;
+  color: #FAF1E4;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin: 10px;
+  text-align: center;
+}
+
+.button-link:hover {
+  background-color: #FAF1E4;
+  color: #40513B;
+}
