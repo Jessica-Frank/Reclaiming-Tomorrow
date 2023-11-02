@@ -30,7 +30,13 @@
   color: #40513B;
   text-decoration: underline;
   text-decoration-color: #40513B;
- 
+}
+h1 {
+            text-align: center;
+        }
+p{
+	text-align: center;
+}
 </style>
 
 </head>
