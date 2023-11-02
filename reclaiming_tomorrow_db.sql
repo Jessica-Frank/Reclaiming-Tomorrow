@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 19, 2023 at 04:11 PM
+-- Generation Time: Nov 02, 2023 at 04:46 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -22,28 +22,6 @@ SET time_zone = "+00:00";
 --
 
 -- --------------------------------------------------------
-
--- 
--- table drops if they exist(this is just to get rid of errors in sql) 
---
-
-DROP TABLE IF EXISTS `admin`;
-
-DROP TABLE IF EXISTS `admin_inbox`;
-
-DROP TABLE IF EXISTS `county_search`;
-
-DROP TABLE IF EXISTS `rewards`;
-
-DROP TABLE IF EXISTS `recycling_center`;
-
-DROP TABLE IF EXISTS `tickets`;
-
-DROP TABLE IF EXISTS `users`;
-
-DROP TABLE IF EXISTS `user_inbox`;
-
-DROP TABLE IF EXISTS `user_location`;
 
 --
 -- Table structure for table `admin`
@@ -118,6 +96,36 @@ INSERT INTO `county_search` (`County`, `Accepted Materials`, `Local event`, `Pic
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `posts`
+--
+
+CREATE TABLE `posts` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `location` varchar(200) NOT NULL,
+  `rating` int(1) NOT NULL,
+  `message` varchar(250) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `posts`
+--
+
+INSERT INTO `posts` (`id`, `name`, `location`, `rating`, `message`) VALUES
+(2, 'Joy Carter', 'Aluminum Recycling', 5, 'The nicest people to ever do business with. Quick transactions!  Always so helpful every time I arrive with my recycling.'),
+(3, 'Chud Mccrud', 'Aluminum Recycling', 5, 'Great service ! It was super easy to get money for your cans. They unloaded the truck for me and then just weighted and gave me a ticket. Took less than 10mins!'),
+(4, 'Adam Reilly', 'J&M recycling', 1, 'terrible customer service.'),
+(5, 'Nancy', 'Salvage America', 4, 'Very friendly staff. First time visit you must provide your driver\'s license if you want cash back. I only had 4 nonstick pans to recycle, and based on the weight of the steel I earned 60 cents, which was rounded up to $1. Partly drive-thru, partly y'),
+(6, 'Ace', 'Salvage America', 1, 'Not very friendly people. I wouldn’t go here.'),
+(7, 'Tony Wise', 'Sonoco Recycling', 5, 'Great place to recycle cardboard… and get paid for it!'),
+(8, 'Billy Smith', 'Sonoco Recycling', 5, 'Great people quick loading ✌️'),
+(9, 'Andy Roberts', 'omnisource corporation', 5, 'The Best place to bring all metal scrap.'),
+(10, 'Josh Robertson', 'Forsyth County Recycling Center', 2, 'Went by now 4 times to dispose of broken down, recyclable cardboard. Facility has been full for 8 days now. It has become ridiculous, and there is no working phone number that I can call prior to making a trip.'),
+(11, 'Kristopher', 'Hanes Mill Road Solid Waste Facility', 5, 'We had a great experience, Staff is amazing and it is easy. Brought a whole truck and got out within 5 minutes!! Love it and I appreciate the convenience. CANT WAIT TO COME BACK!!');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `recycling_center`
 --
 
@@ -168,33 +176,6 @@ INSERT INTO `recycling_center` (`id`, `name`, `address`, `material_recycled`, `l
 
 -- --------------------------------------------------------
 
--- 
--- Table that has preset locations the current user can select
--- 
-
-CREATE TABLE `user_location` (
-  `id` int(11) NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `latitude` decimal(18,14) NOT NULL,
-  `longitude` decimal(18,14) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- 
--- Dumping Data for `user_location` table
--- 
-
-INSERT INTO `user_location`(`id`, `name`, `latitude`, `longitude`) VALUES
-(1, 'Winston-Salem', 36.09876130297125, -80.2177621873731),
-(2, 'Kernersville', 36.119555590227506, -80.0753065511485),
-(3, 'Greensboro', 36.07137630005988, -79.78462974776795),
-(4, 'Durham', 35.995679100535334, -78.91840797740873),
-(5, 'Raleigh', 35.78017687102294, -78.63820201807128),
-(6, 'Holy Springs', 35.6515286972336, -78.83308449375141),
-(7, 'Fayetteville', 35.05192110480352, -78.86821841514231),
-(8, 'Charlotte', 35.22635799264409, -80.82422108147652),
-(9, 'Boone', 36.216725063658004, -81.6733479815449),
-(10, 'Wilmington', 34.209968282244674, -77.88357211052265);
--- --------------------------------------------------------
 --
 -- Table structure for table `rewards`
 --
@@ -215,6 +196,22 @@ INSERT INTO `rewards` (`id`, `name`, `price`, `img_link`) VALUES
 (2, 'Recycling T-Shirt', 50, 'https://cdn.pixabay.com/photo/2017/01/13/04/28/blank-1976317_1280.png'),
 (3, 'Tree Poster', 100, 'https://www.publicdomainpictures.net/pictures/370000/velka/mond-baum-kunst-vintage.jpg'),
 (4, 'Charity Donation', 75, 'https://www.publicdomainpictures.net/pictures/260000/velka/love-handout-outreach-watercolor.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reward_point_log`
+--
+
+CREATE TABLE `reward_point_log` (
+  `user_id` int(11) NOT NULL,
+  `date` datetime NOT NULL DEFAULT current_timestamp(),
+  `admin_id` int(11) DEFAULT NULL,
+  `point_change` int(255) DEFAULT NULL,
+  `reward_id` int(10) DEFAULT NULL,
+  `ticket_code` varchar(10) DEFAULT NULL,
+  `action_name` enum('ADMIN_OVERWRITE','CLAIM_REWARD','REDEEM_TICKET') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -301,6 +298,35 @@ CREATE TABLE `user_inbox` (
 INSERT INTO `user_inbox` (`id`, `from_id`, `from_name`, `to_id`, `message`, `title`, `date_sent`, `read_receipt`) VALUES
 (1, 13, 'jack sparrow', 'admin', 'ybbbt', 'yyy', '2023-10-19 10:07:16', 0);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_location`
+--
+
+CREATE TABLE `user_location` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `latitude` decimal(18,14) NOT NULL,
+  `longitude` decimal(18,14) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user_location`
+--
+
+INSERT INTO `user_location` (`id`, `name`, `latitude`, `longitude`) VALUES
+(1, 'Winston-Salem', 36.09876130297125, -80.21776218737310),
+(2, 'Kernersville', 36.11955559022751, -80.07530655114850),
+(3, 'Greensboro', 36.07137630005988, -79.78462974776795),
+(4, 'Durham', 35.99567910053533, -78.91840797740873),
+(5, 'Raleigh', 35.78017687102294, -78.63820201807128),
+(6, 'Holy Springs', 35.65152869723360, -78.83308449375141),
+(7, 'Fayetteville', 35.05192110480352, -78.86821841514231),
+(8, 'Charlotte', 35.22635799264409, -80.82422108147652),
+(9, 'Boone', 36.21672506365800, -81.67334798154490),
+(10, 'Wilmington', 34.20996828224467, -77.88357211052265);
+
 --
 -- Indexes for dumped tables
 --
@@ -322,6 +348,12 @@ ALTER TABLE `admin_inbox`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `posts`
+--
+ALTER TABLE `posts`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `recycling_center`
 --
 ALTER TABLE `recycling_center`
@@ -333,6 +365,15 @@ ALTER TABLE `recycling_center`
 ALTER TABLE `rewards`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `name` (`name`);
+
+--
+-- Indexes for table `reward_point_log`
+--
+ALTER TABLE `reward_point_log`
+  ADD PRIMARY KEY (`user_id`,`date`),
+  ADD KEY `admin_id` (`admin_id`),
+  ADD KEY `reward_id` (`reward_id`),
+  ADD KEY `ticket_code` (`ticket_code`);
 
 --
 -- Indexes for table `tickets`
@@ -374,6 +415,12 @@ ALTER TABLE `admin_inbox`
   MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `posts`
+--
+ALTER TABLE `posts`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
 -- AUTO_INCREMENT for table `recycling_center`
 --
 ALTER TABLE `recycling_center`
@@ -396,25 +443,21 @@ ALTER TABLE `users`
 --
 ALTER TABLE `user_inbox`
   MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `reward_point_log`
+--
+ALTER TABLE `reward_point_log`
+  ADD CONSTRAINT `reward_point_log_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `reward_point_log_ibfk_2` FOREIGN KEY (`admin_id`) REFERENCES `admin` (`id`),
+  ADD CONSTRAINT `reward_point_log_ibfk_3` FOREIGN KEY (`reward_id`) REFERENCES `rewards` (`id`),
+  ADD CONSTRAINT `reward_point_log_ibfk_4` FOREIGN KEY (`ticket_code`) REFERENCES `tickets` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
--- Create reward log database
-DROP TABLE IF EXISTS reclaiming_tomorrow_db.reward_point_log;
-CREATE TABLE reclaiming_tomorrow_db.reward_point_log (
-  `user_id` int(11) NOT NULL,
-  `date` datetime NOT NULL DEFAULT current_timestamp(),
-  `admin_id` int(11) DEFAULT NULL,
-  `point_change` int(255) DEFAULT NULL,
-  `reward_id` int(10) DEFAULT NULL,
-  `ticket_code` varchar(10) DEFAULT NULL,
-  `action_name` ENUM('ADMIN_OVERWRITE', 'CLAIM_REWARD', 'REDEEM_TICKET') NOT NULL,
-  PRIMARY KEY (`user_id`, `date`),
-  FOREIGN KEY(`user_id`) REFERENCES `users`(`id`),
-  FOREIGN KEY(`admin_id`) REFERENCES `admin`(`id`),
-  FOREIGN KEY(`reward_id`) REFERENCES `rewards`(`id`),
-  FOREIGN KEY(`ticket_code`) REFERENCES `tickets`(`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

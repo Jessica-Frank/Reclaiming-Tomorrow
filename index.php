@@ -24,6 +24,7 @@
     <a href="/admin/dashboard">Preview of Admin Dashboard</a>
     <br>
     <a href="/verify/login">User Login Page</a>
+    <a href="/verify/dashboard">User Dashboard</a>
     <br>
     <a href="/admin_verify/admin_login"> Admin Login Page</a>
     <br>
