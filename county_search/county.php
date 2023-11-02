@@ -4,30 +4,29 @@
      <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../verify/login.css">
- <style>
-        
-        table {
-            width: 80%; /* Reduce the width of the table */
-            background-color: #FAF1E4;
-            color: #40513B;
-            border-collapse: collapse;
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .line_box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         }
 
-        table, th, td {
-            border: 1px solid #40513B;
-            padding: 5px; /* Reduce the padding for a smaller table */
+        .line_box2 {
+        display: flex;
+        align-items: center;
         }
 
-        th {
-            text-align: center;
-            background-color: #40513B;
-            color: #FAF1E4;
-            border: 1px solid #FAF1E4;
+        .line {
+            height: 2px;
+            background-color: #000;
+            margin: 0 5px;
+            width: 70px;
         }
- .search-button {
-            background-color: #40513B; 
-            color: #FAF1E4;         }
+
+        .word {
+            font-size: 24px;
+        }
     </style>
 </head>
 <body>
@@ -35,18 +34,23 @@
 
 
 
+    <h2 style="text-align: center;">County Search</h2>
+    <p style="text-align: center;">Welcome to the County search page!</p>
+    <form method="post" action="search_results" style="text-align: center;">
+        <label for="County">Search for County:</label>
+        <input type="text" name="County" id="County" required pattern=".*\S+.*">
+        <input type="submit" value="Search" class="btn btn-dark btn-sm">
+    </form>
 
+    <div class="line_box">
+    <div class="line_box2" style="margin-top: 40px;margin-bottom: 35px;">
+        <div class="line"></div>
+        <div class="word">or</div>
+        <div class="line"></div>
+    </div>
+    </div>
 
-  <h2>County Search</h2>
-    <p>Welcome to the County search page!</p>
-<form method="post" action="">
-    <label for="County">Search for County:</label>
-    <input type="text" name="County" id="County">
-    <input type="submit" value="Search" class="search-button">
-</form>
-
-
-
+    <h2 style="text-align: center;">Select a County</h2>
 
 
 
@@ -62,46 +66,22 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-
-
-
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['County'])) {
-    $county = $_POST['County'];
-
-    $sql = "SELECT * FROM county_search WHERE County LIKE '%$county%'";
+    $sql = "SELECT * FROM county_search";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
-        echo "<table>";
-        echo "<tr>";
-        echo "<th>Accepted Materials</th>";
-        echo "<th>Local Events</th>";
-        echo "<th>Associated Links</th>";
-        echo "<th>Pick-up Schedule</th>";
-        echo "<th>Buy Bin</th>";
-        echo "<th>Alternatives for Unaccpeted Materials</th>";
-        echo "</tr>";
+        echo '<form method="post" action="search_results" style="text-align: center;">';
         
         while ($row = $result->fetch_assoc()) {
-            echo "<tr>";
-          echo "<td>" . $row['Accepted Materials'] . "</td>";
-            echo "<td>" . $row['Local event'] . "</td>";
-             echo "<td><a href='" . $row['Associated Links'] . "'>" . $row['Associated Links'] . "</a></td>";
-             echo "<td>" . $row['Pick-up Schedule'] . "</td>";
-             echo "<td><a href='" . $row['Buy Bins'] . "'>" . $row['Buy Bins'] . "</a></td>";
-              echo "<td><a href='" . $row['Alternatives'] . "'>" . $row['Alternatives'] . "</a></td>";
-            echo "</tr>";
+            echo '<input type="submit" name="County" value="'.$row['County'].'" class="btn btn-dark" style="margin-right: 10px;margin-top: 20px">';
         }
         
-        echo "</table>";
-    } else {
-        echo "County not found or data not available.";
+        echo "</form>";
     }
-}
 
 ?>
 
-
 </body>
 </html>
+
 
