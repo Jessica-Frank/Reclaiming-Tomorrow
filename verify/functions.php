@@ -176,3 +176,65 @@ function check_verification(){
     return false;
 }
 
+function getUserProfile($userId) {
+    // Assuming you have a database connection
+    $conn = new PDO("mysql:host=localhost;dbname=reclaiming_tomorrow_db", 'root', '');
+
+    // Prepare and execute a query to fetch the user's profile
+    $query = "SELECT * FROM users WHERE id = :user_id";
+    $stmt = $conn->prepare($query);
+    $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
+    $stmt->execute();
+
+    // Fetch the user's profile data
+    $userProfile = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    // Close the database connection
+    $conn = null;
+
+    return $userProfile;
+}
+
+function updateProfile($data)
+{
+    $errors = array();
+
+    // Validate the input data for name, username, and email
+    $name = trim($data['name']);
+    $username = trim($data['username']);
+    $email = trim($data['email']);
+
+    if (empty($name)) {
+        $errors[] = "Name is required.";
+    }
+
+    if (empty($username)) {
+        $errors[] = "Username is required.";
+    }
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errors[] = "Please enter a valid email.";
+    }
+
+    if (count($errors) == 0) {
+        // Update the user's profile in the database
+        $userId = $_SESSION['USER']->id; // Get the user's ID from the session
+
+        $query = "UPDATE users SET name = :name, username = :username, email = :email WHERE id = :id";
+        $params = array('id' => $userId, 'name' => $name, 'username' => $username, 'email' => $email);
+
+        if (database_run($query, $params)) {
+            // Profile updated successfully
+            $_SESSION['USER']->name = $name; // Update the name in the session
+            $_SESSION['USER']->username = $username; // Update the username in the session
+            $_SESSION['USER']->email = $email; // Update the email in the session
+        } else {
+            $errors[] = "Failed to update profile. Please try again later.";
+        }
+    }
+
+    return $errors;
+}
+
+
+

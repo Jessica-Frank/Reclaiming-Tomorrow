@@ -8,6 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
     <link rel="stylesheet" type="text/css" href="styles.css">
     
+    
     <style>
         @import url('https://fonts.googleapis.com/css?family=Poppins');
 
@@ -140,7 +141,7 @@
             background-color: #f9f9f9;
         }
         form input[type="submit"] {
-            background-color: #000000; /* Set the background color to black */
+            background-color: #000000; 
             color: white;
             padding: 5px 10px;
             border-radius: 5px;

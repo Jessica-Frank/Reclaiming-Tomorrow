@@ -26,8 +26,21 @@ echo '<style>
         justify-content: space-between;
         align-items: center;
         margin-bottom: 20px;
+        display: flex;
+        flex-direction: column;
     }
+    .logo {
+        font-size: 1.2em; /* Adjust font size here */
+        color: #FAF1E4;
+        user-select: none;
+    }
+    
 
+    .navigation {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
     .button-container {
         display: flex;
     }
@@ -100,7 +113,69 @@ echo '<style>
         font-size: 24px;
         font-weight: bold;
         margin-bottom: 10px;
+        text-align: center;
     }
+    .wrapper{     
+        display: flex;
+        position: relative;
+      
+      }
+      
+      .wrapper .sidebar{ /*Used to maintain content within the sidebar*/
+        width: 200px;
+        height: 100%;
+        background: #609966;
+        padding: 30px 0px;
+        position: fixed;
+        top:0.2px;
+      }
+      
+      .wrapper .sidebar h2{
+        color: #FAF1E4;
+        text-transform: uppercase;
+        text-align: center;
+        margin-bottom: 30px;
+      }
+      
+      .wrapper .sidebar ul li{
+        padding: 10px;
+        border-bottom: 1px solid #CEC5B7;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+        border-top: 1px solid rgba(255,255,255,0.05);
+      }    
+      
+      .wrapper .sidebar ul li a{
+        color: #FAF1E4;
+        display: block;
+      }
+      
+      .wrapper .sidebar ul li a .fas{
+        width: 25px;
+      }
+      
+      .wrapper .sidebar ul li:hover{ /*Used to modify the hovering style on the sidebar*/
+        background-color: #9DC08B;
+      }
+          
+      .wrapper .sidebar ul li:hover a{
+        color: #FAF1E4;
+      } 
+      
+      .wrapper .main_content{ /*Contains the main page content*/
+        width: 100%;
+        margin-left: 200px;
+      }
+      
+      .wrapper .main_content .info{
+        margin: 20px;
+        color: #717171;
+        line-height: 25px;
+      }
+      
+      .wrapper .main_content .info div{
+        margin-bottom: 20px;
+      }
+      
 
 </style>';
 
@@ -162,3 +237,35 @@ function getStars($rating) {
     <link rel="stylesheet" type="text/css" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
     <body style="background-color: #FAF1E4;">
+    <div class="wrapper">
+        <div class="sidebar">
+            <i class=""></i>
+            <ul>
+                <li><a href="/verify/dashboard"><i class="fas fa-home"></i>Home</a></li>
+                <li><a href="/verify/profile"><i class="fas fa-user"></i>Profile</a></li>
+                <li><a href="/verify/display_reviews"><i class="fas fa-thin fa-comments"></i>Locations reviews</a></li>
+                <li><a href="#"><i class="fas fa-light fa-clipboard"></i>FAQ</a></li>
+            </ul>
+        </div>
+        <div class="main_content">
+            <div class="info">
+                <div></div>
+            </div>
+        </div>
+    </div>
+    <body>
+    <header>
+        <h2 class="logo">Reclaiming Tomorrow</h2>
+        <nav class="navigation">
+        <a href="../index.php">Home</a>
+        <a href="../county_search/search">Search</a>
+        <a href="#">Local Information</a>
+        <a href="/rewards/redemption">Rewards</a>
+        <a href="#">Contact Us</a>
+        <a href="../verify/login" class="btnLogin-popup">Login</a>
+    </nav>
+    </header>
+
+</body>
+
+ 

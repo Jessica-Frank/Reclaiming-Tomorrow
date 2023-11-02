@@ -3,6 +3,7 @@ require "functions.php";
 check_login();
 
 $loggedInUsers = getLoggedInUsers();
+$userProfile = getUserProfile($_SESSION['current']);
 ?>
 
 <style>
@@ -17,8 +18,6 @@ $loggedInUsers = getLoggedInUsers();
     }
 
     body {
-        background-color: #FAF1E4;
-        background-color: #FAF1E4;
         background-size: cover;
         background-position: center;
 
@@ -143,7 +142,99 @@ $loggedInUsers = getLoggedInUsers();
     .profile-options button:hover {
         background-color: #1e87d1;
     }
+    .user-icon {
+            font-size: 1.2em; 
+            color: #333;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+    .edit-button {
+        position: relative;
+        top: -60px;
+        right: -195px;
+        font-size: 16px;
+        color: #666;
+        font-weight: 500;
+        cursor: pointer;
+        background-color: #000000; 
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        border: none;
+        justify-content: flex-end;
+        transition: .5s;
+     }
+
+    .edit-button:hover {
+        background-color: #FAF1E4;
+        color: #000000;
+    }
+    
+.wrapper{     
+  display: flex;
+  position: relative;
+
+}
+
+.wrapper .sidebar{ /*Used to maintain content within the sidebar*/
+  width: 200px;
+  height: 200%;
+  background: #609966;
+  padding: 30px 0px;
+  position: fixed;
+  top: 50px;
+}
+
+.wrapper .sidebar h2{
+  color: #FAF1E4;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.wrapper .sidebar ul li{
+  padding: 10px;
+  border-bottom: 1px solid #CEC5B7;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  border-top: 1px solid rgba(255,255,255,0.05);
+}    
+
+.wrapper .sidebar ul li a{
+  color: #FAF1E4;
+  display: block;
+}
+
+.wrapper .sidebar ul li a .fas{
+  width: 25px;
+}
+
+.wrapper .sidebar ul li:hover{ /*Used to modify the hovering style on the sidebar*/
+  background-color: #9DC08B;
+}
+    
+.wrapper .sidebar ul li:hover a{
+  color: #FAF1E4;
+} 
+
+.wrapper .main_content{ /*Contains the main page content*/
+  width: 100%;
+  margin-left: 200px;
+}
+
+.wrapper .main_content .info{
+  margin: 20px;
+  color: #717171;
+  line-height: 25px;
+}
+
+.wrapper .main_content .info div{
+  margin-bottom: 20px;
+}
+
+        
 </style>
+
 </head>
     <meta charset="UTF-8">
     <title>Reclaiming Tomorrow</title>
@@ -151,7 +242,9 @@ $loggedInUsers = getLoggedInUsers();
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
     <link rel="stylesheet" type="text/css" href="styles.css">
-    
+    <body style="background-color: #FAF1E4;">
+   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 <body>
 <header>
     <h2 class="logo">Reclaiming Tomorrow</h2>
@@ -166,21 +259,40 @@ $loggedInUsers = getLoggedInUsers();
 </header>
 
 <div class="profile-container">
-    <h2>Profile</h2>
+    <h2><i class="fas fa-user user-icon"></i>Profile</h2>
+   
+    <a href="edit_profile.php" class="edit-button">EDIT</a>
+
 
     <?php if (check_login(false)): ?>
         <p class="profile-greeting">Hi, <?=$_SESSION['USER']->username?>!</p>
 
-        <?php if (!check_verification()): ?>
-            <div class="profile-options">
-                <a href="verify.php"><button>Verify Profile</button></a>
-            </div>
-        <?php endif; ?>
+        
 
         <div class="profile-options">
-            <a href="inbox.php"><button>Inbox</button></a>
-        </div>
+    <a href="inbox.php">
+        <button class="inbox-button" style="background-color: #000000; color: #fff; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Inbox</button>
+    </a>
+</div>
     <?php endif; ?>
+</div>
+    
+<div class="wrapper">
+    <div class="sidebar">
+        <i class=""></i>
+        <ul>
+            <li><a href="/verify/dashboard"><i class="fas fa-home"></i>Home</a></li>
+            <li><a href="/verify/profile"><i class="fas fa-user"></i>Profile</a></li>
+            <li><a href="/verify/display_reviews"><i class="fas fa-thin fa-comments"></i>Locations reviews</a></li>
+            <li><a href="/verify/display_reviews"><i class="fas fa-light fa-clipboard"></i>FAQ</a></li>
+        </ul>
+    </div>
+    <div class="main_content">
+        <div class="info">
+            <div></div>
+        </div>
+    </div>
 </div>
 </body>
 </html>
+

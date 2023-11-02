@@ -23,6 +23,7 @@
             <li><a href="/verify/dashboard"><i class="fas fa-home"></i>Home</a></li>
             <li><a href="/verify/profile"><i class="fas fa-user"></i>Profile</a></li>
             <li><a href="/verify/display_reviews"><i class="fas fa-thin fa-comments"></i>Locations reviews</a></li>
+            <li><a href="#"><i class="fas fa-light fa-clipboard"></i>FAQ</a></li>
         </ul> 
     </div>
     <div class="main_content">
