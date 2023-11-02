@@ -23,6 +23,32 @@ SET time_zone = "+00:00";
 
 -- --------------------------------------------------------
 
+-- 
+-- table drops if they exist(this is just to get rid of errors in sql) 
+--
+
+DROP TABLE IF EXISTS `admin`;
+
+DROP TABLE IF EXISTS `admin_inbox`;
+
+DROP TABLE IF EXISTS `county_search`;
+
+DROP TABLE IF EXISTS `county_associated_links`;
+
+DROP TABLE IF EXISTS `county_alternatives`;
+
+DROP TABLE IF EXISTS `county_buy_bins`;
+
+DROP TABLE IF EXISTS `rewards`;
+
+DROP TABLE IF EXISTS `recycling_center`;
+
+DROP TABLE IF EXISTS `tickets`;
+
+DROP TABLE IF EXISTS `users`;
+
+DROP TABLE IF EXISTS `user_inbox`;
+
 --
 -- Table structure for table `admin`
 --
@@ -75,26 +101,91 @@ CREATE TABLE `admin_inbox` (
 CREATE TABLE `county_search` (
   `County` varchar(150) NOT NULL,
   `Accepted Materials` varchar(150) NOT NULL,
-  `Local event` varchar(150) NOT NULL,
-  `Pick-up Schedule` varchar(150) NOT NULL,
-  `Associated Links` varchar(600) NOT NULL,
-  `Alternatives` varchar(600) NOT NULL,
-  `Buy Bins` varchar(250) NOT NULL
+  `Local Events` varchar(150) NOT NULL,
+  `Pick-up Schedule` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `county_search`
 --
 
-INSERT INTO `county_search` (`County`, `Accepted Materials`, `Local event`, `Pick-up Schedule`, `Associated Links`, `Alternatives`, `Buy Bins`) VALUES
-('Guilford County', 'Paper, Glass, plastic bottles, aluminum cans, tin cans, cardboard', 'Pleasant Garden Recycles: March 16, 2024', 'Every Other Tuesday', 'https://www.guilfordcountync.gov/our-county/planning-development/environmental-services/household-recycling', 'https://www.greensboro-nc.gov/departments/field-operations/recycle/gso-collects', 'https://www.homedepot.com/p/Rubbermaid-Roughneck-45-Gal-Vented-Blue-Wheeled-Recycling-Trash-Container-2149498/316790901?source=shoppingads&locale=en-US&pla&mtc=SHOPPING-BF-AIB-GGL-Multi-Multi-NA-NA-NA-PLALIA-NA-IIM-NA-NA-NBR-NA-NA-NEW-PRIO_CLASS&cm_m'),
-('Scotland County', 'Aluminum & Steel cans, cardboard, glass', 'Highway clean-up: November 30, 2023', 'Recycling picked up every other Monday ', 'https://www.scotlandcounty.org/422/What-Can-Be-Recycled', 'https://get-green-now.com/reuse-styrofoam/', 'https://www.staples.com/rubbermaid-stacking-recycle-bin-rectangular-polyethylene-18-gallon-blue/product_815627?cid=PS:GS:SBD:PLA:CB&gclid=Cj0KCQjwhL6pBhDjARIsAGx8D5_3e-Ho6W4C9895JTpkIHtGNhCuKQ2Fx91JxcptPfpRovdGWpOLkXQaApFNEALw_wcB'),
-('Cumberland County', 'Paper, Cardboard, Bottles, Aluminum & Tin cans', 'E-Waste Free Recycling : November 14, 2023', 'Every other Friday', 'https://www.cumberlandcountync.gov/departments/solid-waste-group/solid-waste-management/recycling', 'https://www.cumberlandcountync.gov/departments/solid-waste-group/solid-waste-management/recycling/electronic-recycling\'', 'https://www.fayettevillenc.gov/city-services/public-services/solid-waste/roll-out-carts'),
-('Robeson County', 'Cardboard, Paper, Plastic Bottles', 'Clean & Green Meeting: February 23, 2024', 'Every other Wednesday', 'https://www.robesoncountysw.org/index.php/environmental-control-1', 'https://www.robesoncountysw.org/pdf/Trifold_pest.pdf', 'https://www.googleadservices.com/pagead/aclk?sa=L&ai=DChcSEwjs9r3uqIGCAxUO9-MHHfjqDZ8YABBPGgJ5bQ&gclid=Cj0KCQjwhL6pBhDjARIsAGx8D5-oINUSISaj0XiRH1zq-mwcOAwG3kiU5NUAA-hElqWBfLDTtjBZuKsaAn6FEALw_wcB&ohost=www.google.com&cid=CAESVuD2XUNw_QjiJDq870BK9Bup6'),
-('Wake County', 'Cardboard, Cooking oil, Plastic bottles, Aluminum cans', 'Public Landfill Tour: December 9, 2023', 'Every other Thursday', 'https://www.wake.gov/departments-government/waste-recycling/recycling-101/what-you-can-recycle', 'https://raleighnc.gov/trash-recycling-and-clean/services/where-take-items-city-cant-pick', 'https://raleighnc.gov/trash-recycling-and-clean/services/order-garbage-or-recycling-cart#paragraph--216076');
+INSERT INTO `county_search` (`County`, `Accepted Materials`, `Local Events`, `Pick-up Schedule`) VALUES
+('Guilford', 'Paper, Glass, plastic bottles, aluminum cans, tin cans, cardboard', 'Pleasant Garden Recycles: March 16, 2024', 'Every Other Tuesday'),
+('Scotland', 'Aluminum & Steel cans, cardboard, glass', 'Highway clean-up: November 30, 2023', 'Recycling picked up every other Monday '),
+('Cumberland', 'Paper, Cardboard, Bottles, Aluminum & Tin cans', 'E-Waste Free Recycling : November 14, 2023', 'Every other Friday'),
+('Robeson', 'Cardboard, Paper, Plastic Bottles', 'Clean & Green Meeting: February 23, 2024', 'Every other Wednesday'),
+('Wake', 'Cardboard, Cooking oil, Plastic bottles, Aluminum cans', 'Public Landfill Tour: December 9, 2023', 'Every other Thursday');
 
 -- --------------------------------------------------------
 
+--
+-- Table structure for table `county_associated_links`
+--
+
+CREATE TABLE `county_associated_links` (
+  `County` varchar(150) NOT NULL,
+  `Placeholder` varchar(255) NOT NULL,
+  `Link` varchar(600) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `county_associated_links`
+--
+
+INSERT INTO `county_associated_links` (`County`, `Placeholder`, `Link`) VALUES
+('Guilford', 'What to Recycle & How to Recycle', 'https://www.guilfordcountync.gov/our-county/planning-development/environmental-services/household-recycling'),
+('Scotland', 'What Can Be Recycled', 'https://www.scotlandcounty.org/422/What-Can-Be-Recycled'),
+('Cumberland', 'Solid Waste Management', 'https://www.cumberlandcountync.gov/departments/solid-waste-group/solid-waste-management/recycling'),
+('Robeson', 'Environmental Rules & Laws', 'https://www.robesoncountysw.org/index.php/environmental-control-1'),
+('Wake', 'What You Can Recycle', 'https://www.wake.gov/departments-government/waste-recycling/recycling-101/what-you-can-recycle');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `county_alternatives`
+--
+
+CREATE TABLE `county_alternatives` (
+  `County` varchar(150) NOT NULL,
+  `Placeholder` varchar(255) NOT NULL,
+  `Link` varchar(600) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `county_alternatives`
+--
+
+INSERT INTO `county_alternatives` (`County`, `Placeholder`, `Link`) VALUES
+('Guilford', 'GSO Collects', 'https://www.greensboro-nc.gov/departments/field-operations/recycle/gso-collects'),
+('Scotland', '30 Ways to Refuse Styrofoam', 'https://get-green-now.com/reuse-styrofoam/'),
+('Cumberland', 'Electronic Recycling', 'https://www.cumberlandcountync.gov/departments/solid-waste-group/solid-waste-management/recycling/electronic-recycling'),
+('Robeson', 'Locations & Tips', 'https://www.robesoncountysw.org/pdf/Trifold_pest.pdf'),
+('Wake', 'Where to Take Items City Cant Pick Up', 'https://raleighnc.gov/trash-recycling-and-clean/services/where-take-items-city-cant-pick');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `county_buy_bins`
+--
+
+CREATE TABLE `county_buy_bins` (
+  `County` varchar(150) NOT NULL,
+  `Placeholder` varchar(255) NOT NULL,
+  `Link` varchar(600) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `county_buy_bins`
+--
+
+INSERT INTO `county_buy_bins` (`County`, `Placeholder`, `Link`) VALUES
+('Guilford', 'Home Depot', 'https://www.homedepot.com/p/Rubbermaid-Roughneck-45-Gal-Vented-Blue-Wheeled-Recycling-Trash-Container-2149498/316790901?source=shoppingads&locale=en-US&pla&mtc=SHOPPING-BF-AIB-GGL-Multi-Multi-NA-NA-NA-PLALIA-NA-IIM-NA-NA-NBR-NA-NA-NEW-PRIO_CLASS&cm_m'),
+('Scotland', 'Staples', 'https://www.staples.com/rubbermaid-stacking-recycle-bin-rectangular-polyethylene-18-gallon-blue/product_815627?cid=PS:GS:SBD:PLA:CB&gclid=Cj0KCQjwhL6pBhDjARIsAGx8D5_3e-Ho6W4C9895JTpkIHtGNhCuKQ2Fx91JxcptPfpRovdGWpOLkXQaApFNEALw_wcB'),
+('Cumberland', 'Carts Provided by Fayetteville', 'https://www.fayettevillenc.gov/city-services/public-services/solid-waste/roll-out-carts'),
+('Robeson', 'Home Depot', 'https://www.homedepot.com/p/Rubbermaid-Commercial-Products-14-Gal-Blue-Recycling-Bin-FG571473BLUE/303656324?source=shoppingads&locale=en-US&pla&mtc=SHOPPING-RM-RMP-GGL-D28I-Multi-MB-RUBBERMAID_COMMERCIAL_PRODUCTS-NA-PMAX-NA-NA-MK686942200-NA-NBR-2564-NA-NA-NA&cm_mmc=SHOPPING-RM-RMP-GGL-D28I-Multi-MB-RUBBERMAID_COMMERCIAL_PRODUCTS-NA-PMAX-NA-NA-MK686942200-NA-NBR-2564-NA-NA-NA-71700000114587359--'),
+('Wake', 'Order from Raleigh', 'https://raleighnc.gov/trash-recycling-and-clean/services/order-garbage-or-recycling-cart#paragraph--216076');
+
+-- --------------------------------------------------------
 --
 -- Table structure for table `posts`
 --
