@@ -5,6 +5,18 @@
   access('ADMIN');
 ?>
 
+<?php
+require '../connect.php';
+?>
+
+<?php
+$data=$_GET['id'];
+$sql="SELECT * FROM users WHERE id=$data";
+$result=mysqli_query($db,$sql);
+$row=mysqli_fetch_assoc($result);
+$user_name=$row['name'];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,8 +56,8 @@
         <?php
         $reward_list = getAllRewards();
         ?>
-        <h2 style="color: #000000;display: inline-block;margin-right: 20px;">Recycling Rewards</h2>
-        <a class="btn btn-dark btn" href="addReward" style="width:150px" role="button">Add a Reward</a>
+        <h2 style="color: #000000;display: inline-block;margin-right: 20px;">Select a reward to give to <?php echo $user_name; ?></h2>
+        <a class="btn btn-dark btn" href="/admin/userProfile?id=<?php echo $data?>" style="width:100px" role="button">Back</a>
         <br>
         <div id="reward_display">
             <?php if ($reward_list != null) { foreach ($reward_list as $reward) : ?>
@@ -60,8 +72,7 @@
                             <form method="POST">
                                 <input name="reward_id" style="display: none;" 
                                 <?php $reward_id = $reward['id']; echo " value=\"$reward_id \"";?> ></input>
-                                <a class="btn btn-dark btn" href="updateReward.php?id=<?php echo $reward_id?>" style="width:100px; margin-right: 10px;" role="button">Modify</a>
-                                <a class="link-dark" href="deleteReward.php?id=<?php echo $reward_id?>"><i class="fas fa-trash-alt fa-lg"></i></a>
+                                <a class="btn btn-dark btn" href="giveRewardFxn.php?reward_id=<?php echo $reward_id?>&user_id=<?php echo $data?>" style="width:100px; margin-right: 10px;" role="button">Select</a>
                             </form>
                         </div>
                     </div>

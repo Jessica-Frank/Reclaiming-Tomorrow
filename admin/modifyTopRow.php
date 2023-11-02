@@ -3,25 +3,25 @@ require '../connect.php';
 ?>
 
 <?php
-$id=$_GET['id'];
-$sql="SELECT * FROM rewards WHERE id=$id";
+$county=$_GET['id'];
+$sql="SELECT * FROM county_search WHERE County='$county'";
 $result=mysqli_query($db,$sql);
 $row=mysqli_fetch_assoc($result);
-$name=$row['name'];
-$price=$row['price'];
-$img_link=$row['img_link'];
+$accepted_materials=$row['Accepted Materials'];
+$local_events=$row['Local Events'];
+$schedule=$row['Pick-up Schedule'];
 
 if(isset($_POST['submit'])){
-    $new_name=$_POST['name'];
-    $new_price=$_POST['price'];
-    $new_img=$_POST['img_link'];
+    $accepted_materials=$_POST['Accepted_Materials'];
+    $local_events=$_POST['Local_Events'];
+    $schedule=$_POST['Pickup_Schedule'];
 
-    $sql="UPDATE rewards SET name='$new_name', price='$new_price', img_link='$new_img' WHERE id=$id";
-    $result=mysqli_query($db,$sql);
+    $sql = "UPDATE county_search SET `Accepted Materials`='$accepted_materials', `Local Events`='$local_events', `Pick-up Schedule`='$schedule' WHERE `County`='$county'";
+    $result = mysqli_query($db, $sql);
     if($result){
         session_start();
-        $_SESSION['message'] = 'Successfully updated reward!';
-        header('location:../admin/modifyRewards.php');
+        $_SESSION['message'] = 'Successfully updated!';
+        header('location:../admin/countyPreview.php?id='.$county.'');
     } else {
         die(mysqli_error($db));
     }
@@ -38,7 +38,13 @@ if(isset($_POST['submit'])){
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
     <link href="../style.css" rel="stylesheet">
-    <title>Update Reward</title>
+    <title>Update Top Row</title>
+    <style>
+        .custom-textarea {
+        width: 550px;
+        height: 100px;
+        }
+    </style>
 </head>
 <body>
 <?php include "../admin/header.php"; ?>
@@ -60,24 +66,22 @@ if(isset($_POST['submit'])){
                 <div class="flex-box">
                     <form method="post" style="margin-top: 20px; margin-bottom: 20px">
                         <div>
-                            <h1>Update Reward</h1>
+                            <h1><?php echo $county." County";?></h1>
                         </div>
                         <div>
-                            <label style="margin-bottom: 20px;">Reward Name:</label>
-                            <input type="text" name="name" value="<?php
-                            echo $name;?>" size="20">
-                            <br>
-                            <label style="margin-bottom: 20px;">Price:</label>
-                            <input type="text" name="price" value="<?php
-                            echo $price;?>" size="20">
-                            <br>
-                            <label style="margin-bottom: 20px;">Image Link:</label>
-                            <input type="text" name="img_link" value="<?php
-                            echo $img_link;?>" size="20">
+                            <label>Accepted Materials:</label>
+                            <textarea class="custom-textarea" style="margin-right: 20px;margin-left: 20px;line-height: 100%;margin-bottom: 10px;margin-top: 10px;text-align: left;padding: 5px;" name="Accepted_Materials"><?php
+                            echo $accepted_materials;?></textarea>
+                            <label>Local Events:</label>
+                            <textarea class="custom-textarea" style="margin-right: 20px;margin-left: 20px;line-height: 100%;margin-bottom: 10px;margin-top: 10px;text-align: left;padding: 5px;" name="Local_Events"><?php
+                            echo $local_events;?></textarea>
+                            <label>Pick-up Schedule:</label>
+                            <textarea class="custom-textarea" style="margin-right: 20px;margin-left: 20px;line-height: 100%;margin-bottom: 10px;margin-top: 10px;text-align: left;padding: 5px;" name="Pickup_Schedule"><?php
+                            echo $schedule;?></textarea>
                         </div>
 
-                        <a class="btn btn-dark btn" href="/admin/modifyRewards" style="width:60px" role="button">Back</a>
-                        <button type="submit" class="btn btn-dark" name="submit">Update Reward</button>
+                        <a class="btn btn-dark btn" href="/admin/countyPreview.php?id=<?php echo $county ?>" style="width:60px" role="button">Back</a>
+                        <button type="submit" class="btn btn-dark" name="submit">Update</button>
                 </form>
             </div>
         </div>

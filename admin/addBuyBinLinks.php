@@ -2,6 +2,26 @@
 require '../connect.php';
 ?>
 
+<?php
+$county=$_GET['id'];
+
+if(isset($_POST['submit'])){
+    $placeholder=$_POST['placeholder'];
+    $link=$_POST['link'];
+
+    $sql="INSERT INTO county_buy_bins (County, Placeholder, Link)
+    VALUES('$county','$placeholder','$link')";
+    $result=mysqli_query($db,$sql);
+    if($result){
+        session_start();
+        $_SESSION['message'] = 'Successfully updated!';
+        header('location:../admin/countyPreview.php?id='.$county.'');
+    } else {
+        die(mysqli_error($db));
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +32,7 @@ require '../connect.php';
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
     <link href="../style.css" rel="stylesheet">
-    <title>Message</title>
+    <title>Add Links</title>
 </head>
 <body>
 <?php include "../admin/header.php"; ?>
@@ -30,36 +50,29 @@ require '../connect.php';
         </div>
         <div class="main_content">
             <div class="info">
-            <?php
-                $data=$_GET['id'];
-                $sql="UPDATE admin_inbox SET read_receipt=0 WHERE id=$data";
-                $result=mysqli_query($db,$sql);
-                $sql="SELECT * FROM admin_inbox WHERE id=$data";
-                $result=mysqli_query($db,$sql);
-                if($result){
-                    $row=mysqli_fetch_assoc($result);
-                    echo '<div class="flex-container">
-                        <div class="flex-box">
-                        <h1 style="margin-top: 20px">'.$row['title'].'</h1>
-                        <p style="margin-right: 20px;margin-left: 20px">
-                           '.$row['date_sent'].'
-                        </p>
-                        <p style="margin-right: 20px;margin-left: 20px">
-                            ID: <a href="userProfile.php?id='.$row['from_id'].'" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">'.$row['from_name'].'</a>
-                        </p>
-                        <textarea rows="12" cols="40" style="margin-right: 20px;margin-left: 20px;margin-bottom: 10px;resize: none;text-align: left;padding: 5px;" readonly>'.$row['message'].'</textarea>
-                        <p>
-                            <a class="btn btn-dark btn" href="/admin/inbox" role="button">Back</a>
-                            <a class="btn btn-dark btn" href="reply.php?id='.$row['id'].'" style="width:100px" role="button">Reply</a>
-                        </p>
-                    </div>
-                </div>';
-                }
-            ?>
+            <div class="flex-container">
+                <div class="flex-box">
+                    <form method="post" style="margin-top: 20px; margin-bottom: 20px" id="add_form">
+                        <div id="show_links">
+                        <div id="contain_links">
+                        <div>
+                        <label>Placeholder:</label>
+                        <input type="text" name="placeholder">
+                        </div>
+                        <div>
+                        <label>Link:</label>
+                        <input type="text" name="link">
+                        </div>
+                        </div>
+                        </div>
+
+                        <a class="btn btn-dark btn" href="/admin/countyPreview.php?id=<?php echo $county ?>" style="width:60px" role="button">Back</a>
+                        <button type="submit" class="btn btn-dark" name="submit" id="add_btn">Add Link</button>
+                </form>
+            </div>
+        </div>
       </div>
     </div>
 </div>
 </body>
 </html>
-
-

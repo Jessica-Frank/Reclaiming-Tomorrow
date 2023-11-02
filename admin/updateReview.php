@@ -4,24 +4,24 @@ require '../connect.php';
 
 <?php
 $id=$_GET['id'];
-$sql="SELECT * FROM rewards WHERE id=$id";
+$sql="SELECT * FROM posts WHERE id=$id";
 $result=mysqli_query($db,$sql);
 $row=mysqli_fetch_assoc($result);
 $name=$row['name'];
-$price=$row['price'];
-$img_link=$row['img_link'];
+$location=$row['location'];
+$message=$row['message'];
 
 if(isset($_POST['submit'])){
-    $new_name=$_POST['name'];
-    $new_price=$_POST['price'];
-    $new_img=$_POST['img_link'];
+    $name=$_POST['name'];
+    $location=$_POST['location'];
+    $message=$_POST['message'];
 
-    $sql="UPDATE rewards SET name='$new_name', price='$new_price', img_link='$new_img' WHERE id=$id";
+    $sql="UPDATE posts SET name='$name', location='$location', message='$message' WHERE id=$id";
     $result=mysqli_query($db,$sql);
     if($result){
         session_start();
-        $_SESSION['message'] = 'Successfully updated reward!';
-        header('location:../admin/modifyRewards.php');
+        $_SESSION['message'] = 'Successfully updated!';
+        header('location:../admin/modifyReviews.php');
     } else {
         die(mysqli_error($db));
     }
@@ -38,7 +38,13 @@ if(isset($_POST['submit'])){
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
     <link href="../style.css" rel="stylesheet">
-    <title>Update Reward</title>
+    <title>Update Review</title>
+    <style>
+        .custom-textarea {
+        width: 550px;
+        height: 200px;
+        }
+    </style>
 </head>
 <body>
 <?php include "../admin/header.php"; ?>
@@ -60,24 +66,24 @@ if(isset($_POST['submit'])){
                 <div class="flex-box">
                     <form method="post" style="margin-top: 20px; margin-bottom: 20px">
                         <div>
-                            <h1>Update Reward</h1>
+                            <h1>Update Review</h1>
                         </div>
                         <div>
-                            <label style="margin-bottom: 20px;">Reward Name:</label>
+                            <label style="margin-bottom: 20px;">Name:</label>
                             <input type="text" name="name" value="<?php
                             echo $name;?>" size="20">
                             <br>
-                            <label style="margin-bottom: 20px;">Price:</label>
-                            <input type="text" name="price" value="<?php
-                            echo $price;?>" size="20">
+                            <label style="margin-bottom: 20px;">Location:</label>
+                            <input type="text" name="location" value="<?php
+                            echo $location;?>" size="20">
                             <br>
-                            <label style="margin-bottom: 20px;">Image Link:</label>
-                            <input type="text" name="img_link" value="<?php
-                            echo $img_link;?>" size="20">
+                            <label style="margin-bottom: 10px;">Message:</label>
+                            <textarea class="custom-textarea" style="margin-right: 20px;margin-left: 20px;line-height: 100%;margin-bottom: 10px;text-align: left;padding: 5px;" name="message"><?php
+                            echo $message;?></textarea>
                         </div>
 
-                        <a class="btn btn-dark btn" href="/admin/modifyRewards" style="width:60px" role="button">Back</a>
-                        <button type="submit" class="btn btn-dark" name="submit">Update Reward</button>
+                        <a class="btn btn-dark btn" href="/admin/modifyReviews" style="width:60px" role="button">Back</a>
+                        <button type="submit" class="btn btn-dark" name="submit">Update Review</button>
                 </form>
             </div>
         </div>

@@ -72,8 +72,8 @@ INSERT INTO `admin` (`id`, `name`, `email`, `email_verification`, `username`, `p
 (1, 'mary green', 'green@gmail.com', 'green@gmail.com', 'mary', '$2y$10$KwX9mCu1dIvXtL3ArRy/.Oz1WbuUOTqjhgFeh4cRon099rhJW71VS', 'admin', '2023-09-13 23:18:52'),
 (2, 'donald duck', 'duck@gmail.com', 'duck@gmail.com', 'donald21', '$2y$10$TNOFoMI.V7ikqS7yk53/MOk8LgWqJ/vqeFYQSvqjSq45nkknJiAjW', 'admin', '2023-09-14 01:26:53'),
 (3, 'homer simpson', 'simpson45@gmail.com', NULL, 'homer45', '$2y$10$VKMj7ub53tJSTa/WntoC8.CBADznHWSOPdVnOry.xQRUeZ9Tt2B9K', 'admin', '2023-09-14 01:30:16'),
-(4, 'tweety bird', 'bird@gmail.com', NULL, 'tweety', '$2y$10$Rf2ZgxhBRKMfgg7rkvz0JurH7/IaxFgJicdvJIhwCs18eTAJESPAi', 'admin', '2023-09-14 01:32:23'),
-(5, 'mike blue', 'mike@gmail.com', NULL, 'mike', '$2y$10$GQBkIf.WSV5jxAzlgw1Iyuw//T3q7wINoUBRjvD8YE0VlO9rPN.le', 'admin', '2023-10-05 02:56:12');
+(5, 'mike blue', 'mike@gmail.com', NULL, 'mike', '$2y$10$GQBkIf.WSV5jxAzlgw1Iyuw//T3q7wINoUBRjvD8YE0VlO9rPN.le', 'admin', '2023-10-05 02:56:12'),
+(6, 'Hello', 'hello@gmail.com', NULL, 'HELLO', 'Help!123', 'admin', '2023-10-05 02:58:12');
 
 -- --------------------------------------------------------
 
@@ -123,9 +123,11 @@ INSERT INTO `county_search` (`County`, `Accepted Materials`, `Local Events`, `Pi
 --
 
 CREATE TABLE `county_associated_links` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `County` varchar(150) NOT NULL,
   `Placeholder` varchar(255) NOT NULL,
-  `Link` varchar(600) NOT NULL
+  `Link` varchar(600) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -146,9 +148,11 @@ INSERT INTO `county_associated_links` (`County`, `Placeholder`, `Link`) VALUES
 --
 
 CREATE TABLE `county_alternatives` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `County` varchar(150) NOT NULL,
   `Placeholder` varchar(255) NOT NULL,
-  `Link` varchar(600) NOT NULL
+  `Link` varchar(600) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -169,9 +173,11 @@ INSERT INTO `county_alternatives` (`County`, `Placeholder`, `Link`) VALUES
 --
 
 CREATE TABLE `county_buy_bins` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `County` varchar(150) NOT NULL,
   `Placeholder` varchar(255) NOT NULL,
-  `Link` varchar(600) NOT NULL
+  `Link` varchar(600) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -206,7 +212,7 @@ INSERT INTO `posts` (`id`, `name`, `location`, `rating`, `message`) VALUES
 (2, 'Joy Carter', 'Aluminum Recycling', 5, 'The nicest people to ever do business with. Quick transactions!  Always so helpful every time I arrive with my recycling.'),
 (3, 'Chud Mccrud', 'Aluminum Recycling', 5, 'Great service ! It was super easy to get money for your cans. They unloaded the truck for me and then just weighted and gave me a ticket. Took less than 10mins!'),
 (4, 'Adam Reilly', 'J&M recycling', 1, 'terrible customer service.'),
-(5, 'Nancy', 'Salvage America', 4, 'Very friendly staff. First time visit you must provide your driver\'s license if you want cash back. I only had 4 nonstick pans to recycle, and based on the weight of the steel I earned 60 cents, which was rounded up to $1. Partly drive-thru, partly y'),
+(5, 'Nancy', 'Salvage America', 4, 'Very friendly staff. First time visit you must provide your drivers license if you want cash back. I only had 4 nonstick pans to recycle, and based on the weight of the steel I earned 60 cents, which was rounded up to $1. Partly drive-thru, partly y'),
 (6, 'Ace', 'Salvage America', 1, 'Not very friendly people. I wouldn’t go here.'),
 (7, 'Tony Wise', 'Sonoco Recycling', 5, 'Great place to recycle cardboard… and get paid for it!'),
 (8, 'Billy Smith', 'Sonoco Recycling', 5, 'Great people quick loading ✌️'),

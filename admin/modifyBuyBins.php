@@ -4,24 +4,23 @@ require '../connect.php';
 
 <?php
 $id=$_GET['id'];
-$sql="SELECT * FROM rewards WHERE id=$id";
+$sql="SELECT * FROM county_buy_bins WHERE id='$id'";
 $result=mysqli_query($db,$sql);
 $row=mysqli_fetch_assoc($result);
-$name=$row['name'];
-$price=$row['price'];
-$img_link=$row['img_link'];
+$placeholder=$row['Placeholder'];
+$link=$row['Link'];
+$county=$row['County'];
 
 if(isset($_POST['submit'])){
-    $new_name=$_POST['name'];
-    $new_price=$_POST['price'];
-    $new_img=$_POST['img_link'];
+    $placeholder=$_POST['placeholder'];
+    $link=$_POST['link'];
 
-    $sql="UPDATE rewards SET name='$new_name', price='$new_price', img_link='$new_img' WHERE id=$id";
-    $result=mysqli_query($db,$sql);
+    $sql = "UPDATE county_buy_bins SET `Placeholder`='$placeholder', `Link`='$link' WHERE `id`='$id'";
+    $result = mysqli_query($db, $sql);
     if($result){
         session_start();
-        $_SESSION['message'] = 'Successfully updated reward!';
-        header('location:../admin/modifyRewards.php');
+        $_SESSION['message'] = 'Successfully updated!';
+        header('location:../admin/countyPreview.php?id='.$county.'');
     } else {
         die(mysqli_error($db));
     }
@@ -38,7 +37,13 @@ if(isset($_POST['submit'])){
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
     <link href="../style.css" rel="stylesheet">
-    <title>Update Reward</title>
+    <title>Update</title>
+    <style>
+        .custom-textarea {
+        width: 550px;
+        height: 100px;
+        }
+    </style>
 </head>
 <body>
 <?php include "../admin/header.php"; ?>
@@ -60,24 +65,21 @@ if(isset($_POST['submit'])){
                 <div class="flex-box">
                     <form method="post" style="margin-top: 20px; margin-bottom: 20px">
                         <div>
-                            <h1>Update Reward</h1>
+                            <h1><?php echo $county." County";?></h1>
                         </div>
                         <div>
-                            <label style="margin-bottom: 20px;">Reward Name:</label>
-                            <input type="text" name="name" value="<?php
-                            echo $name;?>" size="20">
-                            <br>
-                            <label style="margin-bottom: 20px;">Price:</label>
-                            <input type="text" name="price" value="<?php
-                            echo $price;?>" size="20">
-                            <br>
-                            <label style="margin-bottom: 20px;">Image Link:</label>
-                            <input type="text" name="img_link" value="<?php
-                            echo $img_link;?>" size="20">
+                            <label>Placeholder:</label>
+                            <input type="text" name="placeholder" value="<?php
+                            echo $placeholder;?>" size="20">
+                        </div>
+                        <div>
+                            <label>Link:</label>
+                            <input type="text" name="link" value="<?php
+                            echo $link;?>" size="20">
                         </div>
 
-                        <a class="btn btn-dark btn" href="/admin/modifyRewards" style="width:60px" role="button">Back</a>
-                        <button type="submit" class="btn btn-dark" name="submit">Update Reward</button>
+                        <a class="btn btn-dark btn" href="/admin/countyPreview.php?id=<?php echo $county ?>" style="width:60px" role="button">Back</a>
+                        <button type="submit" class="btn btn-dark" name="submit">Update</button>
                 </form>
             </div>
         </div>
