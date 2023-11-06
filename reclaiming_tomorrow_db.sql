@@ -49,6 +49,12 @@ DROP TABLE IF EXISTS `users`;
 
 DROP TABLE IF EXISTS `user_inbox`;
 
+DROP TABLE IF EXISTS `user_location`;
+
+DROP TABLE IF EXISTS `posts`;
+
+DROP TABLE IF EXISTS `reward_point_log`;
+
 --
 -- Table structure for table `admin`
 --
@@ -243,25 +249,25 @@ INSERT INTO `recycling_center` (`id`, `name`, `address`, `material_recycled`, `l
 (1, 'Aluminum Recycling', '2412 S Elm-Eugene St. Greensboro, NC 27406', 'Aluminum, Plastic, Paper', 36.04388000, -79.79174000),
 (2, 'ReCommunity Greensboro', '706 Patton Ave, Greensboro, NC 27406', 'Plastic, Metal, Aluminum', 36.04194000, -79.77545000),
 (3, 'Greensboro Recycling', '2300 W Meadowview Rd #207 Greensboro, NC 27407', 'Aluminum, Electronics, Metal, Plastic', 36.05143000, -79.84160000),
-(4, 'J & M Recycling', '2307 W Cone Blvd #180, Greensboro, NC 27408', 'Aluminum', 36.11063000, -79.82725000),
+(4, 'J & M Recycling', '2307 W Cone Blvd #180, Greensboro, NC 27408', 'Aluminum, Metal, Glass, Steel', 36.11063000, -79.82725000),
 (5, 'Gate City Recycling', '610 Industrial Ave, Greensboro, NC 27406', 'Aluminum', 36.02768000, -79.77424000),
-(6, 'A & A Recycling', '3934 Hahns Ln, Greensboro, NC 27401', 'Aluminum', 36.07986000, -79.74060000),
-(7, 'Cardinals Metals LLC', '5149 Randleman Rd, Greensboro, NC 27406', 'Aluminum', 36.93220000, -79.81101000),
-(8, 'Salvage America', '3001 Holts Chapel Rd, Greensboro, NC 27401', 'Aluminum', 36.07792000, -79.75260000),
-(9, 'Boom Recycling', '717 Green Valley Rd Suite 200, Greensboro, NC 27408', 'Aluminum', 36.09513000, -79.82247000),
+(6, 'A & A Recycling', '3934 Hahns Ln, Greensboro, NC 27401', 'Aluminum, Wood, Fiberboard', 36.07986000, -79.74060000),
+(7, 'Cardinals Metals LLC', '5149 Randleman Rd, Greensboro, NC 27406', 'Aluminum, Plastic, Glass, Steel', 36.93220000, -79.81101000),
+(8, 'Salvage America', '3001 Holts Chapel Rd, Greensboro, NC 27401', 'Aluminum, Metal, Glass', 36.07792000, -79.75260000),
+(9, 'Boom Recycling', '717 Green Valley Rd Suite 200, Greensboro, NC 27408', 'Aluminum, Electronics, Steel, Metals', 36.09513000, -79.82247000),
 (10, 'ARC', '2091 Bishop Rd, Greensboro, NC 27406', 'Aluminum', 36.99517000, -79.84645000),
 (11, 'Securis', '1108 N. O.Henry Blvd, Greensboro, NC 27405', 'Aluminum', 36.08940000, -79.76568000),
 (12, 'Piedmont Paper Stock Co', '3909 Riverdale Rd, Greensboro, NC 27406', 'Aluminum', 36.01555000, -79.77916000),
 (13, 'D.H. Griffin Wrecking Co., Inc. - Scrap Yard', '4700 Hilltop Rd, Greensboro, NC 27406', 'Aluminum', 36.03919000, -79.88258000),
 (14, 'Forsyth County Recycling Center', 'Pfafftown, NC 27040', 'Aluminum', 36.17918000, -80.40765000),
 (15, 'Recycling Station', '325 W Hanes Mill Rd, Winston-Salem, NC 27105', 'Aluminum', 36.19798000, -80.28614000),
-(16, 'The 3RC EnviroStation', '1401 S Martin Luther King Jr Dr, Winston-Salem, NC 27107', 'Aluminum', 36.09091000, -80.22327000),
+(16, 'The 3RC EnviroStation', '1401 S Martin Luther King Jr Dr, Winston-Salem, NC 27107', 'Aluminum, Copper, Metal, Steel', 36.09091000, -80.22327000),
 (17, 'WM - Winston-Salem Recycle Center', '280 Business Park Dr, Winston-Salem, NC 27107', 'Aluminum', 36.04984000, -80.15667000),
 (18, 'Sonoco Recycling', '4175 N Glenn Ave, Winston-Salem, NC 27105', 'Aluminum', 36.15470000, -80.23083000),
 (19, 'Recycle America of The Piedmont', '1330 Ivy Ave, Winston-Salem, NC 27105', 'Aluminum', 36.12253000, -80.23975000),
 (20, 'Reflective Recycling Inc', '3380 Old Lexington Rd #2, Winston-Salem, NC 27107', 'Aluminum', 36.06372000, -80.22396000),
 (21, 'leisure time recycling', '1801 Ivy Ave, Winston-Salem, NC 27105', 'Aluminum', 36.13141000, -80.23701000),
-(22, 'Hanes Mill Road Solid Waste Facility', '325 W Hanes Mill Rd, Winston-Salem, NC 27105', 'Plastic', 36.19635000, -80.28037000),
+(22, 'Hanes Mill Road Solid Waste Facility', '325 W Hanes Mill Rd, Winston-Salem, NC 27105', 'Plastic, Paper, Fiberboard, Wood', 36.19635000, -80.28037000),
 (23, 'Abbey Green (DBA A-1 Service Group)', '5030 Overdale Rd, Winston-Salem, NC 27107', 'Copper', 36.04818000, -80.23220000),
 (24, 'OmniSource Corporation', '1426 W Mountain St, Kernersville, NC 27284', 'Metal', 36.13971000, -80.10225000),
 (25, 'Industrial Electronic Recycling', '1381 S Park Dr Q, Kernersville, NC 27284', 'Electronics', 36.10989000, -80.06505000),
@@ -422,7 +428,47 @@ INSERT INTO `user_location` (`id`, `name`, `latitude`, `longitude`) VALUES
 (7, 'Fayetteville', 35.05192110480352, -78.86821841514231),
 (8, 'Charlotte', 35.22635799264409, -80.82422108147652),
 (9, 'Boone', 36.21672506365800, -81.67334798154490),
-(10, 'Wilmington', 34.20996828224467, -77.88357211052265);
+(10, 'Wilmington', 34.20996828224467, -77.88357211052265),
+(11, 'Asheville', 35.64508774211756, -82.44275720908006),
+(12, 'Carolina Beach', 34.03537180394602, -77.89012745511953),
+(13, 'Chapel Hill', 35.911689445382834, -79.04870760406189),
+(14, 'Cary', 35.794389072662106, -78.77606345814303),
+(15, 'High Point', 35.95559378615341, -79.99602862213266),
+(16, 'Concord', 35.41089409429659, -80.57577879907613),
+(17, 'Rocky Mount', 35.93946672841771, -77.79105884116862),
+(18, 'Mooresville', 35.58171713600021, -80.81154733573972),
+(19, 'New Bern', 35.10773580453683, -77.04350630853898),
+(20, 'Hendersonville', 35.31882872740465, -82.45790787216632),
+(21, 'Gastonia', 35.26368846249369, -81.18325595173349),
+(22, 'Statesville', 35.78353285521391, -80.88452531141081),
+(23, 'Goldsboro', 35.3840454637333, -77.98427443972582),
+(24, 'Huntersville', 35.40936702748796, -80.84413641487845),
+(24, 'Waynesville', 35.488263416055844, -82.9853000883694),
+(25, 'Ashboro', 35.707677793668864, -79.81755615367558),
+(27, 'Lumberton', 34.618780976328964, -79.01036558742335),
+(28, 'Kinston', 35.2613183322517, -77.5782615664067),
+(29, 'Mount Airy', 36.49908846805129, -80.6022050115596),
+(30, 'Elizabeth City', 36.294934691841384, -76.24657037402696),
+(31, 'Kannapolis', 35.48619155500245, -80.61584336287447),
+(32, 'Brevard', 35.233177858456884, -82.73493833479333),
+(33, 'Morrisville', 35.82331169612795, -78.82536805656922),
+(34, 'Pinehurst', 35.19588364298931, -79.46618652483504),
+(35, 'Southport', 33.91798428917646, -78.01600869697494),
+(36, 'Bryson City', 35.431071211886895, -83.4464644032489),
+(37, 'Blowing Rock', 36.13476219051257, -81.67154610825781),
+(38, 'Mebane', 36.09692902167445, -79.27164916768169),
+(39, 'Wilkesboro', 36.14583310944477, -81.16436074270487),
+(40, 'Fuquay-Varina', 35.58525608840499, -78.78816712711159),
+(41, 'Morehead City', 34.72313326422952, -76.72127741753991),
+(42, 'Cornelius', 35.48074020105567, -80.86057158993765),
+(43, 'Laurinburg', 34.7732907172744, -79.45879690873694),
+(44, 'Roanoke Rapids', 36.462729547426974, -77.65376956590514),
+(45, 'Waxhaw', 34.924006854385816, -80.74085297936848),
+(46, 'Southern Pines', 35.17394412941369, -79.38954597982968),
+(47, 'Forest City', 35.33376474925303, -81.86193950970467),
+(48, 'Tarboro', 35.89685201440511, -77.53432299283686),
+(49, 'Fort Liberty', 35.13915048129479, -79.00256647041803),
+(50, 'Duck', 36.16976240669869, -75.75500684000558);
 
 --
 -- Indexes for dumped tables

@@ -212,3 +212,23 @@ form { /*Used to modify forms - as seen wtihin the Admin section: Modify Points*
   text-decoration: underline;
   text-decoration-color: #40513B;
  
+}
+
+#map {
+  height: 500px;
+  width: 500px;
+  z-index: 98 !important;
+  margin:auto;
+}
+
+#mapTable {
+  border-style: solid;
+  width: 500px;
+  margin: auto;
+}
+
+#mapResults {
+  border-style: solid;
+  width: 500px;
+  margin: auto;
+}

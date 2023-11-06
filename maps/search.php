@@ -26,8 +26,8 @@
             </div>
             <div class="mb-3">
                 <label for="currentLocation" class="form-label">Current Location</label>
-                <select class="form-select" id="currentLocation" name="currentLocation" required>
-                    <option value=''>Select your current location</option>
+                <select class="form-select selectpicker" data-live-search="true" id="currentLocation" name="currentLocation" required>
+                    <option value=''>Type in a valid City as your Current Location.</option>
                     <?php
 
                     $dbHost = 'localhost';
@@ -46,6 +46,12 @@
                         }
                     }
                     ?>
+
+                    <script>
+                        $(document).ready(function() {
+                            $('.selectpicker').selectpicker();
+                        });
+                    </script>
 
                 </select>
             </div>

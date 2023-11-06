@@ -8,7 +8,6 @@
     <meta name="description" content="A brief description of your page">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <link href="maps.css" rel="stylesheet">
     <link href="../style.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
@@ -42,21 +41,29 @@
         $result = $stmt->get_result()->fetch_assoc();
 
         $LatValue = $result['latitude'];
-
         $LongValue = $result['longitude'];
-
     ?>
 
         <script>
             var locations = [];
             var lat = <?php echo $LatValue ?>;
             var long = <?php echo $LongValue ?>;
+            var rad = <?php echo $distance * 1000 ?>;
 
             var map = L.map('map').setView([lat, long], 11);
 
             L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 19,
                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map);
+
+
+
+            var circle = L.circle([lat, long],{
+                color: 'red',
+                fillColor: '#f03',
+                fillOpacity: 0.5,
+                radius: rad * 0.621371
             }).addTo(map);
 
             <?php
@@ -84,10 +91,11 @@
                 }
             }
             ?>
+
         </script>
 
         <div class="text-center">
-            <h1>Search Results</h1>
+            <h1 id="mapTable">Search Results</h1>
         </div>
 
     <?php
@@ -98,7 +106,7 @@
         $result = $conn->query($query);
 
         while ($row = $result->fetch_assoc()) {
-            echo '<div class="container">';
+            echo '<div id="mapResults" class="container">';
             echo '  <div class="row justify-content-md-center">';
             echo '    <div class="col-md-3 border">';
             echo '      Recycling Center:';
