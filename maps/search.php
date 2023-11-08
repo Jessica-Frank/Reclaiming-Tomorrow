@@ -11,6 +11,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <link href="../style.css" rel="stylesheet">
     <link href="maps.css" rel="stylesheet">
 </head>
@@ -26,8 +28,8 @@
             </div>
             <div class="mb-3">
                 <label for="currentLocation" class="form-label">Current Location</label>
-                <select class="form-select selectpicker" data-live-search="true" id="currentLocation" name="currentLocation" required>
-                    <option value=''>Type in a valid City as your Current Location.</option>
+                <select class="searchselect form-select" data-live-search="true" id="currentLocation" name="currentLocation" required>
+                    <option></option>
                     <?php
 
                     $dbHost = 'localhost';
@@ -49,7 +51,10 @@
 
                     <script>
                         $(document).ready(function() {
-                            $('.selectpicker').selectpicker();
+                            $('.searchselect').select2({
+                                placeholder: "Select a Location",
+                                allowClear: true
+                            });
                         });
                     </script>
 
