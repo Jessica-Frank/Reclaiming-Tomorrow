@@ -27,6 +27,7 @@
                 <td>Time</td>
                 <td>Point Change</td>
                 <td>Action</td>
+                <td>Cause</td>
             <tbody>
                 <?php
                 $log_events = getLogData();
@@ -52,6 +53,14 @@
                         echo "</td>";
                     }
                     else {echo "<td>Error: Unrecognized Event</td>";}
+                    
+                    if ($event['admin_id'] == null) {
+                        echo "<td>User action</td>";
+                    }
+                    else {
+                        echo "<td>Initiated by admin ", $event['admin_id'], "</td>";
+                    }
+
                     echo "</tr>";
                 }
                 ?>

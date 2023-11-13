@@ -29,7 +29,7 @@
                 $ticket = claimTicket($_POST['ticket_num'], $_SESSION['USER']->id);
             }
             if (isset($_POST['reward_id'])) {
-                $chosen_reward = redeemReward($_POST['reward_id'], $_SESSION['USER']->id);
+                $chosen_reward = redeemReward($_POST['reward_id'], $_SESSION['USER']->id, null);
             }
             $points_available = getUserPoints($_SESSION['USER']->id);
         }

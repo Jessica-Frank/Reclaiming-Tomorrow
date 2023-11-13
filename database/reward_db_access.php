@@ -71,7 +71,7 @@ function getRewardById($reward_id)
     }
 }
 
-function redeemReward($reward_id, $user_id)
+function redeemReward($reward_id, $user_id, $admin_id)
 {
     try {
         $connection = new PDO("mysql:host=localhost;dbname=reclaiming_tomorrow_db", "root", "");
@@ -90,7 +90,7 @@ function redeemReward($reward_id, $user_id)
             $spend_statement->bindParam(':price', $reward_data['price'], PDO::PARAM_INT);
             $spend_statement->execute();
 
-            logRewardRedemption($user_id, $reward_id, $reward_data['price']);
+            logRewardRedemption($user_id, $reward_id, $reward_data['price'], $admin_id);
             return $reward_data;
         } else {
             return null;

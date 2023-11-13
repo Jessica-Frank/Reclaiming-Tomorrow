@@ -31,14 +31,15 @@ function logTicketRedemption($user_id, $ticket_code, $ticket_points)
     }
 }
 
-function logRewardRedemption($user_id, $reward_id, $reward_cost)
+function logRewardRedemption($user_id, $reward_id, $reward_cost, $admin_id)
 {
     try {
         $connection = new PDO("mysql:host=localhost;dbname=reclaiming_tomorrow_db", "root", "");
-        $sql_command = "INSERT INTO reward_point_log (user_id, reward_id, point_change, action_name) VALUES (:user_id, :reward_id, :point_change, 'CLAIM_REWARD')";
+        $sql_command = "INSERT INTO reward_point_log (user_id, reward_id, point_change, action_name, admin_id) VALUES (:user_id, :reward_id, :point_change, 'CLAIM_REWARD', :admin_id)";
         
         $statement = $connection->prepare($sql_command);
         $statement->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $statement->bindParam(':admin_id', $admin_id, PDO::PARAM_INT);
         $statement->bindParam(':reward_id', $reward_id, PDO::PARAM_INT);
         $point_change = (0 - $reward_cost);
         $statement->bindParam(':point_change', $point_change, PDO::PARAM_INT);
