@@ -19,26 +19,52 @@
 
 <body>
     <?php include '../include/header.php'; ?>
+    <?php
+
+    $dbHost = 'localhost';
+    $dbUsername = 'root';
+    $dbPassword = '';
+    $dbName = 'reclaiming_tomorrow_db';
+
+    $conn = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
+    ?>
     <div class="container mt-5">
-        <h1>Recycling Search</h1>
-        <form method="post" action="locationator">
+        <h1 class='searchTitle'>Recycling Search</h1>
+        <form class='searchForm' method="post" action="locationator">
             <div class="mb-3">
                 <label for="recyclingMaterial" class="form-label">Recycling Material</label>
-                <input type="text" class="form-control" id="recyclingMaterial" name="recyclingMaterial" required>
+                <select class="searchSelectMaterial form-select" data-live-search="true" id="recyclingMaterial" name="recyclingMaterial" required>
+                    <option></option>
+                    <option></option>
+
+                    <?php
+                    $sql = 'SELECT name, material_info FROM materials';
+                    $result = mysqli_query($conn, $sql);
+
+                    if (mysqli_num_rows($result) > 0) {
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            echo '<option>' . $row['name'] . '</option>';
+                            echo '<option disabled>' . '(' . $row['material_info'] . ') ' . '</option>';
+                        }
+                    }
+                    ?>
+                    <script>
+                        $(document).ready(function() {
+                            $('.searchSelectMaterial').select2({
+                                placeholder: "Select a Recycling Material",
+                                allowClear: true
+                            });
+                        });
+                    </script>
+
+                </select>
             </div>
             <div class="mb-3">
                 <label for="currentLocation" class="form-label">Current Location</label>
-                <select class="searchselect form-select" data-live-search="true" id="currentLocation" name="currentLocation" required>
+                <select class="searchSelectLocation form-select" data-live-search="true" id="currentLocation" name="currentLocation" required>
                     <option></option>
+
                     <?php
-
-                    $dbHost = 'localhost';
-                    $dbUsername = 'root';
-                    $dbPassword = '';
-                    $dbName = 'reclaiming_tomorrow_db';
-
-                    $conn = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
-
                     $sql = 'SELECT name FROM user_location';
                     $result = mysqli_query($conn, $sql);
 
@@ -51,7 +77,7 @@
 
                     <script>
                         $(document).ready(function() {
-                            $('.searchselect').select2({
+                            $('.searchSelectLocation').select2({
                                 placeholder: "Select a Location",
                                 allowClear: true
                             });

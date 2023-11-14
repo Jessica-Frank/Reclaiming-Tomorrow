@@ -55,6 +55,8 @@ DROP TABLE IF EXISTS `posts`;
 
 DROP TABLE IF EXISTS `reward_point_log`;
 
+DROP TABLE IF EXISTS `materials`;
+
 --
 -- Table structure for table `admin`
 --
@@ -198,6 +200,7 @@ INSERT INTO `county_buy_bins` (`County`, `Placeholder`, `Link`) VALUES
 ('Wake', 'Order from Raleigh', 'https://raleighnc.gov/trash-recycling-and-clean/services/order-garbage-or-recycling-cart#paragraph--216076');
 
 -- --------------------------------------------------------
+
 --
 -- Table structure for table `posts`
 --
@@ -279,6 +282,32 @@ INSERT INTO `recycling_center` (`id`, `name`, `city`, `address`, `material_recyc
 (30, 'ecoATM', 'Kernersville','1130 S Main St, Kernersville, NC 27284', 'Electronics', 36.11379000, -80.10047000);
 
 -- --------------------------------------------------------
+
+--
+-- Table structure for table `materials`
+--
+
+CREATE TABLE `materials` (
+  `id` int(10) NOT NULL,
+  `name` varchar(30) NOT NULL,
+  `material_info` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `materials`
+--
+
+INSERT INTO `materials` (`id`, `name`, `material_info`) VALUES
+(1, 'Plastic', 'Plastic Bottles, Plastic Containers, Plastic Lids'),
+(2, 'Metal', 'Scrap Metal, Radiators, Metal Furniture, Left Over Metal Construction Material'),
+(3, 'Wood', 'Pallets, Construction and Demolition Wood, Furniture, Wooden Crates'),
+(4, 'Aluminum', 'Aluminum Cans, Aluminum Foil, Aluminum Food Containers, Aluminum Packaging'),
+(5, 'Paper', 'Newspaper, Magazine, Office Paper, Cardboard, Cardboard Boxes, Paperboard'),
+(6, 'Electronics', 'Cellphones, Smartphones and Tablets, Laptops and Computers, Printers'),
+(7, 'Glass', 'Glass Bottles, Glass Jars, Glass Containers, Glass Food and Drink Packaging'),
+(8, 'Steel', 'Steel Cans, Aerosol Cans, Steel Food Containers, Steel Drums, Steel Appliances'),
+(9, 'Fiberboard', 'Cardboard and Paper Composite Fiberboard, Clean and Uncontaminated Fiberboard'),
+(10, 'Copper', 'Copper Wire, Copper Tubing, Copper Pipes, Copper Sheets, Copper Coils');
 
 --
 -- Table structure for table `rewards`

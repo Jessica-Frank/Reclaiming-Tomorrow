@@ -59,7 +59,7 @@
 
 
 
-            var circle = L.circle([lat, long],{
+            var circle = L.circle([lat, long], {
                 color: 'red',
                 fillColor: '#f03',
                 fillOpacity: 0.5,
@@ -73,7 +73,8 @@
 
             $query = "SELECT name, address, material_recycled, latitude, longitude
               FROM recycling_center
-              WHERE material_recycled LIKE '%$recyclingMaterial%'";
+              WHERE material_recycled LIKE '%$recyclingMaterial%'
+              AND ( 6371 * acos( cos(radians($LatValue)) * cos(radians(latitude)) * cos(radians(longitude) - radians($LongValue)) + sin(radians($LatValue)) * sin(radians(latitude)))) < $distance";
 
             $result = $conn->query($query);
 
@@ -81,7 +82,7 @@
                 while ($row = $result->fetch_assoc()) { ?>
                     L.marker([<?php echo $row['latitude'] ?>, <?php echo $row['longitude'] ?>])
                         .addTo(map)
-                        .bindPopup('<?php echo $row['name'] ?>');
+                        .bindPopup('<?php echo $row['name']?> <br> <?php echo $row['address'] ?>');
             <?php echo "locations.push({
                     name: '{$row['name']}',
                     address: '{$row['address']}',
@@ -91,7 +92,6 @@
                 }
             }
             ?>
-
         </script>
 
         <div class="text-center">
