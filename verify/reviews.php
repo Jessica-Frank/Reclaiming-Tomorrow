@@ -1,8 +1,11 @@
+
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reclaiming Tomorrow</title>
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
@@ -167,22 +170,27 @@
     </header>
 
     <h1>Location Reviews</h1>
-    <form action="submit_reviews.php" method="POST">
-        <label for="name">Location Name:</label>
-        <input type="text" name="name" required><br>
+    <form action="submit_reviews" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br>
+        
+        <label for="location"> Location:</label>
+        <input type="text" id="location" name="location" required><br>
 
         <label for="rating">Rating:</label>
-        <input type="number" name="rating" min="1" max="5" required><br>
+        <input type="number" id="rating" name="rating" min="1" max="5" required><br>
 
         <label for="message">Review:</label>
-        <textarea name="message" rows="4" required></textarea><br>
+        <textarea  id="name" name="message" rows="4" required></textarea><br>
 
         <input type="submit" value="Submit Review">
     </form>
 
     <div class="reviews">
-        <h2>Recent Reviews</h2>
+
 
     </div>
 </body>
 </html>
+
+

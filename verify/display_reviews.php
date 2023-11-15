@@ -19,6 +19,7 @@ echo '<style>
     padding-top: 10px;
     flex-direction: column;
     min-height: 100vh;
+    
     }
     
     .header {
@@ -101,7 +102,7 @@ echo '<style>
     }
 
     .review .stars {
-        color: #FFD700; /* Yellow color for stars */
+        color: #FFD700; 
         font-size: 20px; 
     }
 
@@ -127,7 +128,7 @@ echo '<style>
         background: #609966;
         padding: 30px 0px;
         position: fixed;
-        top:0.2px;
+        top: 50px;
       }
       
       .wrapper .sidebar h2{
@@ -180,11 +181,11 @@ echo '<style>
 </style>';
 
 echo '<div class="header">
-    <h2 class="reviews-title">Recent Reviews</h2>
+    <h3 class="reviews-title">Recent Reviews</h3>
     <div class="button-container">
         
-        <a href="reviews.php" class="button">Write a Review</a> <!-- Link to "Write a Review" -->
-        <a href="dashboard.php" class="button button-back">Back</a> <!-- Link to "Back" -->
+        <a href="reviews.php" class="button">Write a Review</a> 
+        <a href="dashboard.php" class="button button-back">Back</a> 
     </div>
 </div>';
 
@@ -206,7 +207,7 @@ if ($result->num_rows > 0) {
     echo "No reviews yet.";
 }
 
-echo '</div>'; // Close reviews-container
+echo '</div>';
 
 $conn->close();
 
@@ -236,7 +237,9 @@ function getStars($rating) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
     <link rel="stylesheet" type="text/css" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
-    <body style="background-color: #FAF1E4;">
+    <link href="../style.css" rel="stylesheet">
+  
+    <?php include "../admin/header.php"; ?>
     <div class="wrapper">
         <div class="sidebar">
             <i class=""></i>
@@ -244,7 +247,7 @@ function getStars($rating) {
                 <li><a href="/verify/dashboard"><i class="fas fa-home"></i>Home</a></li>
                 <li><a href="/verify/profile"><i class="fas fa-user"></i>Profile</a></li>
                 <li><a href="/verify/display_reviews"><i class="fas fa-thin fa-comments"></i>Locations reviews</a></li>
-                <li><a href="#"><i class="fas fa-light fa-clipboard"></i>FAQ</a></li>
+                <li><a href="/verify/faq"><i class="fas fa-regular fa-question"></i>FAQ</a></li>
             </ul>
         </div>
         <div class="main_content">
@@ -254,17 +257,7 @@ function getStars($rating) {
         </div>
     </div>
     <body>
-    <header>
-        <h2 class="logo">Reclaiming Tomorrow</h2>
-        <nav class="navigation">
-        <a href="../index.php">Home</a>
-        <a href="../county_search/search">Search</a>
-        <a href="#">Local Information</a>
-        <a href="/rewards/redemption">Rewards</a>
-        <a href="#">Contact Us</a>
-        <a href="../verify/login" class="btnLogin-popup">Login</a>
-    </nav>
-    </header>
+  
 
 </body>
 

@@ -6,7 +6,7 @@
         <a href="../county_search/county">County Information</a>
         <a href="/rewards/redemption">Rewards</a>
         <a href="../verify/inbox">Contact Us</a>
-        <a href="../verify/login" class="btnLogin-popup">Login</a>
+        <a href="../verify/logout" class="btnLogin-popup">Logout</a>
     </nav>
 </header>
 

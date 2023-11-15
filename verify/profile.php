@@ -25,6 +25,9 @@ $userProfile = getUserProfile($_SESSION['current']);
         flex-direction: column;
 
         min-height: 100vh;
+        background: url('images/recycle1.jpg') center center fixed;
+        background-size: cover;
+        
     }
 
     header {
@@ -218,8 +221,10 @@ $userProfile = getUserProfile($_SESSION['current']);
 } 
 
 .wrapper .main_content{ /*Contains the main page content*/
+
   width: 100%;
-  margin-left: 200px;
+  margin-left: 150px;
+  margin-right: 20px;
 }
 
 .wrapper .main_content .info{
@@ -243,8 +248,9 @@ $userProfile = getUserProfile($_SESSION['current']);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
     <link rel="stylesheet" type="text/css" href="styles.css">
     <body style="background-color: #FAF1E4;">
-   
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+
+
 <body>
 <header>
     <h2 class="logo">Reclaiming Tomorrow</h2>
@@ -284,7 +290,7 @@ $userProfile = getUserProfile($_SESSION['current']);
             <li><a href="/verify/dashboard"><i class="fas fa-home"></i>Home</a></li>
             <li><a href="/verify/profile"><i class="fas fa-user"></i>Profile</a></li>
             <li><a href="/verify/display_reviews"><i class="fas fa-thin fa-comments"></i>Locations reviews</a></li>
-            <li><a href="/verify/display_reviews"><i class="fas fa-light fa-clipboard"></i>FAQ</a></li>
+            <li><a href="/verify/faq"><i class="fas fa-regular fa-question"></i>FAQ</a></li>
         </ul>
     </div>
     <div class="main_content">
