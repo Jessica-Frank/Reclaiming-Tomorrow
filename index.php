@@ -19,10 +19,10 @@
   background-color: #40513B;
   color: #FAF1E4;
   text-decoration: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  margin: 10px;
   text-align: center;
+  width: 150px;
+  
+
 }
 
 .button-link:hover {
@@ -30,13 +30,34 @@
   color: #40513B;
   text-decoration: underline;
   text-decoration-color: #40513B;
+ 
 }
-h1 {
+ h1 {
             text-align: center;
         }
 p{
 	text-align: center;
 }
+ .image-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+	    flex-wrap: wrap;
+        }
+
+       
+
+
+    .button-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+	    flex-wrap: wrap;
+
+        }
+
+        
+
 </style>
 
 </head>
@@ -49,24 +70,50 @@ p{
 <br>
 <h2> Users</h2>
    <br>
-     <a href="/verify/login" class="button-link">User Login Page</a>
+
+<div class="image-container">
+        <img src="/images/Ulogin.jpg" alt="User login logo" style="width:150px;height:150px;"> 
+        <img src="/images/Udashboard.jpg" alt="User Dashboard" style="width:150px;height:150px;">
+   <img src="/images/rPage.jpg" alt="Rewards Page" style="width:150px;height:150px;">
+     <img src="/images/rlSearch.jpg" alt="Recyling Location Search" style="width:150px;height:150px;">
+        <img src="/images/cSearch.jpg" alt="County Search" style="width:150px;height:150px;">
+    </div>
+  
+
+<div class="button-container">
+    <a href="/verify/login" class="button-link">User Login Page</a>
+
     <a href="/verify/dashboard" class="button-link">User Dashboard</a>
     <a href="/rewards/redemption" class="button-link">Rewards page link</a>
 <a href="/maps/search" class="button-link">Recycling Location Search</a>
     <a href="/county_search/county" class="button-link">County Search</a>
+
+</div>
+
 <br>
 
 <h2> Admins </h2>
 <br>
+<div class="image-container">
+        <img src="/images/mTickets.jpg" alt="Manage Tickets" style="width:150px;height:150px;"> 
+        <img src="/images/Plog.jpg" alt="Points Login for Admin" style="width:150px;height:150px;">
+   <img src="/images/aDashboard.jpg" alt="Admin Dashboard" style="width:150px;height:150px;">
+     <img src="/images/aLogin.jpg" alt="Admin Login" style="width:150px;height:150px;">
+        
+    </div>
+
+
+<div class="button-container">
 <a href="/rewards/manage_tickets" class="button-link">Manage Tickets</a>
     <a href="/rewards/log" class="button-link">Points Log (For Admins)</a>
     
     <a href="/admin/dashboard" class="button-link">Preview of Admin Dashboard</a>
  
     <a href="/admin_verify/admin_login" class="button-link"> Admin Login Page</a>
-    <br>
+   </div>
 
 </body>
 
 </html>
+
 
