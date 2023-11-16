@@ -229,22 +229,20 @@ textarea {
 }
 
 #map {
-  height: 500px;
-  width: 500px;
+  height: 100%;
+  width: 48%;
+  position: absolute;
+  left: 0;
+  transition: height 0.5s ease-in-out;
   z-index: 98 !important;
-  margin: auto;
 }
 
 #mapTable {
-  border-style: solid;
-  width: 500px;
-  margin: auto;
-}
-
-#mapResults {
-  border-style: solid;
-  width: 500px;
-  margin: auto;
+  height: 50%;
+  text-align: center;
+  width: 50%;
+  margin-left: 50%;
+  border-radius: 15px;
 }
 
 .searchTitle {
@@ -254,4 +252,36 @@ textarea {
 .searchForm {
   text-align: center;
   padding: 4%;
+}
+
+.marker-pin {
+  width: 30px;
+  height: 30px;
+  border-radius: 50% 50% 50% 0;
+  background: green;
+  position: absolute;
+  transform: rotate(-45deg);
+  left: 50%;
+  top: 50%;
+  margin: -15px 0 0 -15px;
+}
+
+.marker-pin::after {
+  content: '';
+  width: 24px;
+  height: 24px;
+  margin: 3px 0 0 3px;
+  background: #fff;
+  position: absolute;
+  border-radius: 50%;
+}
+
+.custom-div-icon i {
+  position: absolute;
+  width: 22px;
+  font-size: 22px;
+  left: 0;
+  right: 0;
+  margin: 10px auto;
+  text-align: center;
 }

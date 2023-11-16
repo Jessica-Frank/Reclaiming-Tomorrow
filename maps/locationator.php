@@ -71,68 +71,76 @@
                 die("Connection failed: " . $conn->connect_error);
             }
 
+
             $query = "SELECT name, address, material_recycled, latitude, longitude
               FROM recycling_center
               WHERE material_recycled LIKE '%$recyclingMaterial%'
-              AND ( 6371 * acos( cos(radians($LatValue)) * cos(radians(latitude)) * cos(radians(longitude) - radians($LongValue)) + sin(radians($LatValue)) * sin(radians(latitude)))) < $distance";
+              AND ROUND((6371 * acos( cos(radians($LatValue)) * cos(radians(latitude)) * cos(radians(longitude) - radians($LongValue)) + sin(radians($LatValue)) * sin(radians(latitude)))), 2) < $distance";
 
             $result = $conn->query($query);
 
+            $markerCount = 1;
+
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) { ?>
-                    L.marker([<?php echo $row['latitude'] ?>, <?php echo $row['longitude'] ?>])
+                    icon = L.divIcon({
+                        className: 'custom-div-icon',
+                        html: "<div class='marker-pin'></div><i class='material-icons'><?php echo $markerCount ?></i>",
+                        iconSize: [30, 42],
+                        iconAnchor: [15, 42]
+                    });
+
+                    L.marker([<?php echo $row['latitude'] ?>, <?php echo $row['longitude'] ?>], {
+                            icon: icon
+                        })
                         .addTo(map)
-                        .bindPopup('<?php echo $row['name']?> <br> <?php echo $row['address'] ?>');
+                        .bindPopup('<?php echo $row['name'] ?> <br> <?php echo $row['address'] ?>');
             <?php echo "locations.push({
                     name: '{$row['name']}',
                     address: '{$row['address']}',
                     latitude: {$row['latitude']},
                     longitude: {$row['longitude']}
                 });\n";
+                $markerCount = $markerCount + 1;
                 }
             }
             ?>
         </script>
 
-        <div class="text-center">
-            <h1 id="mapTable">Search Results</h1>
-        </div>
+        <h1 id='mapTable'>Results</h1>
 
-    <?php
-        $query = "SELECT name, address, material_recycled, latitude, longitude
-        FROM recycling_center
-        WHERE material_recycled LIKE '%$recyclingMaterial%'";
+        <table id='mapTable'>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Recycling Center</th>
+                    <th>Address</th>
+                    <th>Recycling Material Accepted</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
 
-        $result = $conn->query($query);
+                $result = $conn->query($query);
 
-        while ($row = $result->fetch_assoc()) {
-            echo '<div id="mapResults" class="container">';
-            echo '  <div class="row justify-content-md-center">';
-            echo '    <div class="col-md-3 border">';
-            echo '      Recycling Center:';
-            echo "<p>" . $row["name"] . "</p>";
-            echo '    </div>';
-            echo '    <div class="col-md-3 border">';
-            echo '      Address:';
-            echo "<p>" . $row["address"] . "</p>";
-            echo '    </div>';
-            echo '    <div class="col-md-3 border">';
-            echo '      Recycling Material Accepted:';
-            $materials = explode(', ', $row["material_recycled"]);
-            echo "<ul>";
-            foreach ($materials as $material) {
-                echo "<li>" . $material . "</li>";
-            }
-            echo "</ul>";
-            echo '    </div>';
-            echo '  </div>';
-            echo '</div>';
-        }
+                $rowCount = 1;
 
-        $stmt->close();
-        $conn->close();
-    }
-    ?>
+                while ($row = $result->fetch_assoc()) { ?>
+                    <tr>
+                        <td><?php echo $rowCount ?></td>
+                        <td><?php echo $row["name"]; ?></td>
+                        <td><?php echo $row["address"]; ?></td>
+                        <td><?php $materials = explode(', ', $row["material_recycled"]);
+                            echo "<ul>";
+                            foreach ($materials as $material) {
+                                echo "<li>" . $material . "</li>";
+                            } ?></td>
+                        <?php $rowCount = $rowCount + 1; ?>
+                    <tr>
+                <?php }
+            } ?>
+            </tbody>
+        </table>
 </body>
 
 </html>
