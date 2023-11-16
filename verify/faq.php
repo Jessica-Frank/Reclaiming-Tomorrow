@@ -84,7 +84,7 @@ $result = $conn->query($sql);
     </script>
 </head>
 <body>
-    <?php include "../admin/header.php"; ?>
+    <?php include "../include/header.php"; ?>
     <h1>Frequently Asked Questions</h1>
     <ul>
         <?php

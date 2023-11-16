@@ -19,7 +19,6 @@ require '../connect.php';
 
     <div style="text-align:center;">
         <?php
-        session_start();
         if(!empty($_SESSION['message'])) {
             $message = $_SESSION['message'];
             echo '<h2 style="color: #000000">'.$message.'</h2>';

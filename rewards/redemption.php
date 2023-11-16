@@ -19,7 +19,7 @@
 
     <div class="container">
         <?php
-        session_start();
+        
         $ticket = null;
         $chosen_reward = null;
         $points_available = null;

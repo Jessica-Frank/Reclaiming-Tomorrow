@@ -1,4 +1,5 @@
 <?php
+session_start();
 $conn = new mysqli("localhost", "root", "", "reclaiming_tomorrow_db");
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
@@ -239,7 +240,7 @@ function getStars($rating) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
     <link href="../style.css" rel="stylesheet">
   
-    <?php include "../admin/header.php"; ?>
+    <?php include "../include/header.php"; ?>
     <div class="wrapper">
         <div class="sidebar">
             <i class=""></i>

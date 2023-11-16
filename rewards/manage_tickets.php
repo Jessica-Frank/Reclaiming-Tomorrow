@@ -57,7 +57,7 @@
     <div class="container">
         <h1 class="center-heading">Manage Tickets</h1>
 
-        <?php session_start(); 
+        <?php
         if (isset($_SESSION['USER'])) {
             $user_org = $_SESSION['USER']->name; 
         } 

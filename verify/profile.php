@@ -1,9 +1,13 @@
 <?php
+
+
 require "functions.php";
 check_login();
 
 $loggedInUsers = getLoggedInUsers();
 $userProfile = getUserProfile($_SESSION['current']);
+$loggedIn = isset($_SESSION['LOGGED_IN']);
+
 ?>
 
 <style>
@@ -251,16 +255,23 @@ $userProfile = getUserProfile($_SESSION['current']);
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 
 
+
 <body>
 <header>
-    <h2 class="logo">Reclaiming Tomorrow</h2>
+<h2 class="logo">Reclaiming Tomorrow</h2>
     <nav class="navigation">
         <a href="../index.php">Home</a>
-        <a href="../county_search/search">Search</a>
-        <a href="#">Local Information</a>
+        <a href="../maps/search">Search</a>
+        <a href="../county_search/county">County Information</a>
         <a href="/rewards/redemption">Rewards</a>
-        <a href="#">Contact Us</a>
-        <a href="../verify/login" class="btnLogin-popup">Login</a>
+        <a href="../verify/inbox">Contact Us</a>
+
+        <?php if ($loggedIn): ?>
+            <a href="../verify/logout" class="btnLogin-popup">Logout</a>
+        <?php else: ?>
+            <a href="../verify/login" class="btnLogin-popup">Login</a>
+        <?php endif; ?>
+
     </nav>
 </header>
 

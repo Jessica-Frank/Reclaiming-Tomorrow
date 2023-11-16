@@ -10,7 +10,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
     
     if(count($errors) == 0)
     {
-        header("Location: /rewards/redemption.php");
+        header("Location: ../index.php");
         die;
     }
 }

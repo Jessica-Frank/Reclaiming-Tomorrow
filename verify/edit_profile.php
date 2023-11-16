@@ -1,10 +1,10 @@
 <?php
+
+
 require "functions.php";
 
 $errors = array();
 
-
-// Use $_SESSION['USER'] to pre-fill the form with the user's current information
 
 // Process the form submission and call updateProfile with the POST data
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
@@ -270,7 +270,7 @@ $userProfile = getUserProfile($_SESSION['current']);
 </head>
 <body>
 
-    <?php include "../admin/header.php"; ?>
+    <?php include "../include/header.php"; ?>
 
      <div class="signup-wrapper">
         <div class="form-box register">
