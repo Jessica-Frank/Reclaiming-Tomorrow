@@ -264,6 +264,7 @@
     <ul>
       <li><a href="/verify/dashboard"><i class="fas fa-home"></i>Home</a></li>
       <li><a href="/verify/profile"><i class="fas fa-user"></i>Profile</a></li>
+      <li><a href="/verify/inbox"><i class="fas fa-envelope"></i>Inbox</a></li>
       <li><a href="/verify/display_reviews"><i class="fas fa-thin fa-comments"></i>Locations reviews</a></li>
       <li><a href="/verify/faq"><i class="fas fa-regular fa-question"></i>FAQ</a></li>
     </ul>
