@@ -70,7 +70,7 @@ header {
   border-radius: 5px;
   transform-origin: right;
   transform: scaleX(0);
-  transition: transform .5s;
+  transition: transform .3s ease-in-out;
 
 }
 
@@ -88,7 +88,7 @@ header {
   border-radius: 5px;
   cursor: pointer;
   justify-content: flex-end;
-  transition: .5s;
+  transition: .3s ease-in-out;
   text-decoration: none;
 }
 
@@ -101,12 +101,6 @@ header {
 /*Added in CSS content from Admin pages */
 .container my-5 {
   background-color: #FAF1E4;
-}
-
-form {
-  /*Used to modify forms - as seen wtihin the Admin section: Modify Points*/
-  margin: 0 auto;
-  width: 700px;
 }
 
 textarea {
@@ -171,6 +165,7 @@ textarea {
 .wrapper .sidebar ul li a {
   color: #FAF1E4;
   display: block;
+  text-decoration: none;
 }
 
 .wrapper .sidebar ul li a .fas {

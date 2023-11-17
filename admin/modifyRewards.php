@@ -9,12 +9,35 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Reclaiming Tomorrow</title>
+  <title>Modify Rewards</title>
   <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
   <link href="../style.css" rel="stylesheet">
+
+  <script>
+    $(document).ready(function () {
+      // Attach a click event handler to the delete links
+      $(".link-dark").on("click", function (e) {
+        // Prevent the default action (following the link) from occurring
+        e.preventDefault();
+
+        // Store the href attribute of the clicked link
+        var deleteLink = $(this).attr("href");
+
+        // Display a confirmation dialog
+        var isConfirmed = confirm("Are you sure you want to delete this reward?");
+
+        // If the user clicks OK, redirect to the delete link
+        if (isConfirmed) {
+          window.location.href = deleteLink;
+        }
+        // If the user clicks Cancel, do nothing
+      });
+    });
+  </script>
+
 </head>
 <body>
 <?php include "../admin/header.php"; ?>

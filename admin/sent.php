@@ -1,5 +1,26 @@
 <?php
 require '../connect.php';
+
+session_start();
+
+// Set the number of rows per page
+$rowsPerPage = 10;
+
+// Check if the current page is set in the URL
+$currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+
+// Calculate the offset for the SQL query
+$offset = ($currentPage - 1) * $rowsPerPage;
+
+$from_name = "admin";
+$sql = "SELECT *, DATE_FORMAT(date_sent, '%b %e, %Y %H:%i:%s') AS date_sent FROM admin_inbox WHERE from_name='$from_name' ORDER BY id DESC LIMIT $offset, $rowsPerPage";
+$result = mysqli_query($db, $sql);
+
+// Get the total number of rows for pagination
+$totalRows = mysqli_num_rows(mysqli_query($db, "SELECT * FROM admin_inbox WHERE from_name='$from_name'"));
+
+// Calculate the total number of pages
+$totalPages = ceil($totalRows / $rowsPerPage);
 ?>
 
 <!DOCTYPE html>
@@ -13,71 +34,225 @@ require '../connect.php';
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
     <link href="../style.css" rel="stylesheet">
     <title>Inbox</title>
+
+    <style>
+        form {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        .form-container {
+        width: 80%;
+        margin: 10px auto; /* Adjust margin as needed */
+        padding: 20px; /* Adjust padding as needed */
+        border-radius: 10px;
+        background-color: #9DC08B; /* Set the background color of the container */
+        box-shadow: 0px 50px 100px -20px rgba(50,50,93,0.25),
+            0px 30px 60px -30px rgba(0,0,0,0.3),
+            0px -2px 6px 0px rgba(10,37,64,0.35) inset;
+        }
+
+        .shadow {
+            box-shadow: 0px 3px 7px 0px rgba(0,0,0,0.13), 0px 1px 2px 0px rgba(0,0,0,0.11);
+        }
+
+        .btn-no-underline {
+        text-decoration: none !important;
+        }
+
+        .popup {
+            display: none;
+            position: absolute;
+            top: 5%;
+            left: 55%;
+            transform: translate(-50%, -50%);
+            background-color: #ffffff;
+            padding: 10px;
+            border: 1px solid #d4d4d4;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
 </head>
 <body>
 <?php include "../admin/header.php"; ?>
 
 <div class="wrapper">
-        <div class="sidebar"><i class=""></i>
-            <ul>
+    <div class="sidebar"><i class=""></i>
+        <ul>
             <li><a href="/admin/dashboard"><i class="fas fa-home"></i>Home</a></li>
             <li><a href="/admin/search"><i class="fas fa-user"></i>Search Users</a></li>
             <li><a href="/admin/modifyContent"><i class="fas fa-recycle"></i>Modify Content</a></li>
             <li><a href="/admin/modifyRewards"><i class="fas fa-ticket-alt"></i>Modify Rewards</a></li>
             <li><a href="/admin/modifyReviews"><i class="fas fa-thin fa-comments"></i>Modify Reviews</a></li>
             <li><a href="/admin/inbox"><i class="fas fa-envelope"></i>Inbox</a></li>
-            </ul> 
+        </ul>
+    </div>
+    <div class="main_content">
+        <div style="text-align:center;">
+            <br>
+            <?php
+            if (!empty($_SESSION['message'])) {
+                $message = $_SESSION['message'];
+                // Display the message in a popup
+                echo '<div class="popup" id="popupMessage" style="color: #000000">' . $message . '</div>';
+                unset($_SESSION['message']);
+            }
+            ?>
         </div>
-        <div class="main_content">
-            <div style="text-align:center;">
-                <br>
-                <?php
-                if(!empty($_SESSION['message'])) {
-                    $message = $_SESSION['message'];
-                    echo '<h2 style="color: #000000">'.$message.'</h2>';
-                    unset($_SESSION['message']);
-                }
-                ?>
-            </div>
-            <div class="info">
+        <div class="info">
             <div class="container my-5" style="text-align: center;">
-            <h1 style="color: #000000"><a href="inbox" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Inbox</a> / Sent</h1>
-            <div class="container my-5">
-                <table class="table table-hover">
-                    <?php
-                        $from_name="admin";
-                        $sql="SELECT * FROM admin_inbox WHERE from_name='$from_name' ORDER BY id DESC";
-                        $result=mysqli_query($db,$sql);
-                        if($result){
-                            if(mysqli_num_rows($result) > 0) {
-                                echo '<thead class="table-dark">
-                                <tr>
+                <div class="form-container">
+                <form action="deleteSentMessage" method="post">
+                    <div class="text-start" style="margin: 0; background-color: #212529;border-radius: 10px 10px 0 0;">
+                    <h1 style="color: #ffffff;text-align: center;padding: 10px"> Admin Sent Messages</h1>
+                    <button class="btn btn-secondary" style="margin-top: 5px;margin-bottom: 5px;margin-left:5px;color: #ffffff;">
+                            <a href="inbox" class="link-light btn-no-underline">Inbox</a>
+                    </button>
+                    <button type="submit" class="btn btn-danger" style="margin-top: 5px;margin-bottom: 5px; margin-left:1px"><i class="fas fa-trash-alt"></i></button>
+                        
+                    </div>
+                        <table class="table table-hover shadow">
+                            <thead class="table-dark">
+                            <tr>
+                                <th></th>
+                                <th>To</th>
                                 <th>Title</th>
                                 <th>Date</th>
-                                <th></th>
-                                </tr>
-                                </thead>
-                                ';
-                                while($row=mysqli_fetch_assoc($result)){
-                                echo '<tbody>
-                                <tr>
-                                <td><a href="openReadOnly.php?id='.$row['id'].'" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">'.$row['title'].'</a></td>
-                                <td>'.$row['date_sent'].'</td>
-                                <td><a class="link-dark" href="deleteSentMessage.php?id='.$row['id'].'"><i class="fas fa-trash-alt"></i></a></td>
-                                </tr>
-                                </tbody>
-                                ';
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+                            $to_id = "admin";
+                            $rowsPerPage = 10;
+                            // Check if the current page is set in the URL
+                            $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+
+                            // Calculate the offset for the SQL query
+                            $offset = ($currentPage - 1) * $rowsPerPage;
+
+                            $to_id = "admin";
+                            $sql = "SELECT *, DATE_FORMAT(date_sent, '%b %e, %Y %H:%i:%s') AS date_sent FROM admin_inbox WHERE from_name='$from_name' ORDER BY id DESC LIMIT $offset, $rowsPerPage";
+                            $result = mysqli_query($db, $sql);
+
+                            // Check if there are more rows
+                            if ($result && mysqli_num_rows($result) > 0) {
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                $sql2 = "SELECT * FROM users";
+                                $result2 = mysqli_query($db, $sql2);
+
+                                while ($row2 = mysqli_fetch_assoc($result2)) {
+                                    if ($row['to_id'] == $row2['id']) {
+                                        $user_name = $row2['name'];
+                                        break;
+                                    }
                                 }
-                            } else {
-                                echo '<h2 class=text-danger>No messages found</h2>';
+
+                                // Output HTML for each row
+                                echo '<tr>';
+                                echo '<td width="5%"><input type="checkbox" name="selectedMessages[]" value="' . $row['id'] . '"></td>';
+                                echo '<td><a href="userProfile.php?id=' . $row['to_id'] . '" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">' . $user_name . '</a></td>';
+                                echo '<td><a href="openMessage.php?id=' . $row['id'] . '" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">' . $row['title'] . '</a></td>';
+                                echo '<td>' . $row['date_sent'] . '</td>';
+                                echo '</tr>';
                             }
-                        } 
-                    ?>
-                </table>
+                            } else {
+                            // Output a message if no more rows are available
+                            echo '<tr><td colspan="5" class="text-danger">No messages found</td></tr>';
+                            }
+                            ?>
+                            </tbody>
+                            </table>
+                            <ul class="pagination">
+                            <?php
+                            // Display page numbers
+                            for ($i = 1; $i <= $totalPages; $i++) {
+                                echo '<li class="page-item ' . ($i == $currentPage ? 'active' : '') . '">';
+                                echo '<a class="page-link ' . ($i == $currentPage ? 'bg-dark text-white' : 'text-dark') . '" href="?page=' . $i . '" style="outline: none;">' . $i . '</a>';
+                                echo '</li>';
+                            }
+                            ?>
+                        </ul>
+                    </div>
+                </form>
+                </div>
             </div>
         </div>
-      </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $('#loadMoreBtn').on('click', function () {
+            var nextPage = $(this).data('page');
+
+            // Make an AJAX request to fetch additional rows
+            $.ajax({
+                type: 'GET',
+                url: 'inbox.php?page=' + nextPage,
+                success: function (data) {
+                    // Append the new rows to the table
+                    $('.table tbody').append(data);
+
+                    // Update the "Load More" button with the next page
+                    $('#loadMoreBtn').data('page', nextPage + 1);
+
+                    // Hide the button if all pages are loaded
+                    if (nextPage >= <?php echo $totalPages; ?>) {
+                        $('#loadMoreBtn').hide();
+                    }
+                }
+            });
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        // Confirmation dialog for delete button
+        $('.btn-danger').on('click', function () {
+            return confirm("Are you sure you want to delete the selected message(s)?");
+        });
+
+        // Load more button click event
+        $('#loadMoreBtn').on('click', function () {
+            var nextPage = $(this).data('page');
+
+            // Make an AJAX request to fetch additional rows
+            $.ajax({
+                type: 'GET',
+                url: 'inbox.php?page=' + nextPage,
+                success: function (data) {
+                    // Append the new rows to the table
+                    $('.table tbody').append(data);
+
+                    // Update the "Load More" button with the next page
+                    $('#loadMoreBtn').data('page', nextPage + 1);
+
+                    // Hide the button if all pages are loaded
+                    if (nextPage >= <?php echo $totalPages; ?>) {
+                        $('#loadMoreBtn').hide();
+                    }
+                }
+            });
+        });
+    });
+</script>
+
+<script>
+    // Function to show the popup message and hide it after a delay
+    function showPopup() {
+        var popup = document.getElementById('popupMessage');
+        if (popup) {
+            popup.style.display = 'block';
+            setTimeout(function () {
+                popup.style.display = 'none';
+            }, 5000); // Adjust the duration in milliseconds (3 seconds in this example)
+        }
+    }
+
+    // Call the function to show the popup
+    showPopup();
+</script>
 </body>
 </html>
