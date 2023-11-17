@@ -1,25 +1,136 @@
 <?php
+session_start();
 $conn = new mysqli("localhost", "root", "", "reclaiming_tomorrow_db");
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-
-// Fetch FAQs from the database
-$sql = "SELECT * FROM faq ORDER BY id DESC";
-$result = $conn->query($sql);
+$result = $conn->query("SELECT * FROM faq");
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FAQ Page</title>
+    <title>Reclaiming Tomorrow</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+        crossorigin="anonymous" />
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
     <link href="../style.css" rel="stylesheet">
+</head>
+
+<body>
+    <?php include "../include/header.php"; ?>
+    <h1 class="body-title">Frequently Asked Questions</h1>
+    <ul class="faq-list">
+        <?php
+        if ($result && $result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                echo "<li class='faq-item'>";
+                echo "<h3 class='faq-question'>" . $row["question"] . "</h3>";
+                echo "<p class='faq-answer'>" . $row["answer"] . "</p>";
+                echo "</li>";
+            }
+        } else {
+            echo "<li class='faq-item'>No FAQs found.</li>";
+        }
+        ?>
+    </ul>
+
+    <div class="wrapper">
+        <div class="sidebar">
+            <i class=""></i>
+            <ul>
+                <li class="menu-item"><a href="/verify/dashboard"><i class="fas fa-home"></i>Home</a></li>
+                <li class="menu-item"><a href="/verify/profile"><i class="fas fa-user"></i>Profile</a></li>
+                <li class="menu-item"><a href="/verify/display_reviews"><i class="fas fa-thin fa-comments"></i>Locations
+                        reviews</a></li>
+                <li class="menu-item"><a href="/verify/faq"><i class="fas fa-regular fa-question"></i>FAQ</a></li>
+            </ul>
+        </div>
+        <div class="main_content">
+            <div class="info">
+                <!-- Add any additional information or content here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            // Toggle answers when clicking on questions
+            $('.faq-question').click(function () {
+                $(this).next('.faq-answer').toggleClass('active');
+            });
+        });
+    </script>
+
     <style>
+        .wrapper {
+            display: flex;
+            position: relative;
+        }
+
+        .wrapper .sidebar {
+            width: 200px;
+            height: 200%;
+            background: #609966;
+            padding: 30px 0px;
+            position: fixed;
+            top: 50px;
+        }
+
+        .wrapper .sidebar h2 {
+            color: #FAF1E4;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .wrapper .sidebar .menu-item {
+            padding: 10px;
+            border-bottom: 1px solid #CEC5B7;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .wrapper .sidebar .menu-item a {
+            color: #FAF1E4;
+            display: block;
+        }
+
+        .wrapper .sidebar .menu-item a .fas {
+            width: 25px;
+        }
+
+        .wrapper .sidebar .menu-item:hover {
+            background-color: #9DC08B;
+        }
+
+        .wrapper .sidebar .menu-item:hover a {
+            color: #FAF1E4;
+        }
+
+        .wrapper .main_content {
+            width: 100%;
+            margin-left: 1326px;
+            top: 25px;
+        }
+
+        .wrapper .main_content .info {
+            margin: 20px;
+            color: #717171;
+            line-height: 25px;
+        }
+
+        .wrapper .main_content .info div {
+            margin-bottom: 20px;
+        }
 
         body {
             display: flex;
@@ -27,11 +138,12 @@ $result = $conn->query($sql);
             align-items: center;
             justify-content: center;
             height: 100vh;
-            margin: 0;
-            
-        min-height: 100vh;
-        background: url('images/recycle3.jpg') center center fixed;
-        background-size: cover;
+            margin: 20px;
+            padding: 30px 160px;
+
+            min-height: 100vh;
+            background: url('images/recycle3.jpg') center center fixed;
+            background-size: cover;
         }
 
         h1 {
@@ -42,67 +154,39 @@ $result = $conn->query($sql);
             margin: 0;
         }
 
-        ul {
+        .faq-list {
             list-style: none;
             padding: 0;
             margin: 0;
             width: 80%;
         }
 
-        li {
-            background-color: #ecf0f1; 
+        .faq-item {
+            background-color: #ecf0f1;
             margin: 10px 0;
             padding: 15px;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
 
-        h3 {
+        .faq-question {
             color: #609966;
             cursor: pointer;
             margin: 0;
         }
 
-        .answer {
-            display: none; /* Hide answers by default */
+        .faq-answer {
+            display: none;
+            /* Hide answers by default */
             margin-top: 10px;
         }
 
-        .answer.active {
-            display: block; 
+        .faq-answer.active {
+            display: block;
             background-color: #609966;
             color: #fff;
         }
     </style>
-    <script>
-        $(document).ready(function () {
-            // Toggle answers when clicking on questions
-            $('h3').click(function () {
-                $(this).next('.answer').toggleClass('active');
-            });
-        });
-    </script>
-</head>
-<body>
-    <?php include "../include/header.php"; ?>
-    <h1>Frequently Asked Questions</h1>
-    <ul>
-        <?php
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                echo "<li>";
-                echo "<h3>" . $row["question"] . "</h3>";
-                echo "<p class='answer'>" . $row["answer"] . "</p>";
-                echo "</li>";
-            }
-        } else {
-            echo "<li>No FAQs found.</li>";
-        }
-        ?>
-    </ul>
 </body>
-</html>
 
-<?php
-$conn->close();
-?>
+</html>

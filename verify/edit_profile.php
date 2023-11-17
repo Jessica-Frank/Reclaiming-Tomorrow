@@ -44,9 +44,6 @@ $userProfile = getUserProfile($_SESSION['current']);
 
         min-height: 100vh;
         
-        min-height: 100vh;
-        background: url('images/recycle1.jpg') center center fixed;
-        background-size: cover;
     }
 
     header {

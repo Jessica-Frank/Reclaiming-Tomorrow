@@ -83,20 +83,25 @@
       margin-bottom: 20px;
     }
 
-
     /* Quote and Welcome Styling */
+    .quote-container {
+      background-color: rgba(255, 255, 255, 0.7);
+      padding: 20px;
+      border-radius: 10px;
+    }
+
     .quote {
       font-size: 24px;
       font-style: italic;
       margin-bottom: 20px;
-      color: #fff;
+      color: #333;
     }
 
     .welcome {
       font-size: 36px;
       font-weight: bold;
       margin-bottom: 20px;
-      color: #E2725B;
+      color: #609966;
     }
 
     /* Keyframes for background image slideshow */
@@ -104,27 +109,27 @@
       0%, 20% {
         background-image: url('images/recycle1.jpg');
         background-size: cover;
-      background-position: center;
+        background-position: center;
       }
       20%, 40% {
         background-image: url('images/recycle3.jpg');
         background-size: cover;
-      background-position: center;
+        background-position: center;
       }
       40%, 60% {
         background-image: url('images/recycle7.jpg');
         background-size: cover;
-      background-position: center;
+        background-position: center;
       }
       60%, 80% {
         background-image: url('images/recycle5.jpg');
         background-size: cover;
-      background-position: center;
+        background-position: center;
       }
       80%, 100% {
         background-image: url('images/recycle2.jpg');
         background-size: cover;
-      background-position: center;
+        background-position: center;
       }
     }
   </style>
@@ -144,9 +149,10 @@
   </div>
   <div class="main_content">
     <div class="info">
-      <div class="welcome">Welcome to Reclaiming Tomorrow!</div>
-      <div class="quote">"The greatest threat to our planet is the belief that someone else will save it." - Robert Swan</div>
-     
+      <div class="quote-container">
+        <div class="welcome">Welcome to Reclaiming Tomorrow!</div>
+        <div class="quote">"The greatest threat to our planet is the belief that someone else will save it." - Robert Swan</div>
+      </div>
     </div>
   </div>
 </div>

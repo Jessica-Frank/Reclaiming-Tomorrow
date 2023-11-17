@@ -18,7 +18,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Send the reset password email to the user with the token
         sendResetPasswordEmail($user->email, $hashedToken);
 
-        $message = "An email with instructions to reset your password has been sent to your email address.";
+        $message = "We've sent an email with instructions on how to reset your password to your email address. 
+        Please check your spam folder if you're using Outlook, just in case.";
+
     } else {
         $message = "Email not found in the database.";
     }

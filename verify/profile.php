@@ -27,10 +27,6 @@ $loggedIn = isset($_SESSION['LOGGED_IN']);
 
         padding-top: 64px;
         flex-direction: column;
-
-        min-height: 100vh;
-        background: url('images/recycle1.jpg') center center fixed;
-        background-size: cover;
         
     }
 

@@ -10,6 +10,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
     <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+    
     
     
     <style>
@@ -105,6 +107,9 @@
             color: #162938;
         }
 
+
+
+
         h1 {
             text-align: center;
         }
@@ -154,6 +159,68 @@
             transition: .5s;
         }
 
+        .wrapper{     
+        display: flex;
+        position: relative;
+      
+      }
+      
+      .wrapper .sidebar{ /*Used to maintain content within the sidebar*/
+        width: 200px;
+        height: 100%;
+        background: #609966;
+        padding: 30px 0px;
+        position: fixed;
+        top: 50px;
+      }
+      
+      .wrapper .sidebar h2{
+        color: #FAF1E4;
+        text-transform: uppercase;
+        text-align: center;
+        margin-bottom: 30px;
+      }
+      
+      .wrapper .sidebar ul li{
+        padding: 10px;
+        border-bottom: 1px solid #CEC5B7;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+        border-top: 1px solid rgba(255,255,255,0.05);
+      }    
+      
+      .wrapper .sidebar ul li a{
+        color: #FAF1E4;
+        display: block;
+      }
+      
+      .wrapper .sidebar ul li a .fas{
+        width: 25px;
+      }
+      
+      .wrapper .sidebar ul li:hover{ /*Used to modify the hovering style on the sidebar*/
+        background-color: #9DC08B;
+      }
+          
+      .wrapper .sidebar ul li:hover a{
+        color: #FAF1E4;
+      } 
+      
+      .wrapper .main_content{ /*Contains the main page content*/
+        width: 100%;
+        margin-left: 200px;
+      }
+      
+      .wrapper .main_content .info{
+        margin: 20px;
+        color: #717171;
+        line-height: 25px;
+      }
+      
+      .wrapper .main_content .info div{
+        margin-bottom: 20px;
+      }
+      
+
     </style>
 </head>
 <body>
@@ -168,8 +235,10 @@
         <a href="../verify/login" class="btnLogin-popup">Login</a>
     </nav>
     </header>
+    
 
     <h1>Location Reviews</h1>
+    
     <form action="submit_reviews" method="POST">
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required><br>
@@ -190,6 +259,15 @@
 
 
     </div>
+    <div class="wrapper">
+  <div class="sidebar">
+    <ul>
+      <li><a href="/verify/dashboard"><i class="fas fa-home"></i>Home</a></li>
+      <li><a href="/verify/profile"><i class="fas fa-user"></i>Profile</a></li>
+      <li><a href="/verify/display_reviews"><i class="fas fa-thin fa-comments"></i>Locations reviews</a></li>
+      <li><a href="/verify/faq"><i class="fas fa-regular fa-question"></i>FAQ</a></li>
+    </ul>
+  </div>
 </body>
 </html>
 
