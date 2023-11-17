@@ -10,9 +10,77 @@ require '../connect.php';
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    
+    <script>
+        $(document).ready(function () {
+        // Attach a click event handler to the delete links
+        $(document).on("click", ".btn.btn-danger.btn", function (e) {
+            // Prevent the default action (following the link) from occurring
+            e.preventDefault();
+
+            // Store the href attribute of the clicked link
+            var deleteLink = $(this).attr("href") || $(this).data("href");
+
+            // Display a confirmation dialog
+            var isConfirmed = confirm("Are you sure you want to delete this?");
+
+            // If the user clicks OK, redirect to the delete link
+            if (isConfirmed) {
+                window.location.href = deleteLink;
+            }
+            // If the user clicks Cancel, do nothing
+        });
+    });
+    </script>
+
+    <script>
+            $(document).ready(function () {
+            // Attach a click event handler to the delete links
+            $(document).on("click", ".dark-delete", function (e) {
+                // Prevent the default action (following the link) from occurring
+                e.preventDefault();
+
+                // Store the href attribute of the clicked link
+                var deleteLink = $(this).attr("href")
+
+                // Display a confirmation dialog
+                var isConfirmed = confirm("Are you sure you want to delete this?");
+
+                // If the user clicks OK, redirect to the delete link
+                if (isConfirmed) {
+                    window.location.href = deleteLink;
+                }
+                // If the user clicks Cancel, do nothing
+            });
+        });
+        </script>
+
+    <script>
+            $(document).ready(function () {
+            // Attach a click event handler to the delete links
+            $(document).on("click", ".btn btn-danger btn", function (e) {
+                // Prevent the default action (following the link) from occurring
+                e.preventDefault();
+
+                // Store the href attribute of the clicked link
+                var deleteLink = $(this).attr("href");
+
+                // Display a confirmation dialog
+                var isConfirmed = confirm("Are you sure you want to delete this?");
+
+                // If the user clicks OK, redirect to the delete link
+                if (isConfirmed) {
+                    window.location.href = deleteLink;
+                }
+                // If the user clicks Cancel, do nothing
+            });
+        });
+        </script>
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
     <link href="../style.css" rel="stylesheet">
     <title>County</title>
+
     <style>
         .center {
         display: flex;
@@ -39,24 +107,48 @@ require '../connect.php';
         .center_thead{
         text-align: center;
         }
+
+        .popup {
+            display: none;
+            position: absolute;
+            top: 5%;
+            left: 55%;
+            transform: translate(-50%, -50%);
+            background-color: #ffffff;
+            padding: 10px;
+            border: 1px solid #d4d4d4;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 <body>
-<?php include "../admin/header.php"; ?>
+<?php include_once "../admin/header.php";?>
+
 
 <div class="wrapper">
         <div class="sidebar"><i class=""></i>
-            <ul>
+        <ul>
             <li><a href="/admin/dashboard"><i class="fas fa-home"></i>Home</a></li>
             <li><a href="/admin/search"><i class="fas fa-user"></i>Search Users</a></li>
             <li><a href="/admin/modifyContent"><i class="fas fa-recycle"></i>Modify Content</a></li>
-            <li><a href="/admin/modifyRewards"><i class="fas fa-ticket-alt"></i>Modify Rewards</a></li>
+            <li><a href="/admin/modifyRewards"><i class="fas fa-edit"></i>Modify Rewards</a></li>
             <li><a href="/admin/modifyReviews"><i class="fas fa-thin fa-comments"></i>Modify Reviews</a></li>
+            <li><a href="/rewards/log"><i class="fas fa-history"></i>Activity Log</a></li>
+            <li><a href="/rewards/manage_tickets"><i class="fas fa-ticket-alt"></i>Manage Tickets</a></li>
             <li><a href="/admin/inbox"><i class="fas fa-envelope"></i>Inbox</a></li>
-            </ul> 
+          </ul> 
         </div>
         <div class="main_content">
             <div class="info">
+            <?php
+            if (!empty($_SESSION['message'])) {
+                $message = $_SESSION['message'];
+                // Display the message in a popup
+                echo '<div class="popup" id="popupMessage" style="color: #000000">' . $message . '</div>';
+                unset($_SESSION['message']);
+            }
+            ?>
             <?php
     $county_id=$_GET['id'];
     $sql="SELECT * FROM `county_search` WHERE `County`='$county_id'";
@@ -125,7 +217,7 @@ require '../connect.php';
             echo "<tbody>";
             echo "<tr>";
             echo '<td><a href="'.$row['Link'].'" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">'.$row['Placeholder'].'</a></td>';
-            echo '<td><li><a class="link-dark" href="/admin/modifyAssocLinks?id='.$row['id'].'"><i class="fas fa-edit"></i></a></li> <li><a class="link-dark" href="/admin/deleteAssocLinks?id='.$row['id'].'"><i class="fas fa-trash-alt"></i></a></li></td>';
+            echo '<td><li><a class="link-dark" href="/admin/modifyAssocLinks?id='.$row['id'].'"><i class="fas fa-edit"></i></a></li> <li><a style="color: black;" class="dark-delete" href="/admin/deleteAssocLinks?id='.$row['id'].'"><i class="fas fa-trash-alt"></i></a></li></td>';
             echo "</tr>";
             echo "</tbody>";
         }
@@ -153,7 +245,7 @@ require '../connect.php';
             echo "<tbody>";
             echo "<tr>";
             echo '<td><a href="'.$row['Link'].'" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">'.$row['Placeholder'].'</a></td>';
-            echo '<td><li><a class="link-dark" href="/admin/modifyAlternative?id='.$row['id'].'"><i class="fas fa-edit"></i></a></li> <li><a class="link-dark" href="/admin/deleteAlternative?id='.$row['id'].'"><i class="fas fa-trash-alt"></i></a></li></td>';
+            echo '<td><li><a class="link-dark" href="/admin/modifyAlternative?id='.$row['id'].'"><i class="fas fa-edit"></i></a></li> <li><a style="color: black;" class="dark-delete" href="/admin/deleteAlternative?id='.$row['id'].'"><i class="fas fa-trash-alt"></i></a></li></td>';
             echo "</tr>";
             echo "</tbody>";
         }
@@ -181,7 +273,7 @@ require '../connect.php';
             echo "<tbody>";
             echo "<tr>";
             echo '<td><a href="'.$row['Link'].'" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">'.$row['Placeholder'].'</a></td>';
-            echo '<td><li><a class="link-dark" href="/admin/modifyBuyBins?id='.$row['id'].'"><i class="fas fa-edit"></i></a></li> <li><a class="link-dark" href="/admin/deleteBuyBins?id='.$row['id'].'"><i class="fas fa-trash-alt"></i></a></li></td>';
+            echo '<td><li><a class="link-dark" href="/admin/modifyBuyBins?id='.$row['id'].'"><i class="fas fa-edit"></i></a></li> <li><a style="color: black;" class="dark-delete" href="/admin/deleteBuyBins?id='.$row['id'].'"><i class="fas fa-trash-alt"></i></a></li></td>';
             echo "</tr>";
             echo "</tbody>";
         }
@@ -201,5 +293,22 @@ require '../connect.php';
       </div>
     </div>
 </div>
+
+<script>
+    // Function to show the popup message and hide it after a delay
+    function showPopup() {
+        var popup = document.getElementById('popupMessage');
+        if (popup) {
+            popup.style.display = 'block';
+            setTimeout(function () {
+                popup.style.display = 'none';
+            }, 5000); // Adjust the duration in milliseconds (3 seconds in this example)
+        }
+    }
+
+    // Call the function to show the popup
+    showPopup();
+</script>
+
 </body>
 </html>

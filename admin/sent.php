@@ -79,14 +79,16 @@ $totalPages = ceil($totalRows / $rowsPerPage);
 
 <div class="wrapper">
     <div class="sidebar"><i class=""></i>
-        <ul>
+    <ul>
             <li><a href="/admin/dashboard"><i class="fas fa-home"></i>Home</a></li>
             <li><a href="/admin/search"><i class="fas fa-user"></i>Search Users</a></li>
             <li><a href="/admin/modifyContent"><i class="fas fa-recycle"></i>Modify Content</a></li>
-            <li><a href="/admin/modifyRewards"><i class="fas fa-ticket-alt"></i>Modify Rewards</a></li>
+            <li><a href="/admin/modifyRewards"><i class="fas fa-edit"></i>Modify Rewards</a></li>
             <li><a href="/admin/modifyReviews"><i class="fas fa-thin fa-comments"></i>Modify Reviews</a></li>
+            <li><a href="/rewards/log"><i class="fas fa-history"></i>Activity Log</a></li>
+            <li><a href="/rewards/manage_tickets"><i class="fas fa-ticket-alt"></i>Manage Tickets</a></li>
             <li><a href="/admin/inbox"><i class="fas fa-envelope"></i>Inbox</a></li>
-        </ul>
+          </ul> 
     </div>
     <div class="main_content">
         <div style="text-align:center;">
@@ -152,7 +154,7 @@ $totalPages = ceil($totalRows / $rowsPerPage);
                                 echo '<tr>';
                                 echo '<td width="5%"><input type="checkbox" name="selectedMessages[]" value="' . $row['id'] . '"></td>';
                                 echo '<td><a href="userProfile.php?id=' . $row['to_id'] . '" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">' . $user_name . '</a></td>';
-                                echo '<td><a href="openMessage.php?id=' . $row['id'] . '" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">' . $row['title'] . '</a></td>';
+                                echo '<td><a href="openReadOnly.php?id=' . $row['id'] . '" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">' . $row['title'] . '</a></td>';
                                 echo '<td>' . $row['date_sent'] . '</td>';
                                 echo '</tr>';
                             }

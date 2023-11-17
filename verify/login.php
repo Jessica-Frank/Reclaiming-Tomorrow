@@ -10,7 +10,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
     
     if(count($errors) == 0)
     {
-        header("Location: ../index.php");
+        header("Location: ../verify/dashboard.php");
         die;
     }
 }

@@ -79,14 +79,16 @@ $totalPages = ceil($totalRows / $rowsPerPage);
 
 <div class="wrapper">
     <div class="sidebar">
-        <ul>
+    <ul>
             <li><a href="/admin/dashboard"><i class="fas fa-home"></i>Home</a></li>
             <li><a href="/admin/search"><i class="fas fa-user"></i>Search Users</a></li>
             <li><a href="/admin/modifyContent"><i class="fas fa-recycle"></i>Modify Content</a></li>
-            <li><a href="/admin/modifyRewards"><i class="fas fa-ticket-alt"></i>Modify Rewards</a></li>
+            <li><a href="/admin/modifyRewards"><i class="fas fa-edit"></i>Modify Rewards</a></li>
             <li><a href="/admin/modifyReviews"><i class="fas fa-thin fa-comments"></i>Modify Reviews</a></li>
+            <li><a href="/rewards/log"><i class="fas fa-history"></i>Activity Log</a></li>
+            <li><a href="/rewards/manage_tickets"><i class="fas fa-ticket-alt"></i>Manage Tickets</a></li>
             <li><a href="/admin/inbox"><i class="fas fa-envelope"></i>Inbox</a></li>
-        </ul>
+          </ul> 
     </div>
     <div class="main_content">
         <div style="text-align:center;">
@@ -150,7 +152,7 @@ $totalPages = ceil($totalRows / $rowsPerPage);
                             }
                             } else {
                             // Output a message if no more rows are available
-                            echo '<tr><td colspan="5" class="text-danger">No more messages found</td></tr>';
+                            echo '<tr><td colspan="5" class="text-danger">No messages found</td></tr>';
                             }
                             ?>
                             </tbody>

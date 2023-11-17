@@ -46,8 +46,8 @@ INSERT INTO `admin` (`id`, `name`, `email`, `email_verification`, `username`, `p
 (1, 'mary green', 'green@gmail.com', 'green@gmail.com', 'mary', '$2y$10$KwX9mCu1dIvXtL3ArRy/.Oz1WbuUOTqjhgFeh4cRon099rhJW71VS', 'admin', '2023-09-13 23:18:52'),
 (2, 'donald duck', 'duck@gmail.com', 'duck@gmail.com', 'donald21', '$2y$10$TNOFoMI.V7ikqS7yk53/MOk8LgWqJ/vqeFYQSvqjSq45nkknJiAjW', 'admin', '2023-09-14 01:26:53'),
 (3, 'homer simpson', 'simpson45@gmail.com', NULL, 'homer45', '$2y$10$VKMj7ub53tJSTa/WntoC8.CBADznHWSOPdVnOry.xQRUeZ9Tt2B9K', 'admin', '2023-09-14 01:30:16'),
-(5, 'mike blue', 'mike@gmail.com', NULL, 'mike', '$2y$10$GQBkIf.WSV5jxAzlgw1Iyuw//T3q7wINoUBRjvD8YE0VlO9rPN.le', 'admin', '2023-10-05 02:56:12'),
-(6, 'Hello', 'hello@gmail.com', NULL, 'HELLO', 'Help!123', 'admin', '2023-10-05 02:58:12');
+(5, 'Mike Blue', 'mike@gmail.com', NULL, 'mike', '$2y$10$GQBkIf.WSV5jxAzlgw1Iyuw//T3q7wINoUBRjvD8YE0VlO9rPN.le', 'admin', '2023-10-05 02:56:12'),
+(6, 'Tyson Grant', 'hello@gmail.com', NULL, 'HELLO', 'Help!123', 'admin', '2023-10-05 02:58:12');
 
 -- --------------------------------------------------------
 
@@ -388,14 +388,14 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verification`, `username`, `password`, `reward_points`, `is_logged_in`, `role`, `reset_token_hash`, `reset_token_expires`, `date`) VALUES
-(1, 'little prince', 'lprince@gmail.com', 'lprince@gmail.com', 'lprince', '$2y$10$SjAyHCQdMhJ9MIwCCD/OzusTm0.dxaKJW4Iap38CCG/6q/4cbLhne', 0, 1, 'user', NULL, NULL, '2023-09-11 20:38:01'),
-(2, 'harry potter', 'potter@gmail.com', NULL, 'hpotter', '$2y$10$ETYJiMo/KQXcNt7mR8eTluhKyM7hC6wDwVHmB428k8osWbU34DZVS', 0, 0, 'user', NULL, NULL, '2023-09-11 20:44:04'),
-(3, 'robin hood', 'rhood@gmail.com', 'rhood@gmail.com', 'rhood', '$2y$10$4PD4D3ra.fn6nIIPD/Sp4u1d7k0Bnq9feZSq4pYHc1U38qNFnTNfe', 0, 0, 'user', NULL, NULL, '2023-09-12 03:24:50'),
-(11, 'oliver twist', 'oliver@gmail.com', 'oliver@gmail.com', 'oliver', '$2y$10$SpXRowbNGugktUvNxwzCRu1AN5kpKSw49zNwA0E9q3Gn64XX2y1lm', 0, 1, 'user', NULL, NULL, '2023-09-13 21:16:14'),
-(12, 'sponge bob', 'bob@gmail.com', 'bob@gmail.com', 'bob', '$2y$10$f8G1NEdZgHox9TmEXwHzaeBG7jj8AnY4nxfE.f/ljkPDn3P3Dh/iq', 0, 1, 'user', NULL, NULL, '2023-09-13 21:51:24'),
-(13, 'jack sparrow', '3103sparrow@gmail.com', '3103sparrow@gmail.com', 'jack', '$2y$10$RkQK8AddE3uyf74ACwKd.u0exZA2DTLUmjJsqTmt/CAGeAj/Rd/Sm', 0, 1, 'user', NULL, NULL, '2023-09-13 22:13:14'),
-(14, 'test', 'test@test.test', 'test@test.test', 'test', '$2y$10$CulmdOK/R83f/Bwv8eRc1O902g2aAYpLmsixPonn6Xt2cvqBQG0Rq', 0, 0, 'user', NULL, NULL, '2023-09-11 20:38:01'),
-(15, 'timmy', 'timmy@gmail.com', 'timmy@gmail.com', 'timmy', '$2y$10$a.fkywhFPwyxCMJXrvzG1unF1A5NwUWF5pRAmfNJbwi/IFHv28hfW', 0, 1, 'user', NULL, NULL, '2023-10-05 02:40:41');
+(1, 'Charlie Brown', 'lprince@gmail.com', 'lprince@gmail.com', 'lprince', '$2y$10$SjAyHCQdMhJ9MIwCCD/OzusTm0.dxaKJW4Iap38CCG/6q/4cbLhne', 0, 1, 'user', NULL, NULL, '2023-09-11 20:38:01'),
+(2, 'Harry Potter', 'potter@gmail.com', NULL, 'hpotter', '$2y$10$ETYJiMo/KQXcNt7mR8eTluhKyM7hC6wDwVHmB428k8osWbU34DZVS', 0, 0, 'user', NULL, NULL, '2023-09-11 20:44:04'),
+(3, 'Quinn Perkins', 'rhood@gmail.com', 'rhood@gmail.com', 'rhood', '$2y$10$4PD4D3ra.fn6nIIPD/Sp4u1d7k0Bnq9feZSq4pYHc1U38qNFnTNfe', 0, 0, 'user', NULL, NULL, '2023-09-12 03:24:50'),
+(11, 'Olivia Pope', 'oliver@gmail.com', 'oliver@gmail.com', 'oliver', '$2y$10$SpXRowbNGugktUvNxwzCRu1AN5kpKSw49zNwA0E9q3Gn64XX2y1lm', 0, 1, 'user', NULL, NULL, '2023-09-13 21:16:14'),
+(12, 'George Smith', 'bob@gmail.com', 'bob@gmail.com', 'bob', '$2y$10$f8G1NEdZgHox9TmEXwHzaeBG7jj8AnY4nxfE.f/ljkPDn3P3Dh/iq', 0, 1, 'user', NULL, NULL, '2023-09-13 21:51:24'),
+(13, 'Austin Powers', '3103sparrow@gmail.com', '3103sparrow@gmail.com', 'jack', '$2y$10$RkQK8AddE3uyf74ACwKd.u0exZA2DTLUmjJsqTmt/CAGeAj/Rd/Sm', 0, 1, 'user', NULL, NULL, '2023-09-13 22:13:14'),
+(14, 'Jenny Jenkins', 'test@test.test', 'test@test.test', 'test', '$2y$10$CulmdOK/R83f/Bwv8eRc1O902g2aAYpLmsixPonn6Xt2cvqBQG0Rq', 0, 0, 'user', NULL, NULL, '2023-09-11 20:38:01'),
+(15, 'Amber Ray', 'timmy@gmail.com', 'timmy@gmail.com', 'timmy', '$2y$10$a.fkywhFPwyxCMJXrvzG1unF1A5NwUWF5pRAmfNJbwi/IFHv28hfW', 0, 1, 'user', NULL, NULL, '2023-10-05 02:40:41');
 
 -- --------------------------------------------------------
 
@@ -419,7 +419,7 @@ CREATE TABLE `user_inbox` (
 --
 
 INSERT INTO `user_inbox` (`id`, `from_id`, `from_name`, `to_id`, `message`, `title`, `date_sent`, `read_receipt`) VALUES
-(1, 13, 'jack sparrow', 'admin', 'ybbbt', 'yyy', '2023-10-19 10:07:16', 0);
+(1, 13, 'Austin Powers', 'admin', 'ybbbt', 'yyy', '2023-10-19 10:07:16', 0);
 
 -- --------------------------------------------------------
 

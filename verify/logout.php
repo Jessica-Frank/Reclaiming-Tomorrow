@@ -12,5 +12,15 @@ if(isset($_SESSION['LOGGED_IN']))
     unset($_SESSION['LOGGED_IN']);
 }
 
-header("Location: login.php");
+if(isset($_SESSION['current']))
+{
+    unset($_SESSION['current']);
+}
+
+if(isset($_SESSION['current_role']))
+{
+    unset($_SESSION['current_role']);
+}
+
+header("Location: ../index.php");
 die;

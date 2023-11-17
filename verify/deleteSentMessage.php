@@ -1,18 +1,25 @@
 <?php
 require '../connect.php';
-if(isset($_GET['id'])) {
-    $id=$_GET['id'];
 
-    $sql="DELETE from user_inbox WHERE id=$id";
-    $result=mysqli_query($db,$sql);
-    if($result){
-        session_start();
-        $_SESSION['message'] = 'Successfully deleted message!';
-        header('location:../verify/sent');
+session_start();
+
+if (isset($_POST['selectedMessages']) && is_array($_POST['selectedMessages'])) {
+    $selectedMessages = $_POST['selectedMessages'];
+
+    foreach ($selectedMessages as $id) {
+        $id = mysqli_real_escape_string($db, $id);
+        $sql = "DELETE FROM user_inbox WHERE id = $id";
+        $result = mysqli_query($db, $sql);
+
+        if (!$result) {
+            die(mysqli_error($db));
+        }
     }
-    else {
-        die(mysqli_error($db));
-    }
+
+    $_SESSION['message'] = 'Successfully deleted selected messages!';
+    header('location:../verify/sent');
+} else {
+    $_SESSION['message'] = 'No messages selected for deletion.';
+    header('location:../verify/sent');
 }
 ?>
-

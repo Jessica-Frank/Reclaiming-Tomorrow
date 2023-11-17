@@ -85,6 +85,7 @@ function login($data)
                     // Update the is_logged_in column to 1 for the logged-in user
                     $user_id = $row->id; 
                     $_SESSION['current'] = $user_id;
+                    $_SESSION['current_role'] = "USER";
                     updateUserLoginStatus($user_id, 1); // Call the function to update is_logged_in
     
                     $_SESSION['USER'] = $row;

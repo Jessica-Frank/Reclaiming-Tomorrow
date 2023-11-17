@@ -31,73 +31,77 @@ if ($result) {
     <link href="../style.css" rel="stylesheet">
     <title>User Profile</title>
     <style>
-        .flex-box2{ /*Used to hold SQL content within the Admin pages. As seen on the User Profiles & Modify Points pages*/
-            width: auto;
-            height: auto;
-            background-color: #9DC08B;
-            line-height: 20px;
-            border-radius: 20px;
-            margin: 20px;
-            color: #000000;
-            justify-content: center;
-            text-align: center;
-        }
+.popup {
+    display: none;
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    padding: 20px;
+    border: 1px solid #d4d4d4;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
-        .popup {
-            display: none;
-            position: absolute;
-            top: 5%;
-            left: 55%;
-            transform: translate(-50%, -50%);
-            background-color: #ffffff;
-            padding: 10px;
-            border: 1px solid #d4d4d4;
-            border-radius: 5px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
+.form-container,
+.form-container2,
+.inside {
+    width: 60%;
+    margin: 20px auto;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Increased box shadow for a more pronounced effect */
+    transition: box-shadow 0.3s ease; /* Added a smooth transition for the box shadow */
+}
 
-        .form-container {
-            width: 40%;
-            margin: 10px auto; /* Adjust margin as needed */
-            padding: 20px; /* Adjust padding as needed */
-            border-radius: 10px;
-            background-color: #9DC08B; /* Set the background color of the container */
-            box-shadow: 0px 50px 100px -20px rgba(50,50,93,0.25),
-                0px 30px 60px -30px rgba(0,0,0,0.3),
-                0px -2px 6px 0px rgba(10,37,64,0.35) inset;
-        }
+.form-container {
+    background-color: #9DC08B; /* Adjusted color for a more modern look */
+}
 
-        .inside {
-            width: 80%;
-            margin: 10px auto;
-            border-radius: 10px;
-            background-color: #ffffff; /* Set the background color of the container */
-            padding: 20px;
-            box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
-        }
+.form-container2 {
+    width: 60%;
+    margin: 20px auto;
+    background-color: #9DC08B;
+}
 
-        form {
-            width: 80%;
-            margin: 0 auto;
-        }
+.inside {
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Adjusted box shadow for consistency */
+}
 
-        .info-item {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            margin-bottom: 10px;
-        }
+.info-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
 
-        .label, .value {
-            color: #000000;
-            font-size: 28px;
-        }
+.label,
+.value {
+    color: #333333; /* Darkened text color for better readability */
+    font-size: 18px;
+}
 
-        .label {
-            font-weight: bold;
-            margin-bottom: 5px;
-            text-decoration: underline;
-        }
+.label {
+    font-weight: bold;
+    margin-bottom: 8px;
+    text-decoration: underline;
+}
+
+.flex-container {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Added a glow effect on hover */
+.form-container:hover,
+.form-container2:hover,
+.inside:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 175, 255, 0.4); /* Added a glow effect on hover */
+}
+
     </style>
 </head>
 <body>
@@ -105,14 +109,16 @@ if ($result) {
 
         <div class="wrapper">
             <div class="sidebar"><i class=""></i>
-                <ul>
-                    <li><a href="/admin/dashboard"><i class="fas fa-home"></i>Home</a></li>
-                    <li><a href="/admin/search"><i class="fas fa-user"></i>Search Users</a></li>
-                    <li><a href="/admin/modifyContent"><i class="fas fa-recycle"></i>Modify Content</a></li>
-                    <li><a href="/admin/modifyRewards"><i class="fas fa-ticket-alt"></i>Modify Rewards</a></li>
-                    <li><a href="/admin/modifyReviews"><i class="fas fa-thin fa-comments"></i>Modify Reviews</a></li>
-                    <li><a href="/admin/inbox"><i class="fas fa-envelope"></i>Inbox</a></li>
-                </ul>
+            <ul>
+            <li><a href="/admin/dashboard"><i class="fas fa-home"></i>Home</a></li>
+            <li><a href="/admin/search"><i class="fas fa-user"></i>Search Users</a></li>
+            <li><a href="/admin/modifyContent"><i class="fas fa-recycle"></i>Modify Content</a></li>
+            <li><a href="/admin/modifyRewards"><i class="fas fa-edit"></i>Modify Rewards</a></li>
+            <li><a href="/admin/modifyReviews"><i class="fas fa-thin fa-comments"></i>Modify Reviews</a></li>
+            <li><a href="/rewards/log"><i class="fas fa-history"></i>Activity Log</a></li>
+            <li><a href="/rewards/manage_tickets"><i class="fas fa-ticket-alt"></i>Manage Tickets</a></li>
+            <li><a href="/admin/inbox"><i class="fas fa-envelope"></i>Inbox</a></li>
+          </ul> 
             </div>
             <div class="main_content">
                 <div style="text-align:center;">
@@ -120,65 +126,64 @@ if ($result) {
                 </div>
                 <div class="info">
                     <div class="container my-5" style="text-align: center;">
+                    <div class="flex-container">
                         <div class="form-container">
-                            <div class="inside">
-                                <h1 style="margin-top: 20px;margin-bottom: 20px; color: #000000;"><?= $row['name'] ?></h1>
-                                
-                                <!-- Displaying information with labels on top of values -->
-                                <div class="info-item">
-                                    <span class="label">ID</span>
-                                    <span class="value"><?= $row['id'] ?></span>
-                                </div>
+                                <div class="inside">
+                                    <h1 style="margin-top: 20px;margin-bottom: 20px; color: #000000;"><?= $row['name'] ?></h1>
+                                    
+                                    <!-- Displaying information with labels on top of values -->
+                                    <div class="info-item">
+                                        <span class="label">ID</span>
+                                        <span class="value"><?= $row['id'] ?></span>
+                                    </div>
 
-                                <div class="info-item">
-                                    <span class="label">Username</span>
-                                    <span class="value"><?= $row['username'] ?></span>
-                                </div>
-                                
-                                <div class="info-item">
-                                    <span class="label">Reward Points</span>
-                                    <p style="margin: 0;">
-                                    <span class="value"><?= $row['reward_points'] ?></span>
-                                    <a class="fas fa-edit link-underline-opacity-0 link-dark" href="updatePoints.php?id=<?= $row['id'] ?>" role="button"></a>
+                                    <div class="info-item">
+                                        <span class="label">Username</span>
+                                        <span class="value"><?= $row['username'] ?></span>
+                                    </div>
+                                    
+                                    <div class="info-item">
+                                        <span class="label">Reward Points</span>
+                                        <p style="margin: 0;">
+                                        <span class="value"><?= $row['reward_points'] ?></span>
+                                        <a class="fas fa-edit link-underline-opacity-0 link-dark" href="updatePoints.php?id=<?= $row['id'] ?>" role="button"></a>
+                                        </p>
+                                    </div>
+
+                                    <div class="info-item">
+                                        <span class="label">Email</span>
+                                        <span class="value"><?= $row['email'] ?></span>
+                                    </div>
+
+                                    <!-- Buttons at the bottom -->
+                                    <p style="margin-top: 30px">
+                                        <a class="btn btn-dark btn" href="/admin/search" style="width:100px" role="button">Back</a>
+                                        <a class="btn btn-dark btn" href="/admin/composeMessage?id=<?= $row['id'] ?>" style="width:100px" role="button">Message</a>
                                     </p>
                                 </div>
-
-                                <div class="info-item">
-                                    <span class="label">Email</span>
-                                    <span class="value"><?= $row['email'] ?></span>
-                                </div>
-
-                                <!-- Buttons at the bottom -->
-                                <p style="margin-top: 30px">
-                                    <a class="btn btn-dark btn" href="/admin/search" style="width:100px" role="button">Back</a>
-                                    <a class="btn btn-dark btn" href="/admin/composeMessage?id=<?= $row['id'] ?>" style="width:100px" role="button">Message</a>
-                                </p>
                             </div>
-                        </div>
-                    </div>
-                </div>
-
-                    <?php
-                    $sql = "SELECT * FROM reward_point_log WHERE user_id=$data ORDER BY date DESC";
-                    $result = mysqli_query($db, $sql);
-
-                    if ($result && mysqli_num_rows($result) > 0) {
-                        ?>
-                        <div class="flex-box2">
+                            
+                        <div class="form-container2">
                             <div style="text-align: center;">
-                                <h1 style="margin-top: 20px"><?= $user_name ?>'s Reward History</h1>
+                                <h1 style="margin-top: 20px;color: #000000;"><?= $user_name ?>'s Reward History</h1>
                             </div>
                             <div>
-                                <table style="width: 500px;margin-right: 20px;margin-left: 20px" class="table table-hover">
+                                <table style="width: 100%; margin-bottom: 20px;" class="table table-hover">
                                     <thead class="table-dark">
                                     <tr>
-                                        <th style="width: 100px;">Date Redeemed</th>
+                                        <th style="width: 100px;">Redeemed</th>
                                         <th>Reward</th>
                                         <th>Cost</th>
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    <?php
+                                        $action_name = 'CLAIM_REWARD';
+                                        $sql = "SELECT *, DATE_FORMAT(date, '%b %e, %Y %H:%i:%s') AS date FROM reward_point_log WHERE user_id=$data AND action_name='$action_name' ORDER BY date DESC";
+                                        $result = mysqli_query($db, $sql);
 
+                                        if ($result && mysqli_num_rows($result) > 0) {
+                                     ?>
                                     <?php
                                     while ($row = mysqli_fetch_assoc($result)) {
                                         $sql2 = "SELECT * FROM rewards";
@@ -191,25 +196,31 @@ if ($result) {
                                                 break;
                                             }
                                         }
-                                        ?>
+                                    ?>
 
-                                        <tr>
-                                            <td style="width: 175px;"><?= $row['date'] ?></td>
-                                            <td style="width: 175px;"><?= $reward_name ?></td>
-                                            <td style="width: 150px;"><?= $reward_cost ?></td>
-                                        </tr>
+                                    <tr>
+                                        <td style="width: 175px;"><?= $row['date'] ?></td>
+                                        <td style="width: 175px;"><?= $reward_name ?></td>
+                                        <td style="width: 150px;"><?= $reward_cost ?></td>
+                                    </tr>
 
                                     <?php } // end while ?>
+
+                                    <?php } else {
+                                        echo '<tr><td colspan="3" class="text-danger">No rewards history</td></tr>';
+                                    } ?>
 
                                     </tbody>
                                 </table>
                                 <a class="btn btn-dark btn" href="/admin/giveReward?id=<?= $data ?>" style="width:150px" role="button">Give Reward</a>
                             </div>
                         </div>
-                    <?php } // end if ?>
+                    </div>            
                 </div>
             </div>
         </div>
-    </body>
-    </html>
+    </div>
+</div>                
+</body>
+</html>
 <?php } // end if ?>

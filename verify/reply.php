@@ -66,20 +66,58 @@ if(isset($_POST['submit'])){
         };
     </script>
 
+<style>
+        .form-container {
+            width: 40%;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #9DC08B;
+            box-shadow: 0px 50px 100px -20px rgba(50, 50, 93, 0.25),
+                0px 30px 60px -30px rgba(0, 0, 0, 0.3),
+                0px -2px 6px 0px rgba(10, 37, 64, 0.35) inset;
+            text-align: center;
+            color: #000;
+        }
+
+        .form-container input,
+        .form-container textarea {
+            width: 90%;
+            border-radius: 20px;
+            padding: 10px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+    </style>
 </head>
 <body>
 <?php include "../admin/header.php"; ?>
+
+<div class="wrapper">
+<div class="sidebar">
+        <i class=""></i>
+        <ul>
+            <li><a href="/verify/dashboard"><i class="fas fa-home"></i>Home</a></li>
+            <li><a href="/verify/profile"><i class="fas fa-user"></i>Profile</a></li>
+            <li><a href="/verify/display_reviews"><i class="fas fa-thin fa-comments"></i>Locations reviews</a></li>
+            <li><a href="/verify/faq"><i class="fas fa-regular fa-question"></i>FAQ</a></li>
+        </ul>
+    </div>
+        <div class="main_content">
             <div class="info">
             <div class="flex-container">
-                <div class="flex-box">
+                <div class="form-container">
                     <form method="post" style="margin-top: 20px; margin-bottom: 20px">
                         <div>
                             <h1><?php echo $reply_title;?></h1>
+                            <p>
+                                To: admin
+                            </p>
                         </div>
                         <div>
                             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
                             <textarea rows="12" cols="40" onkeyup="countChar(this)" style="margin-right: 20px;margin-left: 20px;margin-bottom: 10px;resize: none;text-align: left;padding: 5px;" placeholder="Type message here" name="message"></textarea>
-                            <div id="charNum" style="margin-bottom: 20px;text-align: left;margin-right: 20px;margin-left: 93px;"></div>
+                            <div id="charNum" style="margin-bottom: 20px;margin-left:22px; text-align: left;"></div>
                         </div>
 
                         <a class="btn btn-dark btn" href="/verify/openMessage.php?id=<?php echo $id?>" style="width:60px" role="button">Back</a>
@@ -88,5 +126,7 @@ if(isset($_POST['submit'])){
             </div>
         </div>
       </div>
+    </div>
+</div>
 </body>
 </html>

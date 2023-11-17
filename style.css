@@ -116,19 +116,31 @@ textarea {
 }
 
 .flex-box {
-  /*Used to hold SQL content within the Admin pages. As seen on the User Profiles & Modify Points pages*/
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: auto;
   height: auto;
   background-color: #9DC08B;
-  font-size: 25px;
+  color: #ffffff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font stack */
+  font-size: 1.5rem;
+  font-weight: bold;
   text-align: center;
-  line-height: 20px;
-  border-radius: 20px;
+  line-height: 1.5;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin: 20px;
-  color: #000000;
-  align-items: center;
-  justify-content: center;
+  transition: background-color 0.3s, transform 0.3s ease-in-out;
+
+  &:hover {
+    background-color: #609966;
+    transform: scale(1.05);
+  }
 }
+
 
 
 /*STYLES USED TO CREATE THE SIDE NAVIGATION MENU (sidebar) AS SEEN ON ALL ADMIN PAGES*/
@@ -140,12 +152,13 @@ textarea {
 }
 
 .wrapper .sidebar {
-  /*Used to maintain content within the sidebar*/
   width: 200px;
   height: 100%;
-  background: #609966;
-  padding: 30px 0px;
+  background: linear-gradient(45deg, #609966, #4C7E5A); /* Gradient background */
+  padding: 30px 0;
   position: fixed;
+  transition: width 0.3s ease; /* Add width transition for smoother effects */
+  font-weight: bolder;
 }
 
 .wrapper .sidebar h2 {
@@ -160,6 +173,7 @@ textarea {
   border-bottom: 1px solid #CEC5B7;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   border-top: 1px solid rgba(255, 255, 255, 0.05);
+  transition: background-color 0.3s, border-color 0.3s; /* Add transitions for smoother effects */
 }
 
 .wrapper .sidebar ul li a {
@@ -173,13 +187,14 @@ textarea {
 }
 
 .wrapper .sidebar ul li:hover {
-  /*Used to modify the hovering style on the sidebar*/
   background-color: #9DC08B;
+  border-color: #9DC08B; /* Adjust border color on hover */
 }
 
 .wrapper .sidebar ul li:hover a {
   color: #FAF1E4;
 }
+
 
 .wrapper .main_content {
   /*Contains the main page content*/
@@ -279,4 +294,89 @@ textarea {
   right: 0;
   margin: 10px auto;
   text-align: center;
+}
+
+.fa-trash-alt:hover{
+    color: red;
+    transition: color .15s ease-in-out;
+}
+
+input {
+  border: 1px solid #ddd; /* Add a subtle border for a clean look */
+  border-radius: 5px;
+  padding: 10px;
+  box-sizing: border-box;
+  outline: none; /* Remove the default outline on focus */
+  transition: border-color 0.3s, box-shadow 0.3s; /* Add transitions for a smoother change in appearance */
+
+  &:focus {
+    border-color: #66afe9; /* Highlight border color on focus */
+    box-shadow: 0 0 7px rgba(102, 175, 233, 0.5); /* Add a subtle box shadow on focus */
+  }
+
+  &:hover {
+    border-color: #66afe9;
+    box-shadow: 0 0 7px rgba(102, 175, 233, 0.5); /* Add a subtle box shadow on focus */
+  }
+}
+
+
+label{display: block;}
+
+/* Fancier table styles with a solid green theme */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Header styles with solid color background */
+.table th {
+  background-color: #609966;
+  color: #ffffff;
+  padding: 15px;
+  text-align: left;
+  border-bottom: 2px solid #2E8B57;
+}
+
+/* Row styles */
+.table tr {
+  border-bottom: 1px solid #ddd;
+}
+
+/* Cell styles */
+.table td,
+.table th {
+  padding: 15px;
+  text-align: left;
+}
+
+/* Alternating row background color with solid color */
+.table tr:nth-child(even) {
+  background-color: #D8ECC3;
+}
+
+/* Hover effect on rows */
+.table tbody tr:hover {
+  background-color: #ACCFA1;
+  cursor: pointer;
+}
+
+/* Responsive styles for small screens */
+@media screen and (max-width: 600px) {
+  .table {
+    overflow-x: auto;
+    display: block;
+  }
+
+  .table thead, .table tbody, .table th, .table td, .table tr {
+    display: block;
+  }
+
+  .table th,
+  .table td {
+    text-align: center;
+    border: none;
+  }
 }
