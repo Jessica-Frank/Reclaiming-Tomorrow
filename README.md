@@ -13,7 +13,7 @@ Tools: XAMPP
 This project contains code taken from PHPMailer and Composer
 
 ## Usage
-- This project can be hosted locally with XAMPP by changing by changing the settings that locate the Apache root directory to match the directory this project has been installed in. 
+- This project can be hosted locally with XAMPP by changing the settings that locate the Apache root directory to match the directory this project has been installed in. 
 - Most of the website will require that the database is set up, which can be done by accessing phpMyAdmin (the database management tool included with XAMPP) and running the reclaiming_tomorrow_db.sql file located in the main directory for this project.
 - For the password reset component to work, you should need to change the email and password used if the credentials are changed from the public data in this repository. That data can be changed in /verify/mailer.php
 Note: this project assumes that the default database credentials have not been changed. If you have changed your credentials this project may not work.
