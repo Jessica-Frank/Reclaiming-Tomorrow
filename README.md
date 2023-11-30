@@ -22,19 +22,26 @@ Note: this project assumes that the default database credentials have not been c
 
 ## How to Access Our Website
 1. If you haven't already, install [XAMPP](https://www.apachefriends.org/download.html).
-2. Clone the repository by [Git Bashing](https://gitforwindows.org/) in C:\xampp\htdocs using ```git clone https://github.com/Jessica-Frank/Reclaiming-Tomorrow.git```
-    - Note: The C drive is the default place where your XAMPP folder will be. If you've changed where to store your XAMPP folder, then go there instead, but your address should always end as *"\xampp\htdocs"*
-![Image1](/images/Im5.png)
+2. Clone the repository by [Git Bashing](https://gitforwindows.org/) in C:\xampp\htdocs using 
+```
+git clone https://github.com/Jessica-Frank/Reclaiming-Tomorrow.git
+```
+Note: The C drive is the default place where your XAMPP folder will be. If you've changed where to store your XAMPP folder, then go there instead, but your address should always end as *"\xampp\htdocs"*
+![Im5](https://github.com/Jessica-Frank/Reclaiming-Tomorrow/assets/111710708/d7d3cb8a-afe6-4650-a217-da3ca0f026e9)
 ![Image5](/images/Im1.png)
 3. Open XAMPP and click on *"Config"* next to the Apache module
 4. Then click on Then click on *"Apache (httpd.conf)"*
 ![Image2](/images/Im2.png)
 5. Within the text file, change the following code and save the changes:
+```
 *DocumentRoot "C:/xampp/htdocs"*
 *<Directory "C:/xampp/htdocs">*
+```
 to
+```
 *DocumentRoot "C:/xampp/htdocs/Reclaiming-Tomorrow"*
 *<Directory "C:/xampp/htdocs/Reclaiming-Tomorrow">*
+```
 ![Image3](/images/Im3.png)
 6. Restart XAMPP and start the Apache and MySQL modules
 ![Image4](/images/Im4.png)
