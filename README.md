@@ -30,7 +30,7 @@ Note: The C drive is the default place where your XAMPP folder will be. If you'v
 ![Im5](https://github.com/Jessica-Frank/Reclaiming-Tomorrow/assets/111710708/d7d3cb8a-afe6-4650-a217-da3ca0f026e9)
 ![Im1](https://github.com/Jessica-Frank/Reclaiming-Tomorrow/assets/111710708/0036978a-2ca4-49a5-8194-f8b9ac864361) <br>
 3. Open XAMPP and click on *"Config"* next to the Apache module <br>
-4. Then click on Then click on *"Apache (httpd.conf)"*
+4. Then click on *"Apache (httpd.conf)"*
 ![Im2](https://github.com/Jessica-Frank/Reclaiming-Tomorrow/assets/111710708/58989f07-0b14-435c-8008-1ddbae4d42fd) <br>
 5. Within the text file, change the following code and save the changes:
 ```
