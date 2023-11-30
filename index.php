@@ -144,16 +144,7 @@ body {
 <br>
 <div class="image-container">
         <span>
-            <img src="/images/mTickets.jpg" alt="Manage Tickets">
-            <a href="/rewards/manage_tickets" class="button-link">Manage Tickets</a>
-        </span>
-        <span>
-            <img src="/images/Plog.jpg" alt="Points Login for Admin">
-            <a href="/rewards/log" class="button-link">Log of User Activity</a>
-        </span>
-        <span>
-            <img src="/images/aLogin.jpg" alt="Admin Login">
-            <a href="/admin_verify/admin_login" class="button-link">Admin Login Page</a>
+            <a href="/admin_verify/admin_login" class="button-link">Admin Login</a>
         </span>
     </div>
 
