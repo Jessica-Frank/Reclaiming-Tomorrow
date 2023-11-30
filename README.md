@@ -28,10 +28,10 @@ git clone https://github.com/Jessica-Frank/Reclaiming-Tomorrow.git
 ```
 Note: The C drive is the default place where your XAMPP folder will be. If you've changed where to store your XAMPP folder, then go there instead, but your address should always end as *"\xampp\htdocs"*
 ![Im5](https://github.com/Jessica-Frank/Reclaiming-Tomorrow/assets/111710708/d7d3cb8a-afe6-4650-a217-da3ca0f026e9)
-![Im1](https://github.com/Jessica-Frank/Reclaiming-Tomorrow/assets/111710708/0036978a-2ca4-49a5-8194-f8b9ac864361)
-3. Open XAMPP and click on *"Config"* next to the Apache module
+![Im1](https://github.com/Jessica-Frank/Reclaiming-Tomorrow/assets/111710708/0036978a-2ca4-49a5-8194-f8b9ac864361) <br>
+3. Open XAMPP and click on *"Config"* next to the Apache module <br>
 4. Then click on Then click on *"Apache (httpd.conf)"*
-![Im2](https://github.com/Jessica-Frank/Reclaiming-Tomorrow/assets/111710708/58989f07-0b14-435c-8008-1ddbae4d42fd)
+![Im2](https://github.com/Jessica-Frank/Reclaiming-Tomorrow/assets/111710708/58989f07-0b14-435c-8008-1ddbae4d42fd) <br>
 5. Within the text file, change the following code and save the changes:
 ```
 DocumentRoot "C:/xampp/htdocs"
@@ -42,18 +42,18 @@ to
 DocumentRoot "C:/xampp/htdocs/Reclaiming-Tomorrow"
 <Directory "C:/xampp/htdocs/Reclaiming-Tomorrow">
 ```
-![Im3](https://github.com/Jessica-Frank/Reclaiming-Tomorrow/assets/111710708/d981eec8-d5ee-4748-82c7-89c50b4e6f66)
+![Im3](https://github.com/Jessica-Frank/Reclaiming-Tomorrow/assets/111710708/d981eec8-d5ee-4748-82c7-89c50b4e6f66) <br>
 6. Restart XAMPP and start the Apache and MySQL modules
-![Im4](https://github.com/Jessica-Frank/Reclaiming-Tomorrow/assets/111710708/e972856b-624f-45f5-830c-b13b3ceaea28)
-7. Open a web browser and type in *"http://localhost/"* as the URL
+![Im4](https://github.com/Jessica-Frank/Reclaiming-Tomorrow/assets/111710708/e972856b-624f-45f5-830c-b13b3ceaea28) <br>
+7. Open a web browser and type in *"http://localhost/"* as the URL <br>
 8. Now you've successfully accessed our website!
 
 ## How to Connect the Database to the Website
 1. Click on the *"Admin"* action for the MySQL module. You will be redirected to *"http://localhost/phpmyadmin/"* within your web browser.
-![Im6](https://github.com/Jessica-Frank/Reclaiming-Tomorrow/assets/111710708/8922f23e-83f6-4a70-9da3-b10f7a9f559b)
+![Im6](https://github.com/Jessica-Frank/Reclaiming-Tomorrow/assets/111710708/8922f23e-83f6-4a70-9da3-b10f7a9f559b) <br>
 2. Click on *"Databases"* at the top and create a database named *"reclaiming_tomorrow_db"*
     - You will be redirected to the Structure of the database you've just created.
-![Im7](https://github.com/Jessica-Frank/Reclaiming-Tomorrow/assets/111710708/d0835e2f-1e3d-461d-a888-c0701d13ef7b)
+![Im7](https://github.com/Jessica-Frank/Reclaiming-Tomorrow/assets/111710708/d0835e2f-1e3d-461d-a888-c0701d13ef7b) <br>
 3. Now click on *"Import"* and choose the *"reclaiming_tomorrow_db.sql"* file within our repository to import to your database.
-![Im8](https://github.com/Jessica-Frank/Reclaiming-Tomorrow/assets/111710708/cbbd0a0e-f2d4-413c-8efc-1227578f32cf)
+![Im8](https://github.com/Jessica-Frank/Reclaiming-Tomorrow/assets/111710708/cbbd0a0e-f2d4-413c-8efc-1227578f32cf) <br>
 4. Scroll down and click on *"Import"* and you've now connected the database to the website!
